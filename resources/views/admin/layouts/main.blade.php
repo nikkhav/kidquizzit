@@ -30,7 +30,7 @@
     <!-- Icons Css -->
     <link href="{{ asset('admin/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="{{ asset('admin/assets/css/app.min.css?v='.time()) }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/css/app.min.css?v=' . time()) }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="{{ asset('admin/assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/css.css') }}" rel="stylesheet" type="text/css" />
@@ -40,10 +40,7 @@
 
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/af-2.4.0/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/date-1.1.2/kt-2.7.0/r-2.3.0/rg-1.2.0/rr-1.2.8/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/sr-1.1.1/datatables.min.css" />
-        <link
-        href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css"
-        rel="stylesheet"
-      />
+    <link href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
 
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
@@ -52,11 +49,11 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
-     <!-- Pusher-->
+    <!-- Pusher-->
     <!-- Datepicker JS -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  
-         <script src="https://unpkg.com/imask"></script>
+
+    <script src="https://unpkg.com/imask"></script>
 </head>
 
 <body>
@@ -100,10 +97,10 @@
                             </div>
                         </div>
                     </div> --}}
-                    
+
                     <div class="row">
                         @if (Request::segment(1) != 'dashboard')
-                        {{-- <div class="col-12">
+                            {{-- <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <h4 class="mb-sm-0">@yield('heading_title')</h4>
             
@@ -123,9 +120,9 @@
                             </div>
                         </div>
                     </div>
-           
+
                     @yield('content')
-                    
+
 
                 </div>
             </div>
@@ -136,11 +133,11 @@
                         <div class="col-sm-6">
                             <script>
                                 document.write(new Date().getFullYear())
-                            </script> © GO Panel.
+                            </script> © Admin Panel.
                         </div>
                         <div class="col-sm-6">
                             <div class="text-sm-end d-none d-sm-block">
-                                Design & Develop by Goweb team
+                                Design & Develop by Telman Akhundov(https://github.com/WINDARK-coder)
                             </div>
                         </div>
                     </div>
@@ -227,17 +224,17 @@
     <script src="{{ asset('admin/assets/libs/list.pagination.js/list.pagination.min.js') }}"></script>
 
     <!-- form mask -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <!-- titcket init js -->
     <script src="{{ asset('admin/assets/js/pages/tasks-list.init.js') }}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 
     {{-- <script src="{{ asset('admin/assets/js/pages/datatables.init.js') }}"></script> --}}
 
-    <script src="{{ asset('admin/js/custom.js?v='.time()) }}"></script>
+    <script src="{{ asset('admin/js/custom.js?v=' . time()) }}"></script>
     <script src="{{ asset('admin/assets/js/app.js') }}"></script>
 
     {{-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -251,13 +248,10 @@
     <script>
         $(".select2").select2();
     </script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
-      integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+        integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
 
 
     <script src="{{ asset('admin/assets/js/main.js?v=' . time()) }}"></script>
@@ -266,7 +260,7 @@
     <script>
         // $(document).ready(function(){
         //   function notification(){
-        //     $.get("{{route('getNotifications')}}",
+        //     $.get("{{ route('getNotifications') }}",
         //     function (response) {
         //         console.log(respose.view);
         //         alert('get')

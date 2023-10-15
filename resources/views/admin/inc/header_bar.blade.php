@@ -2,7 +2,8 @@
     <li class="dropdown notification-list list-inline-item d-none d-md-inline-block search-batches">
         <form role="search" class="app-search" id="batchSearchForm">
             <div class="form-group mb-0">
-                <input type="text" class="form-control" id="searchBatch" route="{{route('admin.batch.search')}}" placeholder="Bağlama axtarışı...">
+                <input type="text" class="form-control" id="searchBatch" route="{{ route('admin.batch.search') }}"
+                    placeholder="Bağlama axtarışı...">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </div>
         </form>
@@ -35,7 +36,8 @@
     <li class="dropdown notification-list list-inline-item d-none d-md-inline-block search-users">
         <form role="search" class="app-search" id="searchUserForm">
             <div class="form-group mb-0">
-                <input type="text" class="form-control" id="searchUser" route="{{route('admin.users.search')}}" placeholder="Müştəri axtarışı...">
+                <input type="text" class="form-control" id="searchUser" route="{{ route('admin.users.search') }}"
+                    placeholder="Müştəri axtarışı...">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </div>
         </form>
@@ -74,7 +76,8 @@
         </div>
     </li>
     <!-- full screen -->
-    <li class="dropdown notification-list list-inline-item d-none d-md-inline-block"><a class="nav-link waves-effect" href="#" id="btn-fullscreen"><i class="mdi mdi-fullscreen noti-icon"></i></a></li>
+    <li class="dropdown notification-list list-inline-item d-none d-md-inline-block"><a class="nav-link waves-effect"
+            href="#" id="btn-fullscreen"><i class="mdi mdi-fullscreen noti-icon"></i></a></li>
     <li class="dropdown notification-list list-inline-item d-none d-md-inline-block">
         <a class="nav-link waves-effect" href="#" data-toggle="modal" data-target="#globalDeclareBatch">
             <i class="mdi mdi-inbox-multiple-outline"></i>
@@ -82,12 +85,12 @@
         </a>
     </li>
     <!-- notification -->
-    <li class="dropdown notification-list list-inline-item"><a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><i class="mdi mdi-bell-outline noti-icon"></i> <span class="badge badge-pill badge-danger noti-icon-badge">0</span></a>
-        @include('admin.inc.header_bar_notification')
-    </li>
+
     <li class="dropdown notification-list list-inline-item">
         <div class="dropdown notification-list nav-pro-img">
-            <a class="dropdown-toggle nav-link arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><img src="{{ asset('admin/assets/images/users/user-4.jpg') }}" alt="user" class="rounded-circle"></a>
+            <a class="dropdown-toggle nav-link arrow-none waves-effect nav-user" data-toggle="dropdown" href="#"
+                role="button" aria-haspopup="false" aria-expanded="false"><img
+                    src="{{ asset('admin/assets/images/users/user-4.jpg') }}" alt="user" class="rounded-circle"></a>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                 <!-- item-->
                 <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5"></i> Profilim</a>

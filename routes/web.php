@@ -13,9 +13,12 @@ use App\Http\Controllers\Admin\PersonalController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\UserController;
-
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\PrivacyAndPolicyController;
+use App\Http\Controllers\Admin\TermsAndConditionController;
 use App\Http\Controllers\Api\DatatableController;
 use App\Http\Controllers\Api\MainController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,8 +36,15 @@ Route::get('/', function () {
     return view('auth.login');
 })->name('/');
 
-Auth::routes();
 Auth::routes(['register' => false]);
+
+Route::get('about', [AboutController::class, 'edit'])->name('about.edit');
+Route::match(['put', 'patch'], 'about-update', [AboutController::class, 'update'])->name('about.update');
+Route::get('privacyandpolicy', [PrivacyAndPolicyController::class, 'edit'])->name('privacyandpolicy.edit');
+Route::match(['put', 'patch'], 'privacyandpolicy-update', [PrivacyAndPolicyController::class, 'update'])->name('privacyandpolicy.update');
+
+Route::get('termsandcondition', [TermsAndConditionController::class, 'edit'])->name('termsandcondition.edit');
+Route::match(['put', 'patch'], 'termsandcondition-update', [TermsAndConditionController::class, 'update'])->name('termsandcondition.update');
 
 
 
@@ -43,6 +53,9 @@ Route::get('getNotifications', [DashboardController::class, 'getNotifications'])
 
 Route::resource('user', UserController::class);
 Route::get('user-list', [UserController::class, 'list'])->name('user.list');
+// Route::resource('about', AboutController::class);
+
+
 
 Route::resource('role', RoleController::class);
 

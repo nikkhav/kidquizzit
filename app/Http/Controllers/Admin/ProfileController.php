@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function edit(){
+    public function edit()
+    {
         $item = Auth::user();
-        return view('admin.pages.profil.edit',compact('item'));
+        return view('admin.pages.profil.edit', compact('item'));
     }
 
     public  function update(Request $request)
@@ -22,21 +23,21 @@ class ProfileController extends Controller
             'surname' => $request->post('surname'),
         ];
 
-       if($request->file('image')){
-      
-        $dPath = 'profile/';
-        $img   = $request->file('image');
-        $fName = $img->getClientOriginalName();
-        $exten = $img->getClientOriginalExtension();
-        $request->file('image')->storeAs($dPath, $fName);
-        $path  = $dPath . '' . $fName;
-        Storage::disk('public')->put($path, file_get_contents($request->file('image')));
+        if ($request->file('image')) {
 
-        $data['image'] = $path;
-       }
+            $dPath = 'profile/';
+            $img   = $request->file('image');
+            $fName = $img->getClientOriginalName();
+            $exten = $img->getClientOriginalExtension();
+            $request->file('image')->storeAs($dPath, $fName);
+            $path  = $dPath . '' . $fName;
+            Storage::disk('public')->put($path, file_get_contents($request->file('image')));
 
-       User::where('id',Auth::user()->id)->update($data);
+            $data['image'] = $path;
+        }
 
-       return redirect()->back();
+        User::where('id', Auth::user()->id)->update($data);
+
+        return redirect()->back();
     }
 }
