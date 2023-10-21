@@ -10667,7 +10667,7 @@ div.code-toolbar > .toolbar button:hover {
     color: #fff !important;
 }
 
-.swal2-container .swal2-title {
+. .swal2-title {
     padding: 24px 24px 0;
     font-size: 20px;
     font-weight: 500;

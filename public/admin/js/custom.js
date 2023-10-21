@@ -14,35 +14,41 @@ $(document).on("click", ".destroy", function () {
     });
 
     Swal.fire({
-        title: "Ehtiyat təsdiqləmə sorğusu.",
+        title: "Do you want to delete this data?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        cancelButtonText: "İmtina et",
-        confirmButtonText: "Sil",
+        cancelButtonText: "Cancel",
+        confirmButtonText: "Delete",
     }).then((result) => {
         if (result.isConfirmed) {
-            console.log(result);
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "DELETE",
-                    url: url,
-                    data: { id: id },
-                    success: function (response) {
-                        if (response.code == 200) {
-                            toastr.success("Məlumat silindi");
-                            $(document).find(detaleModal).modal("toggle");
-                            dTReload();
-                        } else {
-                            toastr.error(response.message);
-                        }
-                    },
-                });
-            }
+            pageLoader(true);
+            $.ajax({
+                type: "DELETE",
+                url: url,
+                data: { id: id },
+                success: function (response) {
+                    if (response.code == 200) {
+                        // toastr.success("Data deleted successfully");
+                        // Optionally close modal here if needed
+                        // $(document).find(detaleModal).modal("toggle");
+                        dTReload();
+                        pageLoader(false);
+                    } else {
+                        toastr.error(response.alert);
+                        pageLoader(false);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    toastr.error("An error occurred while deleting the data.");
+                    pageLoader(false);
+                }
+            });
         }
     });
 });
+
 
 $(document).on("click", ".atendent_delete", function () {
     let id = $(this).data("id");

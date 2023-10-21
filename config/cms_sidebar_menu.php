@@ -7,15 +7,9 @@ return [
     ],
     [
         'icon' => '<i class="ri-dashboard-3-fill"></i>',
-        'title' => 'Göstəricilər',
+        'title' => 'Dashboard',
         'route' => 'home',
         'can' => 'dashbord.index'
-    ],
-    [
-        'icon' => '<i class="fas fa-cogs"></i>',
-        'title' => 'Settings',
-        'route' => 'about.edit',
-        'can' => 'about.edit'
     ],
     [
         'icon' => '<i class="fas fa-home"></i>',
@@ -23,6 +17,36 @@ return [
         'route' => 'about.edit',
         'can' => 'about.edit'
     ],
+    [
+        'icon' => '<i class="fas fa-th-list"></i>',
+        'title' => 'Category',
+        'route' => 'category.index',
+        'can' => 'category.index'
+    ],
+    // [
+    //     'icon' => '<i class="fas fa-th-list"></i>',
+    //     'title' => 'Quiz',
+    //     'route' => 'quiz.index',
+    //     'can' => 'quiz.index'
+    // ],
+    [
+        'icon' => '<i class="fas fa-palette"></i>',
+        'title' => 'Colourings',
+        'route' => 'colouring.index',
+        'can' => 'colouring.index'
+    ],
+    // [
+    //     'icon' => '<i class="fas fa-th-list"></i>',
+    //     'title' => 'Why questions',
+    //     'route' => 'whyquestion.index',
+    //     'can' => 'whyquestion.index'
+    // ],
+    // [
+    //     'icon' => '<i class="fas fa-th-list"></i>',
+    //     'title' => 'Find the difference',
+    //     'route' => 'difference.index',
+    //     'can' => 'difference.index'
+    // ],
     [
         'icon' => '<i class="far fa-file"></i>',
         'title' => 'Privacy and Policy',

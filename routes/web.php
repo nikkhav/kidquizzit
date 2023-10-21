@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\PrivacyAndPolicyController;
 use App\Http\Controllers\Admin\TermsAndConditionController;
 use App\Http\Controllers\Api\DatatableController;
 use App\Http\Controllers\Api\MainController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ColouringController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -53,7 +55,11 @@ Route::get('getNotifications', [DashboardController::class, 'getNotifications'])
 
 Route::resource('user', UserController::class);
 Route::get('user-list', [UserController::class, 'list'])->name('user.list');
-// Route::resource('about', AboutController::class);
+Route::resource('category', CategoryController::class);
+Route::resource('colouring', ColouringController::class);
+
+// Route::post('delete', [CategoryController::class, 'delete'])->name('category.destroy');
+
 
 
 

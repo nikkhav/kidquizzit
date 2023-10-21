@@ -33,7 +33,7 @@
                         <span></span>
                     </span>
                 </button>
-
+                {{-- 
                 <form class="app-search d-none d-md-block">
                     <div class="position-relative">
                         <input type="text" class="form-control" placeholder="Axtar..." autocomplete="off"
@@ -156,7 +156,7 @@
                                     class="ri-arrow-right-line ms-1"></i></a>
                         </div>
                     </div>
-                </form>
+                </form> --}}
 
                 <!-- App Search-->
                 {{-- <form class="app-search d-none d-md-block">
@@ -328,7 +328,7 @@
                 </div>
 
                 {{-- Notification --}}
-                <div class="dropdown topbar-head-dropdown ms-1 header-item">
+                {{-- <div class="dropdown topbar-head-dropdown ms-1 header-item">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                         id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
@@ -361,7 +361,7 @@
                             <div class="px-2 pt-2">
                                 <ul class="nav nav-tabs dropdown-tabs nav-tabs-custom" data-dropdown-tabs="true"
                                     id="notificationItemsTab" role="tablist">
-                                    {{-- <li class="nav-item waves-effect waves-light">
+                                    <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#all-noti-tab" role="tab"
                                             aria-selected="true">
                                             All (4)
@@ -371,7 +371,7 @@
                                         <a class="nav-link" data-bs-toggle="tab" href="#messages-tab" role="tab"
                                             aria-selected="false">
                                             Messages
-                                        </a> --}}
+                                        </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#alerts-tab"
@@ -385,7 +385,7 @@
                         </div>
 
                         <div class="tab-content" id="notificationItemsTabContent">
-                            {{-- <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab" role="tabpanel">
+                            <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab" role="tabpanel">
                                 <div data-simplebar style="max-height: 300px;" class="pe-2">
                                     <div class="text-reset notification-item d-block dropdown-item position-relative">
                                         <div class="d-flex">
@@ -425,9 +425,9 @@
                                     </div>
                                 </div>
 
-                            </div> --}}
+                            </div>
 
-                            {{-- <div class="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel"
+                            <div class="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel"
                                 aria-labelledby="messages-tab">
                                 <div data-simplebar style="max-height: 300px;" class="pe-2">
                                     <div class="text-reset notification-item d-block dropdown-item">
@@ -465,14 +465,14 @@
                                             All Messages <i class="ri-arrow-right-line align-middle"></i></button>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="tab-pane fade show active  p-4 notification-content" id="alerts-tab"
                                 role="tabpanel" aria-labelledby="alerts-tab">
 
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="dropdown ms-sm-3 header-item topbar-user">
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
@@ -493,7 +493,7 @@
                         {{-- <h6 class="dropdown-header">Welcome   {{ Auth::user()?->name }} !</h6> --}}
                         <a class="dropdown-item" href="{{ route('profile.edit') }}"><i
                                 class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
-                                class="align-middle">Hesab</span></a>
+                                class="align-middle">Account</span></a>
                         {{-- <a class="dropdown-item" href="apps-chat.html"><i
                                 class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i>
                             <span class="align-middle">Messages</span></a> --}}
@@ -501,8 +501,8 @@
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
-                            <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
-                                class="align-middle" data-key="t-logout">Çxış</span>
+                            <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle"
+                                data-key="t-logout">Logout</span>
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

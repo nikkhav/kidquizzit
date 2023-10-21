@@ -1,28 +1,30 @@
 <!doctype html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg"
+    data-sidebar-image="none" data-preloader="disable">
 
 
 <!-- Mirrored from themesbrand.com/velzon/html/default/auth-signin-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Oct 2022 11:34:54 GMT -->
+
 <head>
 
     <meta charset="utf-8" />
-    <title>Giriş | Asanex - Ideovate Consulting</title>
+    <title>Login | Kidquizzit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('admin/assets/images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
 
     <!-- Layout config Js -->
-    <script src="{{asset('admin/assets/js/layout.js')}}"></script>
+    <script src="{{ asset('admin/assets/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
-    <link href="{{asset('admin/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="{{asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="{{asset('admin/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
-    <link href="{{asset('admin/assets/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -34,7 +36,8 @@
             <div class="bg-overlay"></div>
 
             <div class="shape">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 120">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 1440 120">
                     <path d="M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z"></path>
                 </svg>
             </div>
@@ -51,7 +54,7 @@
                                     <img src="assets/images/logo-light.png" alt="" height="20">
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">CRM Sistem</p>
+                            <p class="mt-3 fs-15 fw-medium">CRM System</p>
                         </div>
                     </div>
                 </div>
@@ -63,26 +66,31 @@
 
                             <div class="card-body p-4">
                                 <div class="text-center mt-2">
-                                    <h5 class="text-primary">Xoş gəlmişsiniz!</h5>
+                                    <h5 class="text-primary">Welcome!</h5>
                                 </div>
                                 <div class="p-2 mt-4">
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Email</label>
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                            <input id="email" type="email"
+                                                class="form-control @error('email') is-invalid @enderror" name="email"
+                                                value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
-                                            @enderror                                        </div>
+                                            @enderror
+                                        </div>
 
                                         <div class="mb-3">
-                                            
-                                            <label class="form-label" for="password-input">Şifrə</label>
+
+                                            <label class="form-label" for="password-input">Password</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                                <input id="password" type="password"
+                                                    class="form-control @error('password') is-invalid @enderror"
+                                                    name="password" required autocomplete="current-password">
 
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
@@ -93,15 +101,16 @@
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="auth-remember-check">
-                                            <label class="form-check-label" for="auth-remember-check">Xatırla</label>
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="auth-remember-check">
+                                            <label class="form-check-label" for="auth-remember-check">Remember</label>
                                         </div>
 
                                         <div class="mt-4">
-                                            <button class="btn btn-success w-100" type="submit">Daxil ol</button>
+                                            <button class="btn btn-success w-100" type="submit">Enter</button>
                                         </div>
 
-            
+
                                     </form>
                                 </div>
                             </div>
@@ -109,7 +118,7 @@
                         </div>
                         <!-- end card -->
 
-                       
+
                     </div>
                 </div>
                 <!-- end row -->
@@ -125,7 +134,10 @@
                     <div class="col-lg-12">
                         <div class="text-center">
                             <p class="mb-0 text-muted">&copy;
-                                <script>document.write(new Date().getFullYear())</script> GoPanel<i class="mdi mdi-heart text-danger"></i> by GOWeb
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>Admin Panel. Design & Develop by Telman
+                                Akhundov(https://github.com/WINDARK-coder)
                             </p>
                         </div>
                     </div>
@@ -154,4 +166,5 @@
 
 
 <!-- Mirrored from themesbrand.com/velzon/html/default/auth-signin-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Oct 2022 11:34:54 GMT -->
+
 </html>

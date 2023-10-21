@@ -15,28 +15,37 @@
         <div class="col-12">
             <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                 <div class="flex-grow-1">
-                    <h4 class="fs-16 mb-1">Hər vaxtınız xeyir, {{Auth::user()->name}}  @if(Auth::user()->gender == 1)  bəy!  @else xanım! @endif </h4>
-                    <p class="text-muted mb-0">Asanex ilə daha az vaxtda daha çox həll edin.</p>
+                    <h4 class="fs-16 mb-1">Hello, @if (Auth::user()->gender == 1)
+                            Mr.
+                        @else
+                            Mrs.
+                        @endif{{ Auth::user()->name }} </h4>
+                    <p class="text-muted mb-0">Create children's entertainment content with Kidquizzit Admin Panel</p>
                 </div>
                 <div class="mt-3 mt-lg-0">
                     <form action="javascript:void(0);">
                         <div class="row g-3 mb-0 align-items-center">
                             <div class="col-sm-auto">
                                 <div class="input-group">
-                                    <input type="text" class="w-160 form-control input-color-date border-0 date-picker form-control shadow" readonly="readonly" >
+                                    <input type="text"
+                                        class="w-160 form-control input-color-date border-0 date-picker form-control shadow"
+                                        readonly="readonly">
                                     <div class="input-group-text bg-primary border-primary text-white ">
                                         <i class="ri-calendar-2-line"></i>
                                     </div>
                                 </div>
                             </div>
                             <!--end col-->
-                            <div class="col-auto">
-                                <a href="{{route('task.index')}}" type="button" class="btn btn-soft-success mb-0"><i class="ri-add-circle-line align-middle me-1"></i> Tapşırıq</a>
-                            </div>
+                            {{-- <div class="col-auto">
+                                <a href="{{ route('task.index') }}" type="button" class="btn btn-soft-success mb-0"><i
+                                        class="ri-add-circle-line align-middle me-1"></i> Tapşırıq</a>
+                            </div> --}}
                             <!--end col-->
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-soft-info btn-icon waves-effect waves-light layout-rightside-btn"><i class="ri-pulse-line"></i></button>
-                            </div>
+                            {{-- <div class="col-auto">
+                                <button type="button"
+                                    class="btn btn-soft-info btn-icon waves-effect waves-light layout-rightside-btn"><i
+                                        class="ri-pulse-line"></i></button>
+                            </div> --}}
                             <!--end col-->
                         </div>
                         <!--end row-->
@@ -59,9 +68,9 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="fw-medium font-size-department text-muted mb-0">Tapşırıqlar</p>
+                                        <p class="fw-medium font-size-department text-muted mb-0">Quizes</p>
                                         <h2 class="mt-3 mb-0 ff-secondary fw-semibold"><span class="counter-value"
-                                                data-target="{{$counts->task_count}}">0</span></h2>
+                                                data-target="{{ $counts->task_count }}">0</span></h2>
                                     </div>
                                     {{-- <div>
                                         <p class="mb-0 font-size-department text-muted"><span class="badge bg-light font-size-department text-success mb-0">
@@ -69,7 +78,7 @@
                                     </div> --}}
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a href="{{route('task.index')}}" class="text-decoration-un">Bütün tapşırıqlar</a>
+                                    <a href="{{ route('task.index') }}" class="text-decoration-un">Bütün tapşırıqlar</a>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-soft-info border-icon-department fs-2">
                                             <i data-feather="external-link" class="text-info"></i>
@@ -86,9 +95,9 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="fw-medium font-size-department text-muted mb-0">Müştərilər</p>
+                                        <p class="fw-medium font-size-department text-muted mb-0">Colourings</p>
                                         <h2 class="mt-3 mb-0 ff-secondary fw-semibold"><span class="counter-value"
-                                                data-target="{{$counts->customer_count}}">0</span></h2>
+                                                data-target="{{ $counts->customer_count }}">0</span></h2>
                                     </div>
                                     {{-- <div>
                                         <p class="mb-0 font-size-department text-muted"><span class="badge bg-light font-size-department text-success mb-0">
@@ -96,7 +105,7 @@
                                     </div> --}}
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a href="{{route('customer.index')}}" class="text-decoration-un">Bütün müştərilər</a>
+                                    <a href="{{ route('customer.index') }}" class="text-decoration-un">Bütün müştərilər</a>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-soft-info border-icon-department fs-2">
                                             <i data-feather="external-link" class="text-info"></i>
@@ -113,9 +122,9 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="fw-medium font-size-department text-muted mb-0">İstifadəçilər</p>
+                                        <p class="fw-medium font-size-department text-muted mb-0">Find matches</p>
                                         <h2 class="mt-3 mb-0 ff-secondary fw-semibold"><span class="counter-value"
-                                                data-target="{{$counts->user_count}}">0</span></h2>
+                                                data-target="{{ $counts->user_count }}">0</span></h2>
                                     </div>
                                     {{-- <div>
                                         <p class="mb-0 font-size-department text-muted"><span class="badge bg-light font-size-department text-success mb-0">
@@ -123,7 +132,8 @@
                                     </div> --}}
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a href="{{route('personal.index')}}" class="text-decoration-un">Bütün istifadəçilər</a>
+                                    <a href="{{ route('personal.index') }}" class="text-decoration-un">Bütün
+                                        istifadəçilər</a>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-soft-info border-icon-department fs-2">
                                             <i data-feather="external-link" class="text-info"></i>
@@ -140,9 +150,9 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="fw-medium font-size-department text-muted mb-0">Departamentlər</p>
+                                        <p class="fw-medium font-size-department text-muted mb-0">Why questions</p>
                                         <h2 class="mt-3 mb-0 ff-secondary fw-semibold"><span class="counter-value"
-                                                data-target="{{$counts->departemet_count}}">0</span></h2>
+                                                data-target="{{ $counts->departemet_count }}">0</span></h2>
                                     </div>
                                     {{-- <div>
                                         <p class="mb-0 font-size-department text-muted"><span class="badge bg-light font-size-department text-success mb-0">
@@ -150,7 +160,8 @@
                                     </div> --}}
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a href="{{route('department.index')}}" class="text-decoration-un">Bütün departamentlər</a>
+                                    <a href="{{ route('department.index') }}" class="text-decoration-un">Bütün
+                                        departamentlər</a>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-soft-info border-icon-department fs-2">
                                             <i data-feather="external-link" class="text-info"></i>
@@ -435,14 +446,17 @@
         </div><!-- end col -->
     </div> --}}
     <!-- end row -->
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title mb-0">Line Chart</h4>
                 </div>
                 <div class="card-body">
-                    <canvas id="lineChart" class="chartjs-chart" data-colors="[&quot;--vz-primary-rgb, 0.2&quot;, &quot;--vz-primary&quot;, &quot;--vz-success-rgb, 0.2&quot;, &quot;--vz-success&quot;]" width="894" height="446" style="display: block; box-sizing: border-box; height: 223px; width: 447px;"></canvas>
+                    <canvas id="lineChart" class="chartjs-chart"
+                        data-colors="[&quot;--vz-primary-rgb, 0.2&quot;, &quot;--vz-primary&quot;, &quot;--vz-success-rgb, 0.2&quot;, &quot;--vz-success&quot;]"
+                        width="894" height="446"
+                        style="display: block; box-sizing: border-box; height: 223px; width: 447px;"></canvas>
                 </div>
             </div>
         </div> <!-- end col -->
@@ -453,7 +467,10 @@
                     <h4 class="card-title mb-0">Tapşırıqlar</h4>
                 </div>
                 <div class="card-body">
-                    <canvas id="bar" class="chartjs-chart" data-colors="[&quot;--vz-primary-rgb, 0.8&quot;, &quot;--vz-primary-rgb, 0.9&quot;]" width="894" height="446" style="display: block; box-sizing: border-box; height: 223px; width: 447px;"></canvas>
+                    <canvas id="bar" class="chartjs-chart"
+                        data-colors="[&quot;--vz-primary-rgb, 0.8&quot;, &quot;--vz-primary-rgb, 0.9&quot;]"
+                        width="894" height="446"
+                        style="display: block; box-sizing: border-box; height: 223px; width: 447px;"></canvas>
 
                 </div>
             </div>
@@ -466,7 +483,9 @@
                     <h4 class="card-title mb-0">Pie Chart</h4>
                 </div>
                 <div class="card-body">
-                    <canvas id="pieChart" class="chartjs-chart" data-colors="[&quot;--vz-success&quot;, &quot;--vz-light&quot;]" width="894" height="640" style="display: block; box-sizing: border-box; height: 320px; width: 447px;"></canvas>
+                    <canvas id="pieChart" class="chartjs-chart"
+                        data-colors="[&quot;--vz-success&quot;, &quot;--vz-light&quot;]" width="894" height="640"
+                        style="display: block; box-sizing: border-box; height: 320px; width: 447px;"></canvas>
                 </div>
             </div>
         </div> <!-- end col -->
@@ -477,9 +496,11 @@
                     <h4 class="card-title mb-0">Donut Chart</h4>
                 </div>
                 <div class="card-body">
-                    <canvas id="doughnut" class="chartjs-chart" data-colors="[&quot;--vz-primary&quot;, &quot;--vz-light&quot;]" width="894" height="640" style="display: block; box-sizing: border-box; height: 320px; width: 447px;"></canvas>
+                    <canvas id="doughnut" class="chartjs-chart"
+                        data-colors="[&quot;--vz-primary&quot;, &quot;--vz-light&quot;]" width="894" height="640"
+                        style="display: block; box-sizing: border-box; height: 320px; width: 447px;"></canvas>
                 </div>
             </div>
         </div> <!-- end col -->
-    </div>
+    </div> --}}
 @endsection
