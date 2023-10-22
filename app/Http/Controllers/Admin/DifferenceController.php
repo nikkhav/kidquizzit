@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ColouringStore;
-use App\Http\Requests\ColouringUpdate;
+use App\Http\Requests\DifferenceStore;
+use App\Http\Requests\DifferenceUpdate;
 use App\Models\Category;
-use App\Models\Colouring;
-use App\Services\ColouringService;
+use App\Models\Difference;
+use App\Services\DifferenceService;
 
-class ColouringController extends Controller
+class DifferenceController extends Controller
 {
-    private $colouringService;
+    private $differenceService;
 
-    public function __construct(ColouringService $colouringService)
+    public function __construct(DifferenceService $differenceService)
     {
-        $this->colouringService = $colouringService;
-        $colouringCategory = Category::where('parent_id', 2)->get();
-        view()->share('categories', $colouringCategory);
+        $this->differenceService = $differenceService;
+        $differenceCategory = Category::where('parent_id', 4)->get();
+        view()->share('categories', $differenceCategory);
     }
     /**
      * Display a listing of the resource.
@@ -26,7 +26,7 @@ class ColouringController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.colouring.index');
+        return view('admin.pages.difference.index');
     }
 
     /**
@@ -36,7 +36,7 @@ class ColouringController extends Controller
      */
     public function create()
     {
-        $view = view('admin.pages.colouring.modal')->render();
+        $view = view('admin.pages.difference.modal')->render();
         return response()->json([
             'code' => 200,
             'view' => $view
@@ -49,13 +49,13 @@ class ColouringController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ColouringStore $request)
+    public function store(DifferenceStore $request)
     {
         $data = $request->toArray();
-        $colouring = $this->colouringService->createColouring($data);
+        $difference = $this->differenceService->createDifference($data);
         return response()->json([
             'code' =>  200,
-            'item' =>  $colouring
+            'item' =>  $difference
         ]);
     }
 
@@ -67,8 +67,8 @@ class ColouringController extends Controller
      */
     public function edit($id)
     {
-        $item = $this->colouringService->getColouringById($id);
-        $view = view('admin.pages.colouring.form', compact('item'))->render();
+        $item = $this->differenceService->getDifferenceById($id);
+        $view = view('admin.pages.difference.form', compact('item'))->render();
         return response()->json([
             'code' => 200,
             'view' => $view
@@ -82,10 +82,10 @@ class ColouringController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ColouringUpdate $request, $id)
+    public function update(DifferenceUpdate $request, $id)
     {
         $data = $request->validated();
-        $this->colouringService->updateColouring($id, $data);
+        $this->differenceService->updateDifference($id, $data);
         return response()->json([
             'code' => 200,
         ]);
@@ -100,7 +100,7 @@ class ColouringController extends Controller
     public function destroy($id)
     {
         // Delete the category
-        $this->colouringService->deleteColouring($id);
+        $this->differenceService->deleteDifference($id);
 
         // Return JSON response with success message and JavaScript snippet for page reload
         return response()->json([
@@ -110,7 +110,7 @@ class ColouringController extends Controller
 
     public function getAll()
     {
-        $colouring = Colouring::all();
-        return response()->json($colouring);
+        $difference = Difference::all();
+        return response()->json($difference);
     }
 }

@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\ColouringController;
 use App\Http\Controllers\Admin\PrivacyAndPolicyController;
 use App\Http\Controllers\Admin\TermsAndConditionController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DifferenceController;
+use App\Http\Controllers\Admin\WhyQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,10 @@ Route::prefix('v1')->group(function () {
     Route::get('/termsandcondition', [TermsAndConditionController::class, 'getAll']);
     Route::get('/category', [CategoryController::class, 'getAll']);
     Route::get('/colouring', [ColouringController::class, 'getAll']);
+    Route::get('/difference', [DifferenceController::class, 'getAll']);
+    Route::get('/whyquestion', [WhyQuestionController::class, 'getAll']);
+
+
 
 
 

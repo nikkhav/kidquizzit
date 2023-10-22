@@ -20,6 +20,8 @@ use App\Http\Controllers\Api\DatatableController;
 use App\Http\Controllers\Api\MainController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColouringController;
+use App\Http\Controllers\Admin\DifferenceController;
+use App\Http\Controllers\Admin\WhyQuestionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +59,10 @@ Route::resource('user', UserController::class);
 Route::get('user-list', [UserController::class, 'list'])->name('user.list');
 Route::resource('category', CategoryController::class);
 Route::resource('colouring', ColouringController::class);
+Route::resource('difference', DifferenceController::class);
+Route::resource('whyquestion', WhyQuestionController::class);
+
+
 
 // Route::post('delete', [CategoryController::class, 'delete'])->name('category.destroy');
 

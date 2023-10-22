@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Task;
 use App\Models\Checklist;
 use App\Services\TaskServices;
 use Illuminate\Support\Facades\Auth;
-
-use App\Models\Task;
-
-
-
 
 class ChecklistController extends Controller
 {

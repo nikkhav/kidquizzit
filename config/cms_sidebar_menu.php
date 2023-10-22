@@ -35,18 +35,18 @@ return [
         'route' => 'colouring.index',
         'can' => 'colouring.index'
     ],
-    // [
-    //     'icon' => '<i class="fas fa-th-list"></i>',
-    //     'title' => 'Why questions',
-    //     'route' => 'whyquestion.index',
-    //     'can' => 'whyquestion.index'
-    // ],
-    // [
-    //     'icon' => '<i class="fas fa-th-list"></i>',
-    //     'title' => 'Find the difference',
-    //     'route' => 'difference.index',
-    //     'can' => 'difference.index'
-    // ],
+    [
+        'icon' => '<i class="fas fa-question"></i>',
+        'title' => 'Why questions',
+        'route' => 'whyquestion.index',
+        'can' => 'whyquestion.index'
+    ],
+    [
+        'icon' => '<i class="fas fa-clone"></i>',
+        'title' => 'Find the difference',
+        'route' => 'difference.index',
+        'can' => 'difference.index'
+    ],
     [
         'icon' => '<i class="far fa-file"></i>',
         'title' => 'Privacy and Policy',

@@ -3,21 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ColouringStore;
-use App\Http\Requests\ColouringUpdate;
+use App\Http\Requests\WhyQuestionStore;
+use App\Http\Requests\WhyQuestionUpdate;
 use App\Models\Category;
-use App\Models\Colouring;
-use App\Services\ColouringService;
+use App\Models\WhyQuestion;
+use App\Services\WhyQuestionService;
 
-class ColouringController extends Controller
+class WhyQuestionController extends Controller
 {
-    private $colouringService;
 
-    public function __construct(ColouringService $colouringService)
+    private $whyQuestionService;
+
+    public function __construct(WhyQuestionService $whyQuestionService)
     {
-        $this->colouringService = $colouringService;
-        $colouringCategory = Category::where('parent_id', 2)->get();
-        view()->share('categories', $colouringCategory);
+        $this->whyQuestionService = $whyQuestionService;
+        $whyQuestionCategory = Category::where('parent_id', 3)->get();
+        view()->share('categories', $whyQuestionCategory);
     }
     /**
      * Display a listing of the resource.
@@ -26,7 +27,7 @@ class ColouringController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.colouring.index');
+        return view('admin.pages.whyquestion.index');
     }
 
     /**
@@ -36,7 +37,7 @@ class ColouringController extends Controller
      */
     public function create()
     {
-        $view = view('admin.pages.colouring.modal')->render();
+        $view = view('admin.pages.whyquestion.modal')->render();
         return response()->json([
             'code' => 200,
             'view' => $view
@@ -49,13 +50,13 @@ class ColouringController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ColouringStore $request)
+    public function store(WhyQuestionStore $request)
     {
         $data = $request->toArray();
-        $colouring = $this->colouringService->createColouring($data);
+        $whyquestion = $this->whyQuestionService->createWhyQuestion($data);
         return response()->json([
             'code' =>  200,
-            'item' =>  $colouring
+            'item' =>  $whyquestion
         ]);
     }
 
@@ -67,8 +68,8 @@ class ColouringController extends Controller
      */
     public function edit($id)
     {
-        $item = $this->colouringService->getColouringById($id);
-        $view = view('admin.pages.colouring.form', compact('item'))->render();
+        $item = $this->whyQuestionService->getWhyQuestionById($id);
+        $view = view('admin.pages.whyquestion.form', compact('item'))->render();
         return response()->json([
             'code' => 200,
             'view' => $view
@@ -82,10 +83,10 @@ class ColouringController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ColouringUpdate $request, $id)
+    public function update(WhyQuestionUpdate $request, $id)
     {
         $data = $request->validated();
-        $this->colouringService->updateColouring($id, $data);
+        $this->whyQuestionService->updateWhyQuestion($id, $data);
         return response()->json([
             'code' => 200,
         ]);
@@ -100,7 +101,7 @@ class ColouringController extends Controller
     public function destroy($id)
     {
         // Delete the category
-        $this->colouringService->deleteColouring($id);
+        $this->whyQuestionService->deleteWhyQuestion($id);
 
         // Return JSON response with success message and JavaScript snippet for page reload
         return response()->json([
@@ -110,7 +111,7 @@ class ColouringController extends Controller
 
     public function getAll()
     {
-        $colouring = Colouring::all();
-        return response()->json($colouring);
+        $whyquestion = WhyQuestion::all();
+        return response()->json($whyquestion);
     }
 }
