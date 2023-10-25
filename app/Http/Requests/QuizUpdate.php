@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class DepartmantUdate extends FormRequest
+class QuizUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +13,7 @@ class DepartmantUdate extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -26,13 +24,7 @@ class DepartmantUdate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'id' => 'required',
+            //
         ];
-    }
-
-    protected function failedValidation(Validator $validator)
-    {
-    throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
 }

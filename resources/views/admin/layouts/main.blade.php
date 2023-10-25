@@ -257,18 +257,6 @@
     <script src="{{ asset('admin/assets/js/main.js?v=' . time()) }}"></script>
     <script src="{{ asset('admin/assets/js/pages/select2.init.js') }}"></script>
 
-    <script>
-        // $(document).ready(function(){
-        //   function notification(){
-        //     $.get("{{ route('getNotifications') }}",
-        //     function (response) {
-        //         console.log(respose.view);
-        //         alert('get')
-        //     });
-        //   }
-        //   notification();
-        // })
-    </script>
     @stack('js_stack')
 </body>
 

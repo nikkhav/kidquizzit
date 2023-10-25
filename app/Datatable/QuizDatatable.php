@@ -2,33 +2,32 @@
 
 namespace App\Datatable;
 
-use App\Models\User;
+use App\Models\Batch\Batch;
 use Illuminate\Database\Eloquent\Builder;
 
-class UserDatatable extends BaseDatatable
+class QuizDatatable extends BaseDatatable
 {
 
     public function __construct()
     {
-        parent::__construct(User::class, [
+        parent::__construct(Quiz::class, [
             'id' => 'ID',
-            'full_name' => 'Ad və Soyad',
-            'email' => 'İmeyl',
+            'customer.full_info' => 'A.S.A',
+            'amount' => 'Miqdar',
+            'total_bonus' => 'Toplam bonus',
+            'bonus_type.key' => 'Bonus tipi',
             'created_at' => 'Qeydiyyat tarixi'
         ], [
             'actions' => [
-                'title' => 'Əməliyyat',
-                'view' => 'admin.pages.user.table_actions'
+                'title' => 'Actions',
+                'view' => ''
             ]
         ]);
     }
 
     protected function query(): Builder
     {
-        $query = $this->baseQueryScope()
-                ->with(['roles']);
-                
-        $query->where('type', 'admin');
+        $query = $this->baseQueryScope();
 
         if (isset($_GET['filters'])) {
             $filters = $_GET['filters'];
@@ -39,7 +38,7 @@ class UserDatatable extends BaseDatatable
         }
 
         if ($this->getSearchInput()) {
-            $query->where('name', 'LIKE', '%' . $this->getSearchInput() . '%');
+            $query->where('test', 'LIKE', '%' . $this->getSearchInput() . '%');
         }
 
         return $query;

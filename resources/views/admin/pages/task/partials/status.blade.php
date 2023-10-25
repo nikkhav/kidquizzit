@@ -1,1 +1,0 @@
-<span class="badge badge-label bg-{{ $item->status->color }}"><i class="mdi mdi-circle-medium"></i> {{ $item->status->name }}</span>

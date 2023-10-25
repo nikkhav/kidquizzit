@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PositionStore;
-use App\Http\Requests\PositionUpdate;
-use App\Models\Position;
-use Illuminate\Http\Request;
+use App\Http\Requests\QuizUpdate;
+use App\Services\QuizService;
+use App\Models\Quiz;
+use Illuminate\Support\Facades\Storage;
 
-class PositionController extends Controller
+class QuizController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,18 +17,9 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $this->canOrAbort('postion.index');
-        return view('admin.pages.position.index');
+        //
     }
 
-    public function list(){
-        $item = Position::get();
-
-        return response()->json([
-            'code' => 200,
-            'data' => $item
-        ]);
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -45,13 +36,9 @@ class PositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PositionStore $request)
+    public function store(Request $request)
     {
-        Position::create($request->validated());
-        return response()->json([
-            'code' =>  200,
-            'item' => $request->all()
-        ]);
+        //
     }
 
     /**
@@ -73,11 +60,7 @@ class PositionController extends Controller
      */
     public function edit($id)
     {
-        $item = Position::find($id);
-        return response()->json([
-            'code' => 200,
-            'data' => $item
-        ]);
+        //
     }
 
     /**
@@ -87,13 +70,9 @@ class PositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PositionUpdate $request, $id)
+    public function update(Request $request, $id)
     {
-        Position::where('id',$request->post('id'))->update($request->validated());
-
-        return response()->json([
-            'code' => 200,
-        ]);
+        //
     }
 
     /**
@@ -104,9 +83,6 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        Position::where('id',$id)->delete();
-        return response()->json([
-            'code' => 200,
-        ]);
+        //
     }
 }
