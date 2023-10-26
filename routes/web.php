@@ -9,7 +9,9 @@ use App\Http\Controllers\Api\DatatableController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColouringController;
 use App\Http\Controllers\Admin\DifferenceController;
+use App\Http\Controllers\Admin\QuizAnswerController;
 use App\Http\Controllers\Admin\QuizController;
+use App\Http\Controllers\Admin\QuizQuestionController;
 use App\Http\Controllers\Admin\WhyQuestionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +50,12 @@ Route::resource('colouring', ColouringController::class);
 Route::resource('difference', DifferenceController::class);
 Route::resource('whyquestion', WhyQuestionController::class);
 Route::resource('quiz', QuizController::class);
+Route::resource('quizquestion', QuizQuestionController::class)->except(['index']);
+Route::get('quizquestion/{quizquestion}', [QuizQuestionController::class, 'index'])->name('quizquestion.index');
+Route::resource('quizanswer', QuizAnswerController::class)->except(['index']);
+Route::get('quizanswer/{quizanswer}', [QuizAnswerController::class, 'index'])->name('quizanswer.index');
+
+
 
 
 Route::get('datatable/{table}', [DatatableController::class, 'handle'])->name('datatable.source');

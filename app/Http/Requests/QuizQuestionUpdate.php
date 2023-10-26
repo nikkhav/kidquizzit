@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class QuizUpdate extends FormRequest
+class QuizQuestionUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class QuizUpdate extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'required|exists:categories,id',
-            'title' => 'required|string|max:255',
+            'quiz_id' => 'required|exists:quizzes,id',
+            'question_text' => 'required|string',
         ];
     }
 }

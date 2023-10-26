@@ -3,22 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\QuizUpdate;
-use App\Http\Requests\QuizStore;
-use App\Services\QuizService;
+use App\Http\Requests\QuizQuestionUpdate;
+use App\Http\Requests\QuizQuestionStore;
+use App\Services\QuizQuestionService;
 use App\Models\Quiz;
-use App\Models\Category;
+use Illuminate\Http\Request;
 
 
-class QuizController extends Controller
+class QuizQuestionController extends Controller
 {
-    private $quizService;
+    private $quizQuestionService;
+    private $quizId;
 
-    public function __construct(QuizService $quizService)
+    public function __construct(QuizQuestionService $quizQuestionService, Request $request)
     {
-        $this->quizService = $quizService;
-        $quizCategory = Category::where('parent_id', 1)->get();
-        view()->share('categories', $quizCategory);
+        $this->quizQuestionService = $quizQuestionService;
+        $this->quizId = $request->route('quizquestion');
+        $quiz = Quiz::find($this->quizId);
+        view()->share('quiz', $quiz);
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +29,7 @@ class QuizController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.quiz.index');
+        return view('admin.pages.quizquestion.index');
     }
 
     /**
@@ -37,7 +39,7 @@ class QuizController extends Controller
      */
     public function create()
     {
-        $view = view('admin.pages.quiz.modal')->render();
+        $view = view('admin.pages.quizquestion.modal')->render();
         return response()->json([
             'code' => 200,
             'view' => $view
@@ -50,13 +52,13 @@ class QuizController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(QuizStore $request)
+    public function store(QuizQuestionStore $request)
     {
         $data = $request->toArray();
-        $quiz = $this->quizService->createQuiz($data);
+        $quizquestion = $this->quizQuestionService->createQuizQuestion($data);
         return response()->json([
             'code' =>  200,
-            'item' =>  $quiz
+            'item' =>  $quizquestion
         ]);
     }
 
@@ -68,8 +70,8 @@ class QuizController extends Controller
      */
     public function edit($id)
     {
-        $item = $this->quizService->getQuizById($id);
-        $view = view('admin.pages.quiz.form', compact('item'))->render();
+        $item = $this->quizQuestionService->getQuizQuestionById($id);
+        $view = view('admin.pages.quizquestion.form', compact('item'))->render();
         return response()->json([
             'code' => 200,
             'view' => $view
@@ -83,10 +85,10 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(QuizUpdate $request, $id)
+    public function update(QuizQuestionUpdate $request, $id)
     {
         $data = $request->validated();
-        $this->quizService->updateQuiz($id, $data);
+        $this->quizQuestionService->updateQuizQuestion($id, $data);
         return response()->json([
             'code' => 200,
         ]);
@@ -100,18 +102,9 @@ class QuizController extends Controller
      */
     public function destroy($id)
     {
-        // Delete the category
-        $this->quizService->deleteQuiz($id);
-
-        // Return JSON response with success message and JavaScript snippet for page reload
+        $this->quizQuestionService->deleteQuizQuestion($id);
         return response()->json([
             'code' => 200,
         ]);
-    }
-
-    public function getAll()
-    {
-        $quizzes = Quiz::with('questions.answers')->get();
-        return response()->json($quizzes);
     }
 }

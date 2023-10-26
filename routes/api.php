@@ -31,11 +31,4 @@ Route::prefix('v1')->group(function () {
     Route::get('/difference', [DifferenceController::class, 'getAll']);
     Route::get('/whyquestion', [WhyQuestionController::class, 'getAll']);
     Route::get('/quiz', [QuizController::class, 'getAll']);
-
-
-
-
-
-
-    // Add more routes for other resources as needed
 });

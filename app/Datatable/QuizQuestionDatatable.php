@@ -2,24 +2,24 @@
 
 namespace App\Datatable;
 
-use App\Models\Quiz;
+use App\Models\QuizQuestion;
 use Illuminate\Database\Eloquent\Builder;
 
-class QuizDatatable extends BaseDatatable
+class QuizQuestionDatatable extends BaseDatatable
 {
 
     public function __construct()
     {
-        parent::__construct(Quiz::class, [
+        parent::__construct(QuizQuestion::class, [
             'id' => '№',
-            'category_title' => 'Category',
-            'title' => 'Title',
+            'quiz_title' => 'Quiz Title',
+            'question_text' => 'Question',
             'created_at' => 'Created at',
             'updated_at' => 'Updated at'
         ], [
             'actions' => [
                 'title' => 'Actions',
-                'view' => 'admin.pages.quiz.table_actions'
+                'view' => 'admin.pages.quizquestion.table_actions'
             ]
         ]);
     }
@@ -27,9 +27,8 @@ class QuizDatatable extends BaseDatatable
     protected function query(): Builder
     {
         $query = $this->baseQueryScope()
-            ->leftJoin('categories', 'quizzes.category_id', '=', 'categories.id')
-            ->select('quizzes.*', 'categories.title as category_title')
-            ->where('categories.parent_id', 1)
+            ->leftJoin('quizzes', 'quiz_questions.quiz_id', '=', 'quizzes.id')
+            ->select('quiz_questions.*', 'quizzes.title as quiz_title')
             ->orderBy('created_at', 'asc');
 
         if (isset($_GET['filters'])) {
@@ -41,7 +40,7 @@ class QuizDatatable extends BaseDatatable
         }
 
         if ($this->getSearchInput()) {
-            $query->where('categories.title', 'LIKE', '%' . $this->getSearchInput() . '%');
+            $query->where('quiz_questions.question_text', 'LIKE', '%' . $this->getSearchInput() . '%');
         }
 
         return $query;

@@ -13,7 +13,7 @@ class QuizStore extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class QuizStore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'category_id' => 'required|exists:categories,id',
+            'title' => 'required|string|max:255',
         ];
     }
 }

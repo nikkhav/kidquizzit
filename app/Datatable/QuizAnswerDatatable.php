@@ -2,24 +2,25 @@
 
 namespace App\Datatable;
 
-use App\Models\Quiz;
+use App\Models\QuizAnswer;
 use Illuminate\Database\Eloquent\Builder;
 
-class QuizDatatable extends BaseDatatable
+class QuizAnswerDatatable extends BaseDatatable
 {
 
     public function __construct()
     {
-        parent::__construct(Quiz::class, [
+        parent::__construct(QuizAnswer::class, [
             'id' => '№',
-            'category_title' => 'Category',
-            'title' => 'Title',
+            'question_title' => 'Question',
+            'answer_text' => 'Answer',
+            'is_correct' => 'Is correct?',
             'created_at' => 'Created at',
             'updated_at' => 'Updated at'
         ], [
             'actions' => [
                 'title' => 'Actions',
-                'view' => 'admin.pages.quiz.table_actions'
+                'view' => 'admin.pages.quizanswer.table_actions'
             ]
         ]);
     }
@@ -27,10 +28,10 @@ class QuizDatatable extends BaseDatatable
     protected function query(): Builder
     {
         $query = $this->baseQueryScope()
-            ->leftJoin('categories', 'quizzes.category_id', '=', 'categories.id')
-            ->select('quizzes.*', 'categories.title as category_title')
-            ->where('categories.parent_id', 1)
-            ->orderBy('created_at', 'asc');
+            ->leftJoin('quiz_questions', 'quiz_answers.quiz_question_id', '=', 'quiz_questions.id')
+            ->select('quiz_answers.*', 'quiz_questions.question_text as question_title')
+            ->orderBy('created_at', 'asc')
+            ->selectRaw("IF(quiz_answers.is_correct = 1, 'True', 'False') as is_correct");
 
         if (isset($_GET['filters'])) {
             $filters = $_GET['filters'];
@@ -41,7 +42,7 @@ class QuizDatatable extends BaseDatatable
         }
 
         if ($this->getSearchInput()) {
-            $query->where('categories.title', 'LIKE', '%' . $this->getSearchInput() . '%');
+            $query->where('quiz_answers.answer_text', 'LIKE', '%' . $this->getSearchInput() . '%');
         }
 
         return $query;
