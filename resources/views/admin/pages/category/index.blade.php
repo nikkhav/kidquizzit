@@ -24,7 +24,6 @@
                 $('.create').click(function(e) {
                     e.preventDefault();
                     pageLoader(true);
-                    console.log('sdadsad')
                     // Make an AJAX POST request to the controller
                     $.post("{{ route('category.create') }}", {
                         _token: "{{ csrf_token() }}"

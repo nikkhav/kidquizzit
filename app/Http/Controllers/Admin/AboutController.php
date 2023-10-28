@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AboutUpdate;
 use App\Services\AboutService;
-
 use App\Models\About;
-use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
@@ -27,9 +25,8 @@ class AboutController extends Controller
     public function update(AboutUpdate $request)
     {
         $data = $request->validated();
-        $about = About::first();
+        $about = About::find($data['id']);
         $this->aboutService->updateAbout($about, $data);
-
         return redirect()->route('about.edit')->with('success', 'About information has been updated successfully.');
     }
 

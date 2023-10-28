@@ -114,7 +114,7 @@ class CategoryController extends Controller
 
     public function getAll()
     {
-        $category = Category::all();
-        return response()->json($category);
+        $categories = Category::with('childCategories')->whereNull('parent_id')->get();
+        return response()->json($categories);
     }
 }

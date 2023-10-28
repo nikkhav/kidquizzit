@@ -4,6 +4,7 @@ namespace App\Datatable;
 
 use App\Models\QuizQuestion;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Route;
 
 class QuizQuestionDatatable extends BaseDatatable
 {
@@ -42,7 +43,6 @@ class QuizQuestionDatatable extends BaseDatatable
         if ($this->getSearchInput()) {
             $query->where('quiz_questions.question_text', 'LIKE', '%' . $this->getSearchInput() . '%');
         }
-
         return $query;
     }
 }

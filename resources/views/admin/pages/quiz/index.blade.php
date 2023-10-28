@@ -125,7 +125,7 @@
                 $(document).on('click', '.view-questions', function() {
                     var quizId = $(this).data('id');
                     var url =
-                        "{{ route('quizquestion.index', ['quizquestion' => 'quizquestion_id_placeholder']) }}";
+                        "{{ route('quizquestion.show', ['quizquestion' => 'quizquestion_id_placeholder']) }}";
                     url = url.replace('quizquestion_id_placeholder', quizId);
                     window.location.href = url;
                 });

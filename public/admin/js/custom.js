@@ -209,52 +209,52 @@ $(document).on("click", ".light-dark-mode", function () {
     );
 });
 // Create modal
-const profilFotografiGiris = document.getElementById("profil-fotografi");
-const profilFotografiGoster = document.getElementById(
-    "profil-fotografi-goster"
-);
+// const profilFotografiGiris = document.getElementById("profil-fotografi");
+// const profilFotografiGoster = document.getElementById(
+//     "profil-fotografi-goster"
+// );
 
-profilFotografiGiris.addEventListener("change", function () {
-    if (this.files && this.files[0]) {
-        var okuyucu = new FileReader();
-        okuyucu.onload = function (e) {
-            localStorage.setItem("profilFotografi", e.target.result);
-            profilFotografiGoster.setAttribute("src", e.target.result);
-        };
-        okuyucu.readAsDataURL(this.files[0]);
-    } else {
-        localStorage.removeItem("profilFotografi");
-        profilFotografiGoster.setAttribute(
-            "src",
-            "https://png.pngtree.com/png-vector/20191009/ourlarge/pngtree-user-icon-png-image_1796659.jpg"
-        );
-    }
-});
+// profilFotografiGiris.addEventListener("change", function () {
+//     if (this.files && this.files[0]) {
+//         var okuyucu = new FileReader();
+//         okuyucu.onload = function (e) {
+//             localStorage.setItem("profilFotografi", e.target.result);
+//             profilFotografiGoster.setAttribute("src", e.target.result);
+//         };
+//         okuyucu.readAsDataURL(this.files[0]);
+//     } else {
+//         localStorage.removeItem("profilFotografi");
+//         profilFotografiGoster.setAttribute(
+//             "src",
+//             "https://png.pngtree.com/png-vector/20191009/ourlarge/pngtree-user-icon-png-image_1796659.jpg"
+//         );
+//     }
+// });
 
-const editprofilFotografiGiris = document.getElementById(
-    "edit-profil-fotografi"
-);
-const editprofilFotografiGoster = document.getElementById(
-    "edit-profil-fotografi-goster"
-);
+// const editprofilFotografiGiris = document.getElementById(
+//     "edit-profil-fotografi"
+// );
+// const editprofilFotografiGoster = document.getElementById(
+//     "edit-profil-fotografi-goster"
+// );
 
 //Edit modal
-editprofilFotografiGiris.addEventListener("change", function () {
-    if (this.files && this.files[0]) {
-        var editokuyucu = new FileReader();
-        editokuyucu.onload = function (e) {
-            localStorage.setItem("editprofilFotografi", e.target.result);
-            editprofilFotografiGoster.setAttribute("src", e.target.result);
-        };
-        editokuyucu.readAsDataURL(this.files[0]);
-    } else {
-        localStorage.removeItem("editprofilFotografi");
-        editprofilFotografiGoster.setAttribute(
-            "src",
-            "https://png.pngtree.com/png-vector/20191009/ourlarge/pngtree-user-icon-png-image_1796659.jpg"
-        );
-    }
-});
+// editprofilFotografiGiris.addEventListener("change", function () {
+//     if (this.files && this.files[0]) {
+//         var editokuyucu = new FileReader();
+//         editokuyucu.onload = function (e) {
+//             localStorage.setItem("editprofilFotografi", e.target.result);
+//             editprofilFotografiGoster.setAttribute("src", e.target.result);
+//         };
+//         editokuyucu.readAsDataURL(this.files[0]);
+//     } else {
+//         localStorage.removeItem("editprofilFotografi");
+//         editprofilFotografiGoster.setAttribute(
+//             "src",
+//             "https://png.pngtree.com/png-vector/20191009/ourlarge/pngtree-user-icon-png-image_1796659.jpg"
+//         );
+//     }
+// });
 
 window.onload = function () {
     const kaydedilmisProfilFotografi = localStorage.getItem("profilFotografi");

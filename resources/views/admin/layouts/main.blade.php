@@ -44,14 +44,14 @@
 
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.js"></script>
+    {{-- <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.js"></script> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
     <!-- Pusher-->
     <!-- Datepicker JS -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
 
     <script src="https://unpkg.com/imask"></script>
 </head>
@@ -150,9 +150,9 @@
 
 
     <!--start back-to-top-->
-    <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
+    {{-- <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
         <i class="ri-arrow-up-line"></i>
-    </button>
+    </button> --}}
     <!--end back-to-top-->
 
     <!--preloader-->
@@ -176,7 +176,7 @@
     <script src="{{ asset('js/ajax.js') }}"></script>
     <script src="{{ asset('admin/plugins/axios/axios.js') }}"></script>
 
-    <script src="{{ asset('admin/assets/js/plugins.js') }}"></script>
+    {{-- <script src="{{ asset('admin/assets/js/plugins.js') }}"></script> --}}
 
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 
@@ -209,10 +209,10 @@
     <script src="{{ asset('admin/assets/libs/dragula/dragula.min.js') }}"></script>
 
     <!-- dom autoscroll -->
-    <script src="{{ asset('admin/assets/libs/dom-autoscroller/dom-autoscroller.min.js') }}"></script>
+    {{-- <script src="{{ asset('admin/assets/libs/dom-autoscroller/dom-autoscroller.min.js') }}"></script> --}}
 
     <!--taks-kanban-->
-    <script src="{{ asset('admin/assets/js/pages/tasks-kanban.init.js') }}"></script>
+    {{-- <script src="{{ asset('admin/assets/js/pages/tasks-kanban.init.js') }}"></script> --}}
     <script src="{{ asset('admin/assets/libs/chart.js/chart.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/pages/chartjs.init.js') }}"></script>
 
@@ -227,7 +227,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <!-- titcket init js -->
-    <script src="{{ asset('admin/assets/js/pages/tasks-list.init.js') }}"></script>
+    {{-- <script src="{{ asset('admin/assets/js/pages/tasks-list.init.js') }}"></script> --}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 

@@ -24,6 +24,7 @@ class AboutUpdate extends FormRequest
     public function rules()
     {
         return [
+            'id' => 'required',
             'title' => 'required|max:255',
             'subtitle' => 'required|max:255',
             'description' => 'required',

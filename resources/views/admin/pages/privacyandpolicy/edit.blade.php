@@ -13,7 +13,11 @@
                         <label class="small mb-1" for="inputDescription">Description</label>
                         <textarea class="form-control" style="resize: none;" name="description" id="inputDescription"
                             placeholder="Add Description" rows="45" required>{{ old('description', $item->description) }}</textarea>
+                        @error('description')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
+                    <input class="form-control" name="id" value="{{ old('id', $item->id) }}" type="hidden">
 
                     <div class="row">
                         <div class="col-md-12">

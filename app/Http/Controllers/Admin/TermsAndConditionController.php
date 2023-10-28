@@ -26,7 +26,7 @@ class TermsAndConditionController extends Controller
     public function update(TermsAndConditionUpdate $request)
     {
         $data = $request->validated();
-        $termsandcondition = TermsAndCondition::first();
+        $termsandcondition = TermsAndCondition::find($data['id']);
         $this->termsandconditionservice->updateTermsAndCondition($termsandcondition, $data);
 
         return redirect()->route('termsandcondition.edit')->with('success', 'Terms and Conditions information has been updated successfully.');

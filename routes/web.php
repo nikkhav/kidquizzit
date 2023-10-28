@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\TermsAndConditionController;
 use App\Http\Controllers\Api\DatatableController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColouringController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DifferenceController;
 use App\Http\Controllers\Admin\QuizAnswerController;
 use App\Http\Controllers\Admin\QuizController;
@@ -50,8 +51,11 @@ Route::resource('colouring', ColouringController::class);
 Route::resource('difference', DifferenceController::class);
 Route::resource('whyquestion', WhyQuestionController::class);
 Route::resource('quiz', QuizController::class);
-Route::resource('quizquestion', QuizQuestionController::class)->except(['index']);
-Route::get('quizquestion/{quizquestion}', [QuizQuestionController::class, 'index'])->name('quizquestion.index');
+Route::resource('contact', ContactController::class);
+Route::resource('quizquestion', QuizQuestionController::class);
+Route::get('quizquestion/{quizquestion}', [QuizQuestionController::class, 'show'])->name('quizquestion.show');
+
+// Route::get('quizquestion/{quizquestion}', [QuizQuestionController::class, 'index'])->name('quizquestion.index');
 Route::resource('quizanswer', QuizAnswerController::class)->except(['index']);
 Route::get('quizanswer/{quizanswer}', [QuizAnswerController::class, 'index'])->name('quizanswer.index');
 

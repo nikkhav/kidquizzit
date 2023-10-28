@@ -26,7 +26,7 @@ class PrivacyAndPolicyController extends Controller
     public function update(PrivacyAndPolicyUpdate $request)
     {
         $data = $request->validated();
-        $privacyandpolicy = PrivacyAndPolicy::first();
+        $privacyandpolicy = PrivacyAndPolicy::find($data['id']);
         $this->privacyandpolicyservice->updatePrivacyAndPolicy($privacyandpolicy, $data);
 
         return redirect()->route('privacyandpolicy.edit')->with('success', 'Privacy and Policy information has been updated successfully.');

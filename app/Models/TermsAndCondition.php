@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class TermsAndCondition extends Model
 {
     use HasFactory;
-    protected $fillable = ['description'];
+    protected $fillable = ['id', 'description'];
 }

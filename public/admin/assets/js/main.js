@@ -118,15 +118,15 @@ function get_hours() {
     var seconds = "0" + date.getSeconds();
 
     // Will display time in 10:30:23 format
-    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    // var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 }
 
-function initUiElements() {
-    $('[data-toggle="tooltip"]').tooltip();
-    $('.toggleSwitcher').bootstrapToggle();
-}
+// function initUiElements() {
+//     $('[data-toggle="tooltip"]').tooltip();
+//     $('.toggleSwitcher').bootstrapToggle();
+// }
 
-$.fn.modal.Constructor.prototype.enforceFocus = function () {};
+// $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 
 $(document).ready(function () {
     $('.phone').mask('+994 00 000 00 00');

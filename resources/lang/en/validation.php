@@ -57,13 +57,13 @@ return [
   'numeric'              => ' :attribute rəqəmlərdən ibarət olmalıdır',
   'present'              => ' :attribute iştirak etməlidir',
   'regex'                => ' :attribute formatı yanlışdır',
-  'required'             => ' :attribute mütləqdir',
-  'required_if'          => ' :attribute (:other :value ikən) mütləqdir',
-  'required_unless'      => ' :attribute (:other :values \'ə daxil ikən) mütləqdir',
-  'required_with'        => ' :attribute (:values var ikən) mütləqdir',
-  'required_with_all'    => ' :attribute (:values var ikən) mütləqdir',
-  'required_without'     => ' :attribute (:values yox ikən) mütləqdir',
-  'required_without_all' => ' :attribute (:values yox ikən) mütləqdir',
+  'required'             => ' :attribute required',
+  'required_if'          => ' :attribute (:other :value ikən) required',
+  'required_unless'      => ' :attribute (:other :values \'ə daxil ikən) required',
+  'required_with'        => ' :attribute (:values var ikən) required',
+  'required_with_all'    => ' :attribute (:values var ikən) required',
+  'required_without'     => ' :attribute (:values yox ikən) required',
+  'required_without_all' => ' :attribute (:values yox ikən) required',
   'same'                 => ' :attribute və :other eyni olmalıdır',
   'size'                 => [
     'numeric' => ' :attribute :size ölçüsündə olmalıdır',
@@ -106,15 +106,16 @@ return [
   */
 
   'attributes' => [
-    'name' => "Ad",
-    'sername' => "Soyad",
-    'department_id' => "Dparatament",
-    'posistio_id' => "Dparatament",
-    'email' => "Email ünvanı",
-    'password' => "Şifrə",
-    'deadline' => "Deadline",
-    'desciption' => "Açıqlama",
-    'title' => "Başlıq",
+    'name' => "Name",
+    'surname' => "Surname",
+    'email' => "Email",
+    'password' => "Password",
+    'description' => "Description",
+    'title' => "Title",
+    'subtitle' => "Subtitle",
+    'image' => "Image",
+
+
   ],
 
 ];

@@ -48,6 +48,12 @@ return [
         'can' => 'difference.index'
     ],
     [
+        'icon' => '<i class="fas fa-mail-bulk"></i>',
+        'title' => 'Contact Us',
+        'route' => 'contact.index',
+        'can' => 'contact.index'
+    ],
+    [
         'icon' => '<i class="far fa-file"></i>',
         'title' => 'Privacy and Policy',
         'route' => 'privacyandpolicy.edit',

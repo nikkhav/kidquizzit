@@ -33,9 +33,6 @@
                         });
 
                     function initTable(_columns) {
-
-
-
                         window.dTable = $("#{{ isset($__datatableId) ? $__datatableId : 'datatable' }}").DataTable({
                                 // dom: '<"html5buttons"B>lTfgitp',
                                 // dom:  "<'row'<'col-sm-6'f><'col-sm-6'B>>" +
@@ -104,6 +101,7 @@
                                                 "className": "dt-center",
                                                 "targets": "_all"
                                             },
+
                                             {
                                                 orderable: false,
                                                 targets: [0]
@@ -115,9 +113,9 @@
                                         ],
                                         "fnPreDrawCallback": function() {
                                             //alert("Pre Draw");
-                                            setTimeout(function() {
-                                                initUiElements();
-                                            }, 1);
+                                            // setTimeout(function() {
+                                            //     initUiElements();
+                                            // }, 1);
                                             $('#dataTables_processing').attr('style',
                                                 'font-size: 20px; font-weight: bold; padding-bottom: 60px; display: block; z-index: 10000 !important'
                                             );

@@ -2,34 +2,33 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Datatable\QuizQuestionDatatable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\QuizQuestionUpdate;
 use App\Http\Requests\QuizQuestionStore;
 use App\Services\QuizQuestionService;
 use App\Models\Quiz;
+use App\Models\QuizQuestion;
 use Illuminate\Http\Request;
 
 
 class QuizQuestionController extends Controller
 {
     private $quizQuestionService;
-    private $quizId;
 
     public function __construct(QuizQuestionService $quizQuestionService, Request $request)
     {
         $this->quizQuestionService = $quizQuestionService;
-        $this->quizId = $request->route('quizquestion');
-        $quiz = Quiz::find($this->quizId);
-        view()->share('quiz', $quiz);
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show($id)
     {
-        return view('admin.pages.quizquestion.index');
+        $quiz = Quiz::find($id);
+        return view('admin.pages.quizquestion.index', compact('quiz'));
     }
 
     /**

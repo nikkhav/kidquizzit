@@ -43,7 +43,7 @@ class WhyQuestionDatatable extends BaseDatatable
         }
 
         if ($this->getSearchInput()) {
-            $query->where('categories.title', 'LIKE', '%' . $this->getSearchInput() . '%');
+            $query->where('why_questions.title', 'LIKE', '%' . $this->getSearchInput() . '%');
         }
 
         return $query;
@@ -53,10 +53,16 @@ class WhyQuestionDatatable extends BaseDatatable
 
     protected function format(): array
     {
-        // Custom formatting for specific columns (if necessary)
+        // Custom formatting for specific columns
         return [
             'image' => function ($value, $row) {
-                return '<img src="' . asset('storage/' . '/'  . $value) . '" alt="Image" width="50" height="50">';
+                // Check if $value is a valid image path, and return the image HTML if it is
+                if ($value && file_exists(public_path('storage/' . $value))) {
+                    return '<img src="' . asset('storage/' . $value) . '" alt="Image" width="50" height="50">';
+                } else {
+                    // Return a placeholder image or an empty string if the image doesn't exist
+                    return '<img src="' . asset('path/to/placeholder/image.png') . '" alt="Image" width="50" height="50">';
+                }
             }
         ];
     }

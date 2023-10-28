@@ -16,7 +16,6 @@ class CategoryDatatable extends BaseDatatable
             'parent_title' => 'Parent',
             'title' => 'Title',
             'created_at' => 'Created at',
-            'updated_at' => 'Updated at'
         ], [
             'actions' => [
                 'title' => 'Actions',
@@ -38,7 +37,7 @@ class CategoryDatatable extends BaseDatatable
         }
 
         if ($this->getSearchInput()) {
-            $query->where('title', 'LIKE', '%' . $this->getSearchInput() . '%');
+            $query->where('categories.title', 'LIKE', '%' . $this->getSearchInput() . '%');
         }
 
         // Modify the SELECT statement to display "Main" for null parent_id
