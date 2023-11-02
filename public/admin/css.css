@@ -102,7 +102,7 @@ div.dataTables_filter input {
     transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-    background: url(../images/xxx.svg);    
+    background: #f2f2f2;    
     background-repeat: no-repeat;
     background-position: 0px 3px !important;
     margin-left: 0 !important ;

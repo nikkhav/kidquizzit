@@ -6,5 +6,4 @@
     data-toggle-url="{{ \App\Helpers\RouteHelpers::getToggleRoute($item) }}" 
     data-offstyle ="danger" 
      >
-    {{-- <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> --}}
   </div>

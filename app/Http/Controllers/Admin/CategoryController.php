@@ -15,7 +15,6 @@ class CategoryController extends Controller
     public function __construct(CategoryService $categoryService)
     {
         $this->categoryService = $categoryService;
-        view()->share('categories', Category::all());
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +23,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.category.index');
+        $categories = Category::all();
+
+        return view('admin.pages.category.index', compact('categories'));
     }
 
     /**
@@ -34,7 +35,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $view = view('admin.pages.category.modal')->render();
+        $categories = Category::all();
+        $view = view('admin.pages.category.modal', compact('categories'))->render();
+        dd($categories);
         return response()->json([
             'code' => 200,
             'view' => $view
@@ -49,7 +52,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryStore $request)
     {
-        $data = $request->toArray();
+        $data = $request->validated();
         $category = $this->categoryService->createCategory($data);
         return response()->json([
             'code' =>  200,
@@ -64,8 +67,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $categories = Category::all();
         $item = $this->categoryService->getCategoryById($id);
-        $view = view('admin.pages.category.form', compact('item'))->render();
+        $view = view('admin.pages.category.form', compact('item', 'categories'))->render();
         return response()->json([
             'code' => 200,
             'view' => $view
@@ -82,8 +86,10 @@ class CategoryController extends Controller
     {
         $data = $request->validated();
         $this->categoryService->updateCategory($id, $data);
+        $category = $this->categoryService->getCategoryById($id);
         return response()->json([
             'code' => 200,
+            'item' => $category,
         ]);
     }
 

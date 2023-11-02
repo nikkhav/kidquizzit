@@ -12,11 +12,11 @@ class DummyClass extends BaseDatatable
     {
         parent::__construct(Test::class, [
             'id' => 'ID',
-            'customer.full_info' => 'A.S.A',
-            'amount' => 'Miqdar',
-            'total_bonus' => 'Toplam bonus',
-            'bonus_type.key' => 'Bonus tipi',
-            'created_at' => 'Qeydiyyat tarixi'
+            'customer.full_info' => 'Customer Full Info',
+            'amount' => 'Amount',
+            'total_bonus' => 'Total bonus',
+            'bonus_type.key' => 'Bonus type',
+            'created_at' => 'Created at'
         ], [
             'actions' => [
                 'title' => 'Actions',

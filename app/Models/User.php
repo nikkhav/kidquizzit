@@ -109,7 +109,7 @@ class User extends Authenticatable
             if ($this->gender) {
                 $key = 'images/male.jpg';
             } else {
-                $key = 'images/female.jpg';
+                $key = 'images/male.jpg';
             }
             return asset($key);
         }

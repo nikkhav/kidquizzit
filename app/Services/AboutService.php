@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AboutService
 {
-    public function updateAbout(About $about, array $data)
+    public function updateAbout(About $about, $data)
     {
 
         if (isset($data['image'])) {

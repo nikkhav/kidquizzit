@@ -15,9 +15,7 @@
                                 <input type="text" name="title" id="title" class="form-control"
                                     placeholder="Enter title" aria-describedby="helpId" required>
                             </div>
-                            @error('title')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                            <div id="title-error" class="error text-danger"></div>
                         </div>
                         <div class="col-md-12 mt-2">
                             <div class="form-group">
@@ -42,8 +40,7 @@
 </div>
 
 
-<div class="modal fade" id="customer-type-modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="category-modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -56,14 +53,11 @@
                     @method('PUT')
                     <div id="inputs">
 
-
-
                     </div>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success " id="edit-customer-type">Edit</button>
+                <button type="button" class="btn btn-success " id="edit-category">Edit</button>
             </div>
         </div>
     </div>

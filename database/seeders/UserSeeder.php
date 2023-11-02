@@ -16,13 +16,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => "Dergah",
+            'name' => "Denis",
+            'surname' => "Guzilov",
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'type' => 'admin',
-            'gender' => 1,
-            'whatsapp' => 1,
-            'phone' => '+9945555555',
             'password' => '$2y$10$GpuAjIpZBZVMO0OgUqt9feW0XT2JJp8euh3mp1QbNDp12mEWglgHO', // 123123
             'remember_token' => Str::random(10),
         ]);

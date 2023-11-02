@@ -28,43 +28,50 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('auth.login');
 })->name('/');
-
 Auth::routes(['register' => false]);
-
-Route::get('about', [AboutController::class, 'edit'])->name('about.edit');
-Route::match(['put', 'patch'], 'about-update', [AboutController::class, 'update'])->name('about.update');
-Route::get('privacyandpolicy', [PrivacyAndPolicyController::class, 'edit'])->name('privacyandpolicy.edit');
-Route::match(['put', 'patch'], 'privacyandpolicy-update', [PrivacyAndPolicyController::class, 'update'])->name('privacyandpolicy.update');
-Route::get('termsandcondition', [TermsAndConditionController::class, 'edit'])->name('termsandcondition.edit');
-Route::match(['put', 'patch'], 'termsandcondition-update', [TermsAndConditionController::class, 'update'])->name('termsandcondition.update');
+Route::middleware(['auth'])->group(function () {
 
 
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
-
-
-Route::resource('category', CategoryController::class);
-Route::resource('colouring', ColouringController::class);
-Route::resource('difference', DifferenceController::class);
-Route::resource('whyquestion', WhyQuestionController::class);
-Route::resource('quiz', QuizController::class);
-Route::resource('contact', ContactController::class);
-Route::resource('quizquestion', QuizQuestionController::class);
-Route::get('quizquestion/{quizquestion}', [QuizQuestionController::class, 'show'])->name('quizquestion.show');
-
-// Route::get('quizquestion/{quizquestion}', [QuizQuestionController::class, 'index'])->name('quizquestion.index');
-Route::resource('quizanswer', QuizAnswerController::class)->except(['index']);
-Route::get('quizanswer/{quizanswer}', [QuizAnswerController::class, 'index'])->name('quizanswer.index');
+    Route::get('about', [AboutController::class, 'edit'])->name('about.edit');
+    Route::match(['put', 'patch'], 'about-update', [AboutController::class, 'update'])->name('about.update');
+    Route::get('privacyandpolicy', [PrivacyAndPolicyController::class, 'edit'])->name('privacyandpolicy.edit');
+    Route::match(['put', 'patch'], 'privacyandpolicy-update', [PrivacyAndPolicyController::class, 'update'])->name('privacyandpolicy.update');
+    Route::get('termsandcondition', [TermsAndConditionController::class, 'edit'])->name('termsandcondition.edit');
+    Route::match(['put', 'patch'], 'termsandcondition-update', [TermsAndConditionController::class, 'update'])->name('termsandcondition.update');
 
 
 
-
-Route::get('datatable/{table}', [DatatableController::class, 'handle'])->name('datatable.source');
-
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
 
-Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::match(['put', 'patch'], 'profile-update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::resource('category', CategoryController::class);
+    Route::resource('colouring', ColouringController::class);
+    Route::resource('difference', DifferenceController::class);
+    Route::resource('whyquestion', WhyQuestionController::class);
+    Route::resource('quiz', QuizController::class);
+    Route::resource('contact', ContactController::class);
+    Route::put('contact/{status}', [ContactController::class, 'status'])->name('contact.status');
+    Route::resource('quizquestion', QuizQuestionController::class);
+    Route::get('quizquestion/{quizquestion}', [QuizQuestionController::class, 'show'])->name('quizquestion.show');
+
+    // Route::get('quizquestion/{quizquestion}', [QuizQuestionController::class, 'index'])->name('quizquestion.index');
+    Route::resource('quizanswer', QuizAnswerController::class)->except(['index']);
+    Route::get('quizanswer/{quizanswer}', [QuizAnswerController::class, 'index'])->name('quizanswer.index');
+
+
+
+
+    Route::get('datatable/{table}', [DatatableController::class, 'handle'])->name('datatable.source');
+    // Route::get('datatable/{table}/{id}', [DatatableController::class, 'getDataById'])->name('datatable.getbyid');
+
+
+
+
+    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::match(['put', 'patch'], 'profile-update', [ProfileController::class, 'update'])->name('profile.update');
+});

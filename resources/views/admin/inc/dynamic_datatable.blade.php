@@ -21,113 +21,120 @@
     @endphp
     <script>
         $(document).ready(function() {
-                    axiosInstance
-                        .get('{{ route('datatable.source', $__datatableName) }}?show_columns=ok')
-                        .then(result => {
-                            // console.log(result)
-                            initTable(result.data);
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            basicAlert('error on request')
-                        });
+            axiosInstance
+                .get('{{ route('datatable.source', $__datatableName) }}?show_columns=ok')
+                .then(result => {
+                    initTable(result.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                    basicAlert('error on request')
+                });
 
-                    function initTable(_columns) {
-                        window.dTable = $("#{{ isset($__datatableId) ? $__datatableId : 'datatable' }}").DataTable({
-                                // dom: '<"html5buttons"B>lTfgitp',
-                                // dom:  "<'row'<'col-sm-6'f><'col-sm-6'B>>" +
-                                //         "<'row'<'col-sm-12'tr>>" +
-                                //         "<'row'<'col-sm-4'i><'col-sm-8 'p>>",
-                                dom: 'fBtip',
-                                "language": {
-                                    "url": "//cdn.datatables.net/plug-ins/1.11.3/i18n/az.tr.json"
-                                },
-                                lengthChange: true,
-                                language: {
-                                    search: "",
-                                    searchPlaceholder: "Find..."
-                                },
-                                "lengthMenu": [
-                                    [10, 25, 50, 100, 300, '-1'],
-                                    ['10 pcs', '25 pcs', '50 pcs', '100 pcs', '300 Ədəd', 'All']
-                                ],
-                                @if (Request::segment(1) == 'user')
-                                    @can('role.create')
-                                        buttons: [{
-                                                text: '<i class="fas fa-plus"></i> Add',
-                                                className: 'btn btn-primary  arrow-none waves-effect waves-light create',
-                                                action: function(e) {
-                                                    window.location = "{{ route('user.create') }}";
-                                                }
-                                            },
-                                        @endcan
-                                    @else
-                                        buttons: [{
-                                                text: '<i class="fas fa-plus"></i> Add',
-                                                className: 'btn btn-primary  arrow-none waves-effect waves-light create',
-                                                action: function(e) {
-                                                    $(".create-modal").modal('toggle');
-                                                    $('#profil-fotografi-goster').attr('src',
-                                                        'https://png.pngtree.com/png-vector/20191009/ourlarge/pngtree-user-icon-png-image_1796659.jpg'
-                                                    )
-                                                }
-                                            },
-                                        @endif
-                                        // {
-                                        //     extend: 'csv',
-                                        //     text: '<i class="fas fa-file-csv fa-1x"></i> CSV'
-                                        // },
-                                        // {
-                                        //     extend: 'excel',
-                                        //     text: '<i class="fas fa-file-excel" aria-hidden="true"></i> EXCEL'
-                                        // },
-
-                                    ],
-                                    "ajax": {
-                                        url: "{{ route('datatable.source', $__datatableName) . '?' . $__cusomParam }}",
-                                        type: "GET", //POST
-                                        data: get_query()
-                                    },
-                                    // ajax: '{{ route('datatable.source', $__datatableName) . '?' . request()->getQueryString() }}',
-                                    columns: _columns,
-                                        serverSide: true,
-                                        responsive: false,
-                                        lengthChange: true,
-                                        processing: true,
-                                        order: [
-                                            [0, 'desc']
-                                        ],
-                                        "columnDefs": [{
-                                                "className": "dt-center",
-                                                "targets": "_all"
-                                            },
-
-                                            {
-                                                orderable: false,
-                                                targets: [0]
-                                            },
-                                            {
-                                                targets: 'no-sort',
-                                                orderable: false
-                                            }
-                                        ],
-                                        "fnPreDrawCallback": function() {
-                                            //alert("Pre Draw");
-                                            // setTimeout(function() {
-                                            //     initUiElements();
-                                            // }, 1);
-                                            $('#dataTables_processing').attr('style',
-                                                'font-size: 20px; font-weight: bold; padding-bottom: 60px; display: block; z-index: 10000 !important'
-                                            );
-                                        }
-                                });
-
-                            // dTable.on('draw', function () {
-                            //     initToggleSwitch();
-                            // });
-
-                            window.dTable.buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
+            function initTable(_columns) {
+                window.dTable = $("#{{ isset($__datatableId) ? $__datatableId : 'datatable' }}").DataTable({
+                    dom: 'fBtip',
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.11.3/i18n/az.tr.json"
+                    },
+                    lengthChange: true,
+                    language: {
+                        search: "",
+                        searchPlaceholder: "Find..."
+                    },
+                    "lengthMenu": [
+                        [10, 25, 50, 100, 300, '-1'],
+                        ['10 pcs', '25 pcs', '50 pcs', '100 pcs', '300 Ədəd', 'All']
+                    ],
+                    buttons: [
+                        @if (Request::segment(1) !== 'contact')
+                            {
+                                text: '<i class="fas fa-plus"></i> Add',
+                                className: 'btn btn-primary  arrow-none waves-effect waves-light create',
+                                action: function(e) {
+                                    $(".create-modal").modal('toggle');
+                                }
+                            }
+                        @endif
+                    ],
+                    "ajax": {
+                        url: "{{ route('datatable.source', $__datatableName) . '?' . $__cusomParam }}",
+                        type: "GET",
+                        data: get_query()
+                    },
+                    columns: _columns.map(function(column) {
+                        if (column.data === 'image') {
+                            return {
+                                data: 'image',
+                                title: 'Image',
+                                render: function(data, type, row) {
+                                    if (type === 'display' && data) {
+                                        return '<img src="storage/' + data +
+                                            '" alt="Image" class="img-thumbnail" style="max-width: 100px; max-height: 200px;">';
+                                    }
+                                    return data;
+                                }
+                            };
                         }
-                    });
+                        if (column.data === 'image1') {
+                            return {
+                                data: 'image1',
+                                title: 'Image1',
+
+                                render: function(data, type, row) {
+                                    if (type === 'display' && data) {
+                                        return '<img src="storage/' + data +
+                                            '" alt="Image" class="img-thumbnail" style="max-width: 100px; max-height: 200px;">';
+                                    }
+                                    return data;
+                                }
+                            };
+                        }
+                        if (column.data === 'image2') {
+                            return {
+                                data: 'image2',
+                                title: 'Image2',
+
+                                render: function(data, type, row) {
+                                    if (type === 'display' && data) {
+                                        return '<img src="storage/' + data +
+                                            '" alt="Image" class="img-thumbnail" style="max-width: 100px; max-height: 200px;">';
+                                    }
+                                    return data;
+                                }
+                            };
+                        }
+                        return column;
+                    }),
+                    serverSide: true,
+                    responsive: false,
+                    lengthChange: true,
+                    processing: true,
+                    order: [
+                        [0, 'desc']
+                    ],
+                    "columnDefs": [{
+                            "className": "dt-center",
+                            "targets": "_all"
+                        },
+                        {
+                            orderable: false,
+                            targets: [0]
+                        },
+                        {
+                            targets: 'no-sort',
+                            orderable: false
+                        }
+                    ],
+                    "fnPreDrawCallback": function() {
+                        $('#dataTables_processing').attr('style',
+                            'font-size: 20px; font-weight: bold; padding-bottom: 60px; display: block; z-index: 10000 !important'
+                        );
+                    }
+                });
+                window.dTable.buttons().container().appendTo(
+                    "#datatable-buttons_wrapper .col-md-6:eq(0)");
+            }
+        });
     </script>
 @endpush

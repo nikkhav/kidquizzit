@@ -16,7 +16,7 @@ class ContactDatatable extends BaseDatatable
             'surname' => 'Surname',
             'email' => 'Email',
             'phone' => 'Phone',
-            'created_at' => 'Created at',
+            'read_status' => 'Read/Unread',
         ], [
             'actions' => [
                 'title' => 'Actions',
@@ -27,8 +27,17 @@ class ContactDatatable extends BaseDatatable
 
     protected function query(): Builder
     {
-        $query = $this->baseQueryScope();
-
+        $query = $this->baseQueryScope()
+            ->select(
+                'contacts.id',
+                'contacts.name',
+                'contacts.surname',
+                'contacts.email',
+                'contacts.phone',
+                'contacts.read',
+                \DB::raw('CASE WHEN contacts.read = 0 THEN "Unread" ELSE "Read" END as read_status')
+            )
+            ->orderBy('id', 'asc');
         if ($this->getSearchInput()) {
             $searchTerm = $this->getSearchInput();
             $query->where(function ($query) use ($searchTerm) {

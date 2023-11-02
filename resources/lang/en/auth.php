@@ -1,6 +1,6 @@
 <?php
 
 return [
-  'failed' => 'İstifadəçi adı və ya şifrə səhvdir',
-  'throttle' => ':seconds saniyə ərzində yenidən cəhd edin',
+  'failed' => 'Username or password is incorrect',
+  'throttle' => ':seconds try again in seconds',
 ];

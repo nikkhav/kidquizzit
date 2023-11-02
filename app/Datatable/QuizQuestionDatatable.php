@@ -4,7 +4,8 @@ namespace App\Datatable;
 
 use App\Models\QuizQuestion;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Request;
 
 class QuizQuestionDatatable extends BaseDatatable
 {
@@ -27,6 +28,7 @@ class QuizQuestionDatatable extends BaseDatatable
 
     protected function query(): Builder
     {
+
         $query = $this->baseQueryScope()
             ->leftJoin('quizzes', 'quiz_questions.quiz_id', '=', 'quizzes.id')
             ->select('quiz_questions.*', 'quizzes.title as quiz_title')

@@ -57,6 +57,10 @@ abstract class BaseDatatable
             ];
         } else $this->actionBladeView = $actionBladeView;
     }
+    public function getDataById($id): ?Model
+    {
+        return $this->baseQueryScope()->find($id);
+    }
 
     protected function setTableColumns($table)
     {

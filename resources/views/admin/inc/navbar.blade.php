@@ -4,7 +4,7 @@
         <span class="logo-sm">
             <img src="{{ asset('admin/assets/images/logo-sm.png') }}" alt=""
                 height="22">
-        </span>{{ asset('admin')}}3453534534545
+        </span>{{ asset('admin')}}
         <span class="logo-lg">
             <img src="{{ asset('admin/assets/images/logo-dark.png') }}" alt=""
                 height="17">

@@ -28,13 +28,4 @@ class CategoryStore extends FormRequest
             'parent_id' => 'nullable|integer',
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'title.required' => 'The title field is required.',
-            'title.string' => 'The title must be a string.',
-            'title.max' => 'The title may not be greater than :max characters.',
-        ];
-    }
 }

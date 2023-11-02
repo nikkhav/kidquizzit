@@ -1,10 +1,6 @@
 <!doctype html>
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg"
     data-sidebar-image="none" data-preloader="disable">
-
-
-<!-- Mirrored from themesbrand.com/velzon/html/default/auth-signin-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Oct 2022 11:34:54 GMT -->
-
 <head>
 
     <meta charset="utf-8" />
@@ -14,7 +10,6 @@
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
-
     <!-- Layout config Js -->
     <script src="{{ asset('admin/assets/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
@@ -99,26 +94,15 @@
                                                 @enderror
                                             </div>
                                         </div>
-
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="auth-remember-check">
-                                            <label class="form-check-label" for="auth-remember-check">Remember</label>
-                                        </div>
-
                                         <div class="mt-4">
                                             <button class="btn btn-success w-100" type="submit">Enter</button>
                                         </div>
-
-
                                     </form>
                                 </div>
                             </div>
                             <!-- end card body -->
                         </div>
                         <!-- end card -->
-
-
                     </div>
                 </div>
                 <!-- end row -->
@@ -163,8 +147,5 @@
     <!-- password-addon init -->
     <script src="assets/js/pages/password-addon.init.js"></script>
 </body>
-
-
-<!-- Mirrored from themesbrand.com/velzon/html/default/auth-signin-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Oct 2022 11:34:54 GMT -->
 
 </html>

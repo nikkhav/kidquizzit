@@ -8,6 +8,12 @@
                 <form action="{{ route('about.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
+
+                    <div class="col-md-12 mb-3 d-flex justify-content-center">
+                        <img class="mb-2" id="imgPreview" width="500px" src="{{ asset('storage/') . '/' . $item->image }}"
+                            alt="">
+                    </div>
+
                     <div class="col-md-12 mb-3">
                         <label class="small mb-1" for="inputFirstName">Image</label>
                         <input type="file" name="image" class="form-control about-img">
@@ -15,12 +21,6 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-
-                    <div class="col-md-12 mb-3">
-                        <img class="img-account-profile mb-2" id="imgPreview" width="300px"
-                            src="{{ asset('storage/') . '/' . $item->image }}" alt="">
-                    </div>
-
                     <div class="col-md-12 mb-3">
                         <label class="small mb-1" for="inputFirstName">Title</label>
                         <input class="form-control" name="title" value="{{ old('title', $item->title) }}"

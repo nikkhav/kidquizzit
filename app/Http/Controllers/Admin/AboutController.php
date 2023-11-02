@@ -18,15 +18,14 @@ class AboutController extends Controller
 
     public function edit()
     {
-        $item = About::first();
+        $item = About::firstOrFail();
         return view('admin.pages.about.edit', compact('item'));
     }
 
     public function update(AboutUpdate $request)
     {
-        $data = $request->validated();
-        $about = About::find($data['id']);
-        $this->aboutService->updateAbout($about, $data);
+        $about = About::find($request['id']);
+        $this->aboutService->updateAbout($about, $request);
         return redirect()->route('about.edit')->with('success', 'About information has been updated successfully.');
     }
 

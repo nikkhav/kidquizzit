@@ -12,6 +12,11 @@ class ContactService
         return $contact;
     }
 
+    public function getContactById($id)
+    {
+        return Contact::find($id);
+    }
+
 
     public function deleteContact($id)
     {
