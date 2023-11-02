@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             AboutSeeder::class,
             PrivacyAndPolicySeeder::class,
             TermsAndConditionSeeder::class,
+            CategorySeeder::class,
+
         ]);
     }
 }

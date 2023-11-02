@@ -25,7 +25,7 @@ class ColouringUpdate extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
-            'image' => 'required|image|max:2048', // max:2048 specifies the maximum file size in kilobytes (2MB)
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
         ];
     }
 }

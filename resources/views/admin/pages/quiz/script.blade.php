@@ -1,38 +1,41 @@
 <script>
     $(document).ready(function() {
+
         $('.create').click(function(e) {
             e.preventDefault();
             pageLoader(true);
-            $.ajax({
-                type: "GET",
-                url: "{{ route('category.create') }}",
-                dataType: "json",
-                success: function(response) {
-                    if (response.code == 200) {
-                        $("#create-modal .modal-body").html(response.view);
-                        $("#create-modal").modal('show');
-                    } else {
-                        // Handle error case if needed
-                        console.error('Failed to create category');
-                    }
-                    pageLoader(false);
-                },
-                error: function(error) {
+            // Make an AJAX POST request to the controller
+            $.post("{{ route('quiz.create') }}", {
+                _token: "{{ csrf_token() }}"
+            }, function(response) {
+                if (response.code == 200) {
+                    // Assuming response.view contains the HTML for the modal body
+                    $("#create-modal .modal-body").html(response.view);
+                    $("#create-modal").modal('show');
+                } else {
+                    // Handle error case if needed
                     console.error('Failed to create category');
-                    pageLoader(false);
                 }
+                pageLoader(false);
+            }).fail(function(error) {
+                // Handle AJAX request failure if needed
+                console.error('Failed to create category');
+                pageLoader(false);
             });
         });
 
         $("#save-category").click(function(e) {
             e.preventDefault();
             pageLoader(true);
-            let data = $("#create-form").serialize();
+
+            let formData = new FormData($("#create-form")[0]);
+
             $.ajax({
+                url: "{{ route('quiz.store') }}",
                 type: "POST",
-                url: "{{ route('category.store') }}",
-                data: data,
-                dataType: "json",
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function(response) {
                     if (response.code == 200) {
                         dTReload();
@@ -50,9 +53,11 @@
                 }
             });
         });
+
+
         $(document).on('click', '.edit', function() {
             let id = $(this).data('id');
-            let url = "{{ route('category.edit', 'edit') }}";
+            let url = "{{ route('quiz.edit', 'edit') }}"
             url = url.replace('edit', id);
             let data = {
                 _token: "{{ csrf_token() }}",
@@ -61,34 +66,34 @@
             pageLoader(true);
             $.get(url, function(response) {
                 if (response.code == 200) {
+
                     $("#inputs").html(response.view);
-                    $("#category-modal-edit").modal('toggle');
+                    $("#customer-type-modal-edit").modal('toggle');
                 }
                 pageLoader(false);
             });
         });
-        $("#edit-category").click(function(e) {
+
+        $("#edit-customer-type").click(function(e) {
             e.preventDefault();
             pageLoader(true);
-
+            let formData = new FormData($("#edit-form")[0]); // Create FormData object from the form
             let id = $("#edit-id").val();
-            let title = $("#edit-title").val();
-            let parent_id = $("#edit-parent_id").val();
+            let url = "{{ route('quiz.update', 'update') }}"
+            url = url.replace('update', id);
 
+
+            // Use AJAX to submit form data including files
             $.ajax({
-                type: "PUT",
-                url: "{{ route('category.update', 'update') }}".replace('update', id),
-                data: {
-                    id: id,
-                    title: title,
-                    parent_id: parent_id,
-                    _token: '{{ csrf_token() }}',
-                },
-                dataType: "json",
+                url: url,
+                type: 'POST',
+                data: formData,
+                processData: false, // Prevent jQuery from processing the data
+                contentType: false, // Prevent jQuery from setting content type
                 success: function(response) {
                     if (response.code == 200) {
                         dTReload();
-                        $("#category-modal-edit").modal('toggle');
+                        $("#customer-type-modal-edit").modal('toggle');
                     }
                     pageLoader(false);
                 },
@@ -100,6 +105,14 @@
                     pageLoader(false);
                 }
             });
+        });
+
+        $(document).on('click', '.view-questions', function() {
+            var quizId = $(this).data('id');
+            var url =
+                "{{ route('quizquestion.show', ['quizquestion' => 'quizquestion_id_placeholder']) }}";
+            url = url.replace('quizquestion_id_placeholder', quizId);
+            window.location.href = url;
         });
     });
 </script>

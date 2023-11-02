@@ -17,7 +17,6 @@ class WhyQuestionDatatable extends BaseDatatable
             'title' => 'Title',
             'description' => 'Description',
             'created_at' => 'Created at',
-            'updated_at' => 'Updated at'
         ], [
             'actions' => [
                 'title' => 'Actions',

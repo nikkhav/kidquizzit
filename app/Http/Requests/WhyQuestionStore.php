@@ -25,7 +25,7 @@ class WhyQuestionStore extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
-            'image' => 'image|mimes:jpeg,png,jpg,gif',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
         ];

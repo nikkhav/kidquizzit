@@ -13,7 +13,9 @@
                             <div class="form-group">
                                 <label for="question_text">Question Text</label>
                                 <input type="text" name="question_text" id="question_text" class="form-control"
-                                    placeholder="Enter Question Text" aria-describedby="helpId" required>
+                                    placeholder="Enter Question Text" aria-describedby="helpId">
+                                <div id="question_text-error" class="error text-danger"></div>
+
                             </div>
                         </div>
                     </div>

@@ -24,7 +24,7 @@
                     <div class="col-md-12 mb-3">
                         <label class="small mb-1" for="inputFirstName">Title</label>
                         <input class="form-control" name="title" value="{{ old('title', $item->title) }}"
-                            id="inputFirstName" type="text" placeholder="Add title">
+                            id="inputFirstName" type="text" placeholder="Add title" required>
                         @error('title')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -59,20 +59,5 @@
 @endsection
 
 @push('js_stack')
-    <script>
-        $(document).ready(() => {
-            $('.about-img').change(function() {
-                const file = this.files[0];
-                console.log(file);
-                if (file) {
-                    let reader = new FileReader();
-                    reader.onload = function(event) {
-                        console.log(event.target.result);
-                        $('#imgPreview').attr('src', event.target.result);
-                    }
-                    reader.readAsDataURL(file);
-                }
-            });
-        });
-    </script>
+    @include('admin.pages.about.script')
 @endpush

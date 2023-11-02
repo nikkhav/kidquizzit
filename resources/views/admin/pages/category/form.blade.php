@@ -6,7 +6,7 @@
             <input type="text" name="title" id="edit-title" value="{{ $item->title }}" class="form-control"
                 placeholder="Title" aria-describedby="helpId">
         </div>
-        <div id="title-error-edit" class="error text-danger"></div>
+        <div id="error-edit-title" class="error text-danger"></div>
     </div>
     <div class="col-md-12 mt-2">
         <div class="form-group">

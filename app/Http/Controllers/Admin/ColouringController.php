@@ -85,9 +85,10 @@ class ColouringController extends Controller
     public function update(ColouringUpdate $request, $id)
     {
         $data = $request->validated();
-        $this->colouringService->updateColouring($id, $data);
+        $colouring = $this->colouringService->updateColouring($id, $data);
         return response()->json([
             'code' => 200,
+            'item' =>  $colouring
         ]);
     }
 

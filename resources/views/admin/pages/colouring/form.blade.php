@@ -4,7 +4,9 @@
         <label for="image">Image</label>
         <div class="form-group">
             <img src="{{ asset('storage/' . '/' . $item->image) }}" alt="Old Image" width="300" height="200">
-            <input type="file" name="image" id="image" class="form-control mt-2">
+            <input type="file" name="image" id="edit-image" class="form-control mt-2"
+                value="{{ old('image', $item->image) }}">
+            <div id="error-edit-image" class="error text-danger"></div>
         </div>
     </div>
     <div class="col-md-12 mt-2">

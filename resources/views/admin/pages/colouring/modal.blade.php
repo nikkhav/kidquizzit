@@ -12,8 +12,8 @@
                         <div class="col-md-12 mt-2">
                             <div class="form-group">
                                 <label class="small mb-1" for="inputFirstName">Image</label>
-
-                                <input type="file" name="image" class="form-control about-img">
+                                <input type="file" id="image" name="image" class="form-control about-img">
+                                <div id="image-error" class="error text-danger"></div>
                             </div>
                         </div>
                         <div class="col-md-12 mt-2">

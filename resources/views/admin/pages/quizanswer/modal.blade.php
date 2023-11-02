@@ -14,6 +14,8 @@
                                 <label for="title">Answer</label>
                                 <input type="text" name="answer_text" id="answer_text" class="form-control"
                                     placeholder="Enter Answer Text" aria-describedby="helpId" required>
+                                <div id="answer_text-error" class="error text-danger"></div>
+
                             </div>
                         </div>
                         <div class="col-md-12 mt-2">

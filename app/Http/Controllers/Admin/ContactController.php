@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContactStore;
 use App\Models\Contact;
 use App\Services\ContactService;
-use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
@@ -26,24 +26,19 @@ class ContactController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactStore $request)
     {
-        //
+        $data = $request->toArray();
+        $contact = $this->contactService->createContact($data);
+        return response()->json([
+            'code' =>  200,
+            'item' =>  $contact
+        ]);
     }
 
     /**
@@ -60,17 +55,6 @@ class ContactController extends Controller
             'code' => 200,
             'view' => $view,
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
     public function status($id)
     {
@@ -92,20 +76,6 @@ class ContactController extends Controller
             ]);
         }
     }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -114,6 +84,11 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Delete the category
+        $this->contactService->deleteContact($id);
+
+        return response()->json([
+            'code' => 200,
+        ]);
     }
 }

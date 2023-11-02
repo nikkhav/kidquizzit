@@ -11,16 +11,16 @@
                     <div class="row">
                         <div class="col-md-12 mt-2">
                             <div class="form-group">
-                                <label class="small mb-1" for="inputFirstName">Image 1</label>
-
-                                <input type="file" name="image1" class="form-control about-img">
+                                <label class="small mb-1" for="inputFirstName">First Image</label>
+                                <input type="file" name="image1" id="image1" class="form-control about-img">
+                                <div id="image1-error" class="error text-danger"></div>
                             </div>
                         </div>
                         <div class="col-md-12 mt-2">
                             <div class="form-group">
-                                <label class="small mb-1" for="inputFirstName">Image 2</label>
-
-                                <input type="file" name="image2" class="form-control about-img">
+                                <label class="small mb-1" for="inputFirstName">Second Image</label>
+                                <input type="file" name="image2" id="image2" class="form-control about-img">
+                                <div id="image2-error" class="error text-danger"></div>
                             </div>
                         </div>
                         <div class="col-md-12 mt-2">

@@ -27,11 +27,11 @@ return [
   'digits_between'       => ' :attribute :min ilə :max rəqəmləri intervalında olmalıdır',
   'dimensions'           => ' :attribute doğru şəkil ölçülərində deyil',
   'distinct'             => ' :attribute dublikat qiymətlidir',
-  'email'                => ' :attribute doğru email formatında deyil',
+  'email'                => ' :attribute is not in the correct email format',
   'exists'               => ' seçilmiş :attribute yanlışdır',
   'file'                 => ' :attribute fayl formatında olmalıdır',
   'filled'               => ' :attribute qiyməti olmalıdır',
-  'image'                => ' :attribute şəkil formatında olmalıdır',
+  'image'                => ' :attribute must be in image format',
   'in'                   => ' seçilmiş :attribute yanlışdır',
   'in_array'             => ' :attribute :other qiymətləri arasında olmalıdır',
   'integer'              => ' :attribute tam ədəd olmalıdır',
@@ -42,11 +42,11 @@ return [
   'max'                  => [
     'numeric' => ' :attribute maksiumum :max rəqəmdən ibarət ola bilər',
     'file'    => ' :attribute maksimum :max KB ölçüsündə ola bilər',
-    'string'  => ' :attribute maksimum :max simvoldan ibarət ola bilər',
+    'string'  => ' :attribute max can contain :max characters',
     'array'   => ' :attribute maksimum :max hədd\'dən ibarət ola bilər',
   ],
-  'mimes'                => ' :attribute :values tipində fayl olmalıdır',
-  'mimetypes'            => ' :attribute :values tipində fayl olmalıdır',
+  'mimes'                => ' Must be a file of type :attribute :values',
+  'mimetypes'            => ' Must be a file of type :attribute :values',
   'min'                  => [
     'numeric' => ' :attribute minimum :min rəqəmdən ibarət ola bilər',
     'file'    => ' :attribute minimum :min KB ölçüsündə ola bilər',
@@ -114,6 +114,10 @@ return [
     'title' => "Title",
     'subtitle' => "Subtitle",
     'image' => "Image",
+    'image1' => "First Image",
+    'image2' => "Second Image",
+    'question_text' => "Question Text",
+    'answer_text' => "Answer Text"
   ],
 
 ];

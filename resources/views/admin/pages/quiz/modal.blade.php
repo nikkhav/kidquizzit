@@ -14,6 +14,8 @@
                                 <label for="title">Title</label>
                                 <input type="text" name="title" id="title" class="form-control"
                                     placeholder="Enter title" aria-describedby="helpId" required>
+                                <div id="title-error" class="error text-danger"></div>
+
                             </div>
                         </div>
                         <div class="col-md-12 mt-2">

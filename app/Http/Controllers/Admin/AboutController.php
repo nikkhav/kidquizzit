@@ -24,8 +24,9 @@ class AboutController extends Controller
 
     public function update(AboutUpdate $request)
     {
-        $about = About::find($request['id']);
-        $this->aboutService->updateAbout($about, $request);
+        $data = $request->validated();
+        $about = About::find($data['id']);
+        $this->aboutService->updateAbout($about, $data);
         return redirect()->route('about.edit')->with('success', 'About information has been updated successfully.');
     }
 

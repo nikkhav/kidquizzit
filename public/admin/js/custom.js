@@ -5,7 +5,7 @@ $(document).ready(function () {
 $(document).on("click", ".destroy", function () {
     let url = $(this).attr("route");
     let id = $(this).data("id");
-
+console.log(url);
     url = url.replace("destroy", id);
     $.ajaxSetup({
         headers: {
@@ -30,9 +30,6 @@ $(document).on("click", ".destroy", function () {
                 data: { id: id },
                 success: function (response) {
                     if (response.code == 200) {
-                        // toastr.success("Data deleted successfully");
-                        // Optionally close modal here if needed
-                        // $(document).find(detaleModal).modal("toggle");
                         dTReload();
                         pageLoader(false);
                     } else {
