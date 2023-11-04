@@ -59,15 +59,17 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('quizquestion', QuizQuestionController::class);
     Route::get('quizquestion/{quizquestion}', [QuizQuestionController::class, 'show'])->name('quizquestion.show');
 
-    // Route::get('quizquestion/{quizquestion}', [QuizQuestionController::class, 'index'])->name('quizquestion.index');
-    Route::resource('quizanswer', QuizAnswerController::class)->except(['index']);
-    Route::get('quizanswer/{quizanswer}', [QuizAnswerController::class, 'index'])->name('quizanswer.index');
+    Route::resource('quizanswer', QuizAnswerController::class)->except(['show']);
+    Route::get('quizanswer/{quizanswer}', [QuizAnswerController::class, 'show'])->name('quizanswer.show');
 
 
 
 
     Route::get('datatable/{table}', [DatatableController::class, 'handle'])->name('datatable.source');
-    // Route::get('datatable/{table}/{id}', [DatatableController::class, 'getDataById'])->name('datatable.getbyid');
+    Route::get('datatable/{table}/{id}', [DatatableController::class, 'handle'])->name('datatable.sourceid');
+
+
+
 
 
 

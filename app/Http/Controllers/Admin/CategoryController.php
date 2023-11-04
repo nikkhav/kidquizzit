@@ -37,7 +37,6 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
         $view = view('admin.pages.category.modal', compact('categories'))->render();
-        dd($categories);
         return response()->json([
             'code' => 200,
             'view' => $view

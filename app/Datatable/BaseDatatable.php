@@ -77,7 +77,7 @@ abstract class BaseDatatable
         return $this->baseModel::query();
     }
 
-    public function datatable(): JsonResponse
+    public function datatable($datasource = '', $id = null): JsonResponse
     {
 
         if ($this->isRequestColumns()) return $this->columns();
@@ -87,6 +87,14 @@ abstract class BaseDatatable
         $filteredRecordsCount = $this->query()->count();
         $mainQuery          = $this->query();
         $mainQueryCustom    =  $mainQuery;
+
+        $mainQuery->when($id !== null && $datasource === 'quizquestion', function ($query) use ($id) {
+            return $query->where('quiz_id', $id);
+        })
+            ->when($id !== null && $datasource === 'quizanswer', function ($query) use ($id) {
+                return $query->where('quiz_question_id', $id);
+            });
+
 
         $response = [];
 

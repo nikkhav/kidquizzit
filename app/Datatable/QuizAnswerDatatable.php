@@ -25,7 +25,7 @@ class QuizAnswerDatatable extends BaseDatatable
         ]);
     }
 
-    protected function query(): Builder
+    protected function query($id = null): Builder
     {
         $query = $this->baseQueryScope()
             ->leftJoin('quiz_questions', 'quiz_answers.quiz_question_id', '=', 'quiz_questions.id')

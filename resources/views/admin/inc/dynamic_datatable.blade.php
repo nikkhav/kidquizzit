@@ -15,9 +15,11 @@
             $__pdf = '0,1,2,3,4,5,6,7,8,9,10';
             $__print = '0,1,2,3,4,5,6,7,8,9,10';
         }
-
-        $__cusomParam = isset($__cusomParam) && is_array($__cusomParam) ? ($__cusomParam = http_build_query($__cusomParam, '', '&amp;')) : '';
-
+        if (!isset($__cusomParam)) {
+            $__cusomParam = '';
+        } else {
+            $__cusomParam = isset($__cusomParam) && is_array($__cusomParam) ? http_build_query($__cusomParam, '', '&') : $__cusomParam;
+        }
     @endphp
     <script>
         $(document).ready(function() {
@@ -28,7 +30,7 @@
                 })
                 .catch(error => {
                     console.log(error);
-                    basicAlert('error on request')
+                    basicAlert('error on request');
                 });
 
             function initTable(_columns) {
@@ -44,7 +46,7 @@
                     },
                     "lengthMenu": [
                         [10, 25, 50, 100, 300, '-1'],
-                        ['10 pcs', '25 pcs', '50 pcs', '100 pcs', '300 Ədəd', 'All']
+                        ['10 pcs', '25 pcs', '50 pcs', '100 pcs', '300 pcs', 'All']
                     ],
                     buttons: [
                         @if (Request::segment(1) !== 'contact')
@@ -58,9 +60,18 @@
                         @endif
                     ],
                     "ajax": {
-                        url: "{{ route('datatable.source', $__datatableName) . '?' . $__cusomParam }}",
-                        type: "GET",
-                        data: get_query()
+                        @if (isset($__cusomParam) && !empty($__cusomParam))
+                            url: "{{ route('datatable.sourceid', [$__datatableName, $__cusomParam]) }}",
+                            type: "GET",
+                            data: function(d) {
+                                d.id = {{ $__cusomParam }};
+                                return d;
+                            }
+                        @else
+                            url: "{{ route('datatable.source', $__datatableName) . '?' . $__cusomParam }}",
+                            type: "GET",
+                            data: get_query()
+                        @endif
                     },
                     columns: _columns.map(function(column) {
                         if (column.data === 'image') {
@@ -80,7 +91,6 @@
                             return {
                                 data: 'image1',
                                 title: 'Image1',
-
                                 render: function(data, type, row) {
                                     if (type === 'display' && data) {
                                         return '<img src="storage/' + data +
@@ -94,7 +104,6 @@
                             return {
                                 data: 'image2',
                                 title: 'Image2',
-
                                 render: function(data, type, row) {
                                     if (type === 'display' && data) {
                                         return '<img src="storage/' + data +

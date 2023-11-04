@@ -108,10 +108,10 @@
         });
 
         $(document).on('click', '.view-questions', function() {
-            var quizId = $(this).data('id');
+            var quiz_id = $(this).data('id');
             var url =
-                "{{ route('quizquestion.show', ['quizquestion' => 'quizquestion_id_placeholder']) }}";
-            url = url.replace('quizquestion_id_placeholder', quizId);
+                "{{ route('quizquestion.show', ['quizquestion' => 'quizquestion_id']) }}";
+            url = url.replace('quizquestion_id', quiz_id);
             window.location.href = url;
         });
     });

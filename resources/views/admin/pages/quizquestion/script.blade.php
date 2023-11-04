@@ -111,7 +111,7 @@
         $(document).on('click', '.view-answers', function() {
             var quizQuestionId = $(this).data('id');
             var url =
-                "{{ route('quizanswer.index', ['quizanswer' => 'quizanswer_id_placeholder']) }}";
+                "{{ route('quizanswer.show', ['quizanswer' => 'quizanswer_id_placeholder']) }}";
             url = url.replace('quizanswer_id_placeholder', quizQuestionId);
             window.location.href = url;
         });

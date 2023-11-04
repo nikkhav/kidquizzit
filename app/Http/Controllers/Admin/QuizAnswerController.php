@@ -26,9 +26,10 @@ class QuizAnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show($id)
     {
-        return view('admin.pages.quizanswer.index');
+        $quizquestion = QuizQuestion::find($id);
+        return view('admin.pages.quizanswer.index', compact('id', 'quizquestion'));
     }
 
     /**

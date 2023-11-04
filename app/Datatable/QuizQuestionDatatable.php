@@ -4,8 +4,6 @@ namespace App\Datatable;
 
 use App\Models\QuizQuestion;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Request;
 
 class QuizQuestionDatatable extends BaseDatatable
 {
@@ -26,7 +24,7 @@ class QuizQuestionDatatable extends BaseDatatable
         ]);
     }
 
-    protected function query(): Builder
+    protected function query($id = null): Builder
     {
 
         $query = $this->baseQueryScope()

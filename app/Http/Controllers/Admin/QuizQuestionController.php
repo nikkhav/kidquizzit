@@ -28,7 +28,7 @@ class QuizQuestionController extends Controller
     public function show($id)
     {
         $quiz = Quiz::find($id);
-        return view('admin.pages.quizquestion.index', compact('quiz'));
+        return view('admin.pages.quizquestion.index', compact('id', 'quiz'));
     }
 
     /**
