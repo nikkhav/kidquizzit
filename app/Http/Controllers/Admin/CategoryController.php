@@ -11,10 +11,13 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     private $categoryService;
+    private $categories;
+
 
     public function __construct(CategoryService $categoryService)
     {
         $this->categoryService = $categoryService;
+        $this->categories = Category::with('childCategories')->whereNull('parent_id')->get();
     }
     /**
      * Display a listing of the resource.
@@ -23,8 +26,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-
+        $categories = $this->categories;
         return view('admin.pages.category.index', compact('categories'));
     }
 
@@ -35,7 +37,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = $this->categories;
+
         $view = view('admin.pages.category.modal', compact('categories'))->render();
         return response()->json([
             'code' => 200,
@@ -66,7 +69,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $categories = Category::all();
+        $categories = $this->categories;
+
         $item = $this->categoryService->getCategoryById($id);
         $view = view('admin.pages.category.form', compact('item', 'categories'))->render();
         return response()->json([
@@ -119,7 +123,6 @@ class CategoryController extends Controller
 
     public function getAll()
     {
-        $categories = Category::with('childCategories')->whereNull('parent_id')->get();
-        return response()->json($categories);
+        return response()->json($this->categories);
     }
 }

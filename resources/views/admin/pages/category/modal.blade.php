@@ -17,6 +17,7 @@
                             </div>
                             <div id="title-error" class="error text-danger"></div>
                         </div>
+
                         <div class="col-md-12 mt-2">
                             <div class="form-group">
                                 <label for="parent_id">Parent</label>
@@ -24,10 +25,15 @@
                                     <option value="">Main</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                        @foreach ($category->childCategories as $childCategory)
+                                            <option value="{{ $childCategory->id }}">- {{ $childCategory->title }}
+                                            </option>
+                                        @endforeach
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
                     </div>
                 </form>
             </div>

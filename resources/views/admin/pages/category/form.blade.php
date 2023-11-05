@@ -11,15 +11,20 @@
     <div class="col-md-12 mt-2">
         <div class="form-group">
             <label for="parent_id">Parent</label>
-            <select name="parent_id" id="edit-parent_id" class="form-control">
+            <select name="parent_id" id="parent_id" class="form-control">
                 <option value="">Main</option>
                 @foreach ($categories as $category)
-                    @if ($category->id != $item->id)
-                        <option value="{{ $category->id }}" @if ($category->id == $item->parent_id) selected @endif>
-                            {{ $category->title }}</option>
-                    @endif
+                    <option value="{{ $category->id }}" @if ($category->id == $item->parent_id) selected @endif>
+                        {{ $category->title }}
+                    </option>
+                    @foreach ($category->childCategories as $childCategory)
+                        <option value="{{ $childCategory->id }}" @if ($childCategory->id == $item->parent_id) selected @endif>
+                            - {{ $childCategory->title }}
+                        </option>
+                    @endforeach
                 @endforeach
             </select>
         </div>
     </div>
+
 </div>
