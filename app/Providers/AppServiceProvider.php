@@ -18,7 +18,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
-        File::makeDirectory(public_path('admin'), 0775, true);
     }
 
     /**
