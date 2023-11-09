@@ -30,9 +30,9 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/admin', function () {
+Route::get('/', function () {
     return view('auth.login');
-})->name('/admin');
+})->name('/');
 Auth::routes(['register' => false]);
 Route::middleware(['auth'])->group(function () {
 
