@@ -30,9 +30,9 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('auth.login');
-})->name('/');
+})->name('/admin');
 Auth::routes(['register' => false]);
 Route::middleware(['auth'])->group(function () {
 
@@ -67,12 +67,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('datatable/{table}', [DatatableController::class, 'handle'])->name('datatable.source');
     Route::get('datatable/{table}/{id}', [DatatableController::class, 'handle'])->name('datatable.sourceid');
-
-
-
-
-
-
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::match(['put', 'patch'], 'profile-update', [ProfileController::class, 'update'])->name('profile.update');
