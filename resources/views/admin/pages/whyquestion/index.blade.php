@@ -9,8 +9,8 @@
                 </div>
                 <div class="card-body">
                     @include('admin.inc.dynamic_datatable', [
-                        '__datatableName' => 'whyquestion',
-                        '__datatableId' => 'whyquestion',
+                        '__datatableName' => 'WhyQuestion',
+                        '__datatableId' => 'whyQuestion',
                     ])
                 </div>
             </div>

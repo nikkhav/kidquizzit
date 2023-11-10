@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-body">
                     @include('admin.inc.dynamic_datatable', [
-                        '__datatableName' => 'quizquestion',
+                        '__datatableName' => 'QuizQuestion',
                         '__datatableId' => 'quizquestion',
                         '__cusomParam' => $id,
                     ])
