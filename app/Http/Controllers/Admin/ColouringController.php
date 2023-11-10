@@ -111,7 +111,16 @@ class ColouringController extends Controller
 
     public function getAll()
     {
-        $colouring = Colouring::all();
+        $colouring = Colouring::with('category')->get();
+
+        $colouring = $colouring->map(function ($item) {
+            $item->image = config('app.url') . '/storage/' . $item->image;
+            return $item;
+        });
+        $colouring = $colouring->makeHidden(['created_at', 'updated_at']);
+        $colouring->each(function ($item) {
+            $item->category->makeHidden(['created_at', 'updated_at']);
+        });
         return response()->json($colouring);
     }
 }
