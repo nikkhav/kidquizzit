@@ -74,7 +74,7 @@ return [
   'string'               => ' :attribute hərf formatında olmalıdır',
   'timezone'             => ' :attribute ərazi formatında olmalıdır',
   'unique'               => ' :attribute artıq iştirak edib',
-  'uploaded'             => ' :attribute yüklənməsi mümkün olmadı',
+  'uploaded'             => ' :attribute could not be loaded',
   'url'                  => ' :attribute formatı yanlışdır',
 
   /*
