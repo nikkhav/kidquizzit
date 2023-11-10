@@ -35,6 +35,7 @@ Route::get('/', function () {
 })->name('/');
 Auth::routes(['register' => false]);
 Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
 
     Route::get('about', [AboutController::class, 'edit'])->name('about.edit');
@@ -46,7 +47,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
 
     Route::resource('category', CategoryController::class);

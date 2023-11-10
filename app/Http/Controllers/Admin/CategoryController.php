@@ -123,6 +123,13 @@ class CategoryController extends Controller
 
     public function getAll()
     {
-        return response()->json($this->categories);
+        $categoriesAPI = Category::with(['childCategories' => function ($query) {
+            $query->select('id', 'title', 'parent_id');
+        }])
+            ->select('id', 'title')
+            ->whereNull('parent_id')
+            ->get();
+
+        return response()->json($categoriesAPI);
     }
 }

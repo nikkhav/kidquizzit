@@ -29,10 +29,17 @@ class AboutController extends Controller
         $this->aboutService->updateAbout($about, $data);
         return redirect()->route('about.edit')->with('success', 'About information has been updated successfully.');
     }
-
     public function getAll()
     {
         $about = About::all();
+
+        $about = $about->map(function ($item) {
+            $item->image = config('app.url') . '/storage/' . $item->image;
+            return $item;
+        });
+
+        $about = $about->makeHidden(['created_at', 'updated_at']);
+
         return response()->json($about);
     }
 }
