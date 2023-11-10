@@ -35,6 +35,8 @@ class TermsAndConditionController extends Controller
     public function getAll()
     {
         $termsandcondition = TermsAndCondition::all();
+        $termsandcondition = $termsandcondition->makeHidden(['created_at']);
+
         return response()->json($termsandcondition);
     }
 }

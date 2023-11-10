@@ -35,6 +35,7 @@ class PrivacyAndPolicyController extends Controller
     public function getAll()
     {
         $privacyandpolicy = PrivacyAndPolicy::all();
+        $privacyandpolicy = $privacyandpolicy->makeHidden(['created_at']);
         return response()->json($privacyandpolicy);
     }
 }

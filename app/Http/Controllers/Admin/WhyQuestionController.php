@@ -111,7 +111,16 @@ class WhyQuestionController extends Controller
 
     public function getAll()
     {
-        $whyquestion = WhyQuestion::all();
-        return response()->json($whyquestion);
+        $whyQuestions = WhyQuestion::with('category')->get();
+
+        $whyQuestions = $whyQuestions->map(function ($item) {
+            $item->image = config('app.url') . '/storage/' . $item->image;
+            return $item;
+        });
+        $whyQuestions = $whyQuestions->makeHidden(['created_at', 'updated_at']);
+        $whyQuestions->each(function ($item) {
+            $item->category->makeHidden(['created_at', 'updated_at']);
+        });
+        return response()->json($whyQuestions);
     }
 }
