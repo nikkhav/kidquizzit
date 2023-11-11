@@ -111,7 +111,26 @@ class QuizController extends Controller
 
     public function getAll()
     {
-        $quizzes = Quiz::with('questions.answers')->get();
+        $quizzes = Quiz::with('questions.answers', 'category')->get();
+
+        // Hide created_at and updated_at fields
+        $quizzes = $quizzes->map(function ($quiz) {
+            $quiz->makeHidden(['created_at', 'updated_at']);
+            $quiz->category->makeHidden(['created_at', 'updated_at']);
+
+            // Hide created_at and updated_at fields for each question
+            $quiz->questions->each(function ($question) {
+                $question->makeHidden(['created_at', 'updated_at']);
+
+                // Hide created_at and updated_at fields for each answer
+                $question->answers->each(function ($answer) {
+                    $answer->makeHidden(['created_at', 'updated_at']);
+                });
+            });
+
+            return $quiz;
+        });
+
         return response()->json($quizzes);
     }
 }
