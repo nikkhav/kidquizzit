@@ -106,11 +106,12 @@
                 }
             });
         });
+
         $(document).on('click', '.view-questions', function() {
-            var quiz_id = $(this).data('id');
-            var url =
-                "{{ route('quizquestion.show', ['quizquestion' => 'quizquestion_id']) }}";
-            url = url.replace('quizquestion_id', quiz_id);
+            var urlParams = new URLSearchParams(window.location.search);
+            var quiz_id = urlParams.get('quiz_id');
+            var url = "{{ route('quizquestion.show') }}";
+            url = url + '?quiz_id=' + quiz_id;
             window.location.href = url;
         });
 

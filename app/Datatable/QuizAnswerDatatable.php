@@ -25,12 +25,17 @@ class QuizAnswerDatatable extends BaseDatatable
         ]);
     }
 
-    protected function query($id = null): Builder
+    protected function query(): Builder
     {
+
+        $quizQuestionId = $_GET['quiz_question_id'];
+
         $query = $this->baseQueryScope()
             ->leftJoin('quiz_questions', 'quiz_answers.quiz_question_id', '=', 'quiz_questions.id')
             ->select('quiz_answers.*', 'quiz_questions.question_text as question_title')
             ->orderBy('created_at', 'asc')
+            ->where('quiz_answers.quiz_question_id', $quizQuestionId)
+
             ->selectRaw("IF(quiz_answers.is_correct = 1, 'True', 'False') as is_correct");
 
         if (isset($_GET['filters'])) {

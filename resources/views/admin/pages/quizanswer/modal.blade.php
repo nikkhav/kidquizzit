@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <input type="hidden" name="quiz_question_id" class="form-control"
-                            value="{{ $quizquestion->id }}">
+                            value="{{ $_GET['quiz_question_id'] }}">
                     </div>
                 </form>
             </div>

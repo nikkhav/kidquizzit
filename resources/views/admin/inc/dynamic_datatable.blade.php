@@ -15,11 +15,7 @@
             $__pdf = '0,1,2,3,4,5,6,7,8,9,10';
             $__print = '0,1,2,3,4,5,6,7,8,9,10';
         }
-        if (!isset($__cusomParam)) {
-            $__cusomParam = '';
-        } else {
-            $__cusomParam = isset($__cusomParam) && is_array($__cusomParam) ? http_build_query($__cusomParam, '', '&') : $__cusomParam;
-        }
+        $__cusomParam = isset($__cusomParam) && is_array($__cusomParam) ? ($__cusomParam = http_build_query($__cusomParam, '', '&amp;')) : '';
     @endphp
     <script>
         $(document).ready(function() {
@@ -60,18 +56,10 @@
                         @endif
                     ],
                     "ajax": {
-                        @if (isset($__cusomParam) && !empty($__cusomParam))
-                            url: "{{ route('datatable.sourceid', [$__datatableName, $__cusomParam]) }}",
-                            type: "GET",
-                            data: function(d) {
-                                d.id = {{ $__cusomParam }};
-                                return d;
-                            }
-                        @else
-                            url: "{{ route('datatable.source', $__datatableName) . '?' . $__cusomParam }}",
-                            type: "GET",
-                            data: get_query()
-                        @endif
+
+                        url: "{{ route('datatable.source', $__datatableName) . '?' . $__cusomParam }}",
+                        type: "GET",
+                        data: get_query()
                     },
                     columns: _columns.map(function(column) {
                         if (column.data === 'image') {

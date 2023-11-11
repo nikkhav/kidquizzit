@@ -24,7 +24,7 @@ class QuizAnswerUpdate extends FormRequest
     public function rules()
     {
         return [
-            'question_id' => 'required|exists:quiz_questions,id',
+            'quiz_question_id' => 'required|exists:quiz_questions,id',
             'answer_text' => 'required|string',
             'is_correct' => 'required|boolean',
         ];

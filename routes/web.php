@@ -56,11 +56,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('quiz', QuizController::class);
     Route::resource('contact', ContactController::class);
     Route::put('contact/{status}', [ContactController::class, 'status'])->name('contact.status');
-    Route::resource('quizquestion', QuizQuestionController::class);
-    Route::get('quizquestion/{quizquestion}', [QuizQuestionController::class, 'show'])->name('quizquestion.show');
+    Route::resource('quizquestion', QuizQuestionController::class)->except('show');
+    Route::get('quizquestion/show', [QuizQuestionController::class, 'show'])->name('quizquestion.show');
+
 
     Route::resource('quizanswer', QuizAnswerController::class)->except(['show']);
-    Route::get('quizanswer/{quizanswer}', [QuizAnswerController::class, 'show'])->name('quizanswer.show');
+    Route::get('quizanswer/show', [QuizAnswerController::class, 'show'])->name('quizanswer.show');
 
 
 

@@ -19,7 +19,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="quiz_id" class="form-control" value="{{ $quiz->id }}">
+                    <input type="hidden" name="quiz_id" class="form-control" value="{{ $_GET['quiz_id'] }}">
                 </form>
             </div>
             <div class="modal-footer">

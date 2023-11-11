@@ -14,7 +14,6 @@
                     @include('admin.inc.dynamic_datatable', [
                         '__datatableName' => 'QuizQuestion',
                         '__datatableId' => 'quizquestion',
-                        '__cusomParam' => $id,
                     ])
                 </div>
             </div>

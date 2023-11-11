@@ -108,11 +108,13 @@
             });
         });
 
+
         $(document).on('click', '.view-answers', function() {
             var quizQuestionId = $(this).data('id');
-            var url =
-                "{{ route('quizanswer.show', ['quizanswer' => 'quizanswer_id_placeholder']) }}";
-            url = url.replace('quizanswer_id_placeholder', quizQuestionId);
+            var urlParams = new URLSearchParams(window.location.search);
+            var quiz_id = urlParams.get('quiz_id');
+            var url = "{{ route('quizanswer.show') }}";
+            url = url + '?quiz_id=' + quiz_id + '&quiz_question_id=' + quizQuestionId;
             window.location.href = url;
         });
 

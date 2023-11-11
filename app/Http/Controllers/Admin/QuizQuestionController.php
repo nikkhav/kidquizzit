@@ -25,10 +25,11 @@ class QuizQuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $quiz = Quiz::find($id);
-        return view('admin.pages.quizquestion.index', compact('id', 'quiz'));
+        $quiz = Quiz::find($_GET['quiz_id'])->with("questions")->first();
+        $quizquestion = QuizQuestion::where("quiz_id", $_GET['quiz_id'])->get();
+        return view('admin.pages.quizquestion.show', compact('quiz', 'quizquestion'));
     }
 
     /**

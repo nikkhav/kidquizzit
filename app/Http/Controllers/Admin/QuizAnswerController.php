@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\QuizAnswerUpdate;
 use App\Http\Requests\QuizAnswerStore;
+use App\Models\QuizAnswer;
 use App\Services\QuizAnswerService;
 use App\Models\QuizQuestion;
 use Illuminate\Http\Request;
@@ -26,10 +27,11 @@ class QuizAnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $quizquestion = QuizQuestion::find($id);
-        return view('admin.pages.quizanswer.index', compact('id', 'quizquestion'));
+        $quizquestion = QuizQuestion::find($_GET['quiz_question_id'])->with("answers")->first();
+        $quizanswer = QuizAnswer::where("quiz_question_id", $_GET['quiz_question_id'])->get();
+        return view('admin.pages.quizanswer.index', compact('quizquestion', 'quizanswer'));
     }
 
     /**

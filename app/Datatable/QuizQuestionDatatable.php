@@ -24,14 +24,14 @@ class QuizQuestionDatatable extends BaseDatatable
         ]);
     }
 
-    protected function query($id = null): Builder
+    protected function query(): Builder
     {
-
+        $quizId = $_GET['quiz_id'];
         $query = $this->baseQueryScope()
             ->leftJoin('quizzes', 'quiz_questions.quiz_id', '=', 'quizzes.id')
             ->select('quiz_questions.*', 'quizzes.title as quiz_title')
+            ->where('quiz_questions.quiz_id', $quizId)
             ->orderBy('created_at', 'asc');
-
         if (isset($_GET['filters'])) {
             $filters = $_GET['filters'];
             foreach ($filters as $filter) {
