@@ -12,7 +12,14 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
 
-    public function canOrAbort($permission, $defaultCode = 401) {
-        if (!auth()->user()->can($permission)) abort($defaultCode);
+    public function canOrAbort($permission, $message = null, $defaultCode = 401)
+    {
+        if (!auth()->user()->can($permission)) {
+            if ($message) {
+                abort($defaultCode, $message);
+            } else {
+                abort($defaultCode);
+            }
+        }
     }
 }
