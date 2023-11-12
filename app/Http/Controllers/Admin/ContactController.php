@@ -39,17 +39,18 @@ class ContactController extends Controller
             $contact = $this->contactService->createContact($validatedData);
 
             return response()->json([
-                'code' => 200,
+                'code' => 201,
                 'item' => $contact,
-            ]);
+            ], 201);
         } catch (\Exception $e) {
-            // Handle exceptions or validation errors here
             return response()->json([
-                'code' => 400, // or appropriate error code
-                'message' => $e->getMessage(), // or a custom error message
-            ], 400); // or appropriate HTTP status code
+                'code' => 400,
+                'message' => 'Failed to store contact.',
+                'errors' => $e->getMessage(),
+            ], 400);
         }
     }
+
 
 
     /**
