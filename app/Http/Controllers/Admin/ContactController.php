@@ -34,13 +34,23 @@ class ContactController extends Controller
      */
     public function store(ContactStore $request)
     {
-        $data = $request->toArray();
-        $contact = $this->contactService->createContact($data);
-        return response()->json([
-            'code' =>  200,
-            'item' =>  $contact
-        ]);
+        try {
+            $validatedData = $request->validated();
+            $contact = $this->contactService->createContact($validatedData);
+
+            return response()->json([
+                'code' => 200,
+                'item' => $contact,
+            ]);
+        } catch (\Exception $e) {
+            // Handle exceptions or validation errors here
+            return response()->json([
+                'code' => 400, // or appropriate error code
+                'message' => $e->getMessage(), // or a custom error message
+            ], 400); // or appropriate HTTP status code
+        }
     }
+
 
     /**
      * Display the specified resource.
