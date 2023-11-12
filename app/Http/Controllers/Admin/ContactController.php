@@ -13,6 +13,7 @@ class ContactController extends Controller
 
     public function __construct(ContactService $contactService)
     {
+        $this->middleware('auth', ['except' => ['store']]);
         $this->contactService = $contactService;
     }
     /**
