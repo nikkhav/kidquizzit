@@ -17,7 +17,7 @@
     <!-- Responsive datatable examples -->
     <link href="{{ asset('admin/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('images/favicon-16x16-modified.png') }}">
     <!-- Dragula css -->
     <link rel="stylesheet" href="{{ asset('admin/assets/libs/dragula/dragula.min.css') }}" />
     <!-- Layout config Js -->

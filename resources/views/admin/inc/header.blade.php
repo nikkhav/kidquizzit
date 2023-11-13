@@ -75,19 +75,24 @@
                         </span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="{{ route('profile.edit') }}"><i
-                                class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
-                                class="align-middle">Account</span></a>
+                        <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                            <i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
+                            <span class="align-middle">Account</span>
+                        </a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">
-                            <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle"
-                                data-key="t-logout">Logout</span>
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+                            <span class="align-middle" data-key="t-logout">Logout</span>
+                        </a>
+                        <a class="dropdown-item" href="https://kidquizit.com/" target="_blank">
+                            <i class="mdi mdi-link text-muted fs-16 align-middle me-1"></i>
+                            <span class="align-middle">Go to the website</span>
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
