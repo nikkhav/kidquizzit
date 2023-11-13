@@ -54,8 +54,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('difference', DifferenceController::class);
     Route::resource('whyquestion', WhyQuestionController::class);
     Route::resource('quiz', QuizController::class);
-    Route::resource('contact', ContactController::class)->except(['store']);
-    // Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
+    Route::resource('contact', ContactController::class)->except(['store', 'update']);
 
     Route::put('contact/{status}', [ContactController::class, 'status'])->name('contact.status');
     Route::resource('quizquestion', QuizQuestionController::class)->except('show');
