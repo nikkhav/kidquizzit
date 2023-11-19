@@ -21,6 +21,23 @@
             placeholder="Add Description" rows="15" required>{{ old('description', $item->description) }}</textarea>
         <div id="error-edit-description" class="error text-danger"></div>
     </div>
+
+
+    <div class="col-md-12 mb-3">
+        <label class="small mb-1" for="description2">Description 2</label>
+        <textarea class="form-control" style="resize: none;" name="description2" id="edit-description2"
+            placeholder="Add Description" rows="15">{{ old('description2', $item->description2) }}</textarea>
+        <div id="error-edit-description2" class="error text-danger"></div>
+    </div>
+
+
+
+    <div class="col-md-12 mb-3">
+        <label class="small mb-1" for="description3">Description 3</label>
+        <textarea class="form-control" style="resize: none;" name="description3" id="edit-description3"
+            placeholder="Add Description" rows="15">{{ old('description3', $item->description3) }}</textarea>
+        <div id="error-edit-description3" class="error text-danger"></div>
+    </div>
     <div class="col-md-12 mt-2">
         <div class="form-group">
             <label for="category_id">Category</label>

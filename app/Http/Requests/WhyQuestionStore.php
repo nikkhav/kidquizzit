@@ -28,6 +28,8 @@ class WhyQuestionStore extends FormRequest
             'image' => 'required|image|mimes:jpeg,png,jpg,gif',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'description2' => 'nullable|string',
+            'description3' => 'nullable|string',
         ];
     }
 }

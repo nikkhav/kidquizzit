@@ -1,5 +1,5 @@
 <div class="modal fade create-modal" id="create-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Why Questions Create</h5>
@@ -14,7 +14,6 @@
                                 <label class="small mb-1" for="image">Image</label>
                                 <input type="file" id="image" name="image" class="form-control about-img">
                                 <div id="image-error" class="error text-danger"></div>
-
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
@@ -29,7 +28,18 @@
                             <textarea class="form-control" name="description" id="description" placeholder="Add Description" rows="15"
                                 required></textarea>
                             <div id="description-error" class="error text-danger"></div>
+                        </div>
 
+                        <div class="col-md-12 mb-3">
+                            <label class="small mb-1" for="description2">Description 2</label>
+                            <textarea class="form-control" name="description2" id="description2" placeholder="Add Description" rows="15"></textarea>
+                            <div id="description2-error" class="error text-danger"></div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label class="small mb-1" for="description3">Description 3</label>
+                            <textarea class="form-control" name="description3" id="description3" placeholder="Add Description" rows="15"></textarea>
+                            <div id="description3-error" class="error text-danger"></div>
                         </div>
                         <div class="col-md-12 mt-2">
                             <div class="form-group">

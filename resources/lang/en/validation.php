@@ -71,7 +71,7 @@ return [
     'string'  => ' :attribute :size simvoldan ibarət olmalıdır',
     'array'   => ' :attribute :size hədd\'dən ibarət olmalıdır',
   ],
-  'string'               => ' :attribute hərf formatında olmalıdır',
+  'string'               => ' :attribute must be in string format',
   'timezone'             => ' :attribute ərazi formatında olmalıdır',
   'unique'               => ' :attribute artıq iştirak edib',
   'uploaded'             => ' :attribute could not be loaded',
