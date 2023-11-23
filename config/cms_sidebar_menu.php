@@ -47,6 +47,13 @@ return [
         'route' => 'difference.index',
         'can' => 'difference.index'
     ],
+
+    [
+        'icon' => '<i class="fas fa-commenting"></i>',
+        'title' => 'Fairy Tales',
+        'route' => 'tale.index',
+        'can' => 'tale.index'
+    ],
     [
         'icon' => '<i class="fas fa-mail-bulk"></i>',
         'title' => 'Contact Us',

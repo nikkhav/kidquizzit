@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\QuizAnswerController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\QuizQuestionController;
 use App\Http\Controllers\Admin\WhyQuestionController;
+use App\Http\Controllers\Admin\TalesController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +55,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('colouring', ColouringController::class);
     Route::resource('difference', DifferenceController::class);
     Route::resource('whyquestion', WhyQuestionController::class);
+    Route::resource('tale', TalesController::class);
+
     Route::resource('quiz', QuizController::class);
     Route::resource('contact', ContactController::class)->except(['store', 'update']);
 

@@ -25,8 +25,8 @@ class DifferenceUpdate extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
-            'image1' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'image2' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'image1' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
+            'image2' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
         ];
     }
 }

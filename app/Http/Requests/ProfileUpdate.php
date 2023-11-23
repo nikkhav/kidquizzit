@@ -27,7 +27,7 @@ class ProfileUpdate extends FormRequest
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
             'email' => 'required|email|max:255',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Assuming a maximum file size of 2MB (2048 KB)
+            'image' => 'image|mimes:jpeg,png,jpg,gif,webp', // Assuming a maximum file size of 2MB (2048 KB)
         ];
     }
 }

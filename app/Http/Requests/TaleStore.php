@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AboutUpdate extends FormRequest
+class TaleStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,10 @@ class AboutUpdate extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required',
-            'title' => 'required|max:255',
-            'subtitle' => 'required|max:255',
-            'description' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,webp',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
         ];
     }
 }

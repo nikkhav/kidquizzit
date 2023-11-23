@@ -25,7 +25,7 @@ class ColouringUpdate extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
         ];
     }
 }
