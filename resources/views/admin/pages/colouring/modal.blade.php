@@ -16,6 +16,12 @@
                                 <div id="image-error" class="error text-danger"></div>
                             </div>
                         </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="small mb-1" for="title">Title</label>
+                            <input class="form-control" name="title" id="title" type="text"
+                                placeholder="Add title" required>
+                            <div id="title-error" class="error text-danger"></div>
+                        </div>
                         <div class="col-md-12 mt-2">
                             <div class="form-group">
                                 <label for="category_id">Category</label>

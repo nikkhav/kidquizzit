@@ -18,6 +18,13 @@
         </div>
     </div>
     <div class="col-md-12 mb-3">
+        <label class="small mb-1" for="inputFirstName">Title</label>
+        <input class="form-control" name="title" value="{{ old('title', $item->title) }}" id="edit-title"
+            type="text" placeholder="Add title" required>
+        <div id="error-edit-title" class="error text-danger"></div>
+
+    </div>
+    <div class="col-md-12 mb-3">
         <label class="small mb-1" for="inputDescription">Description</label>
         <textarea class="form-control" style="resize: none;" name="description" id="edit-description"
             placeholder="Add Description" rows="15" required>{{ old('description', $item->description) }}</textarea>

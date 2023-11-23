@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Colouring extends Model
 {
     use HasFactory;
-    protected $fillable = ['category_id', 'image'];
+    protected $fillable = ['category_id', 'image', 'title'];
 
     public function category()
     {

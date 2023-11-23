@@ -24,6 +24,12 @@
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
+                            <label class="small mb-1" for="title">Title</label>
+                            <input class="form-control" name="title" id="title" type="text"
+                                placeholder="Add title" required>
+                            <div id="title-error" class="error text-danger"></div>
+                        </div>
+                        <div class="col-md-12 mb-3">
                             <label class="small mb-1" for="description">Description</label>
                             <textarea class="form-control" name="description" id="description" placeholder="Add Description" rows="15"></textarea>
                             <div id="description-error" class="error text-danger"></div>

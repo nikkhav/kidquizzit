@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Difference extends Model
 {
     use HasFactory;
-    protected $fillable = ['category_id', 'image1', 'image2', 'difference'];
+    protected $fillable = ['category_id', 'image1', 'image2', 'description', 'title'];
 
     public function category()
     {

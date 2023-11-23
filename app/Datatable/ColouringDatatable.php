@@ -13,9 +13,9 @@ class ColouringDatatable extends BaseDatatable
         parent::__construct(Colouring::class, [
             'id' => '№',
             'category_title' => 'Category',
+            'title' => 'Title',
             'image' => 'Image',
             'created_at' => 'Created at',
-            'updated_at' => 'Updated at'
         ], [
             'actions' => [
                 'title' => 'Actions',

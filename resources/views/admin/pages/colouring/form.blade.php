@@ -9,6 +9,13 @@
             <div id="error-edit-image" class="error text-danger"></div>
         </div>
     </div>
+    <div class="col-md-12 mb-3">
+        <label class="small mb-1" for="inputFirstName">Title</label>
+        <input class="form-control" name="title" value="{{ old('title', $item->title) }}" id="edit-title"
+            type="text" placeholder="Add title" required>
+        <div id="error-edit-title" class="error text-danger"></div>
+
+    </div>
     <div class="col-md-12 mt-2">
         <div class="form-group">
             <label for="category_id">Category</label>
