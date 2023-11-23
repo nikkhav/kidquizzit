@@ -15,8 +15,8 @@ class DifferenceDatatable extends BaseDatatable
             'category_title' => 'Category',
             'image1' => 'Image1',
             'image2' => 'Image2',
-            'created_at' => 'Created at',
-            'updated_at' => 'Updated at'
+            'description' => 'Description',
+            'created_at' => 'Created at'
         ], [
             'actions' => [
                 'title' => 'Actions',

@@ -23,6 +23,11 @@
                                 <div id="image2-error" class="error text-danger"></div>
                             </div>
                         </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="small mb-1" for="description">Description</label>
+                            <textarea class="form-control" name="description" id="description" placeholder="Add Description" rows="15"></textarea>
+                            <div id="description-error" class="error text-danger"></div>
+                        </div>
                         <div class="col-md-12 mt-2">
                             <div class="form-group">
                                 <label for="category_id">Category</label>

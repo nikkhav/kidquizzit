@@ -17,6 +17,12 @@
             <div id="error-edit-image2" class="error text-danger"></div>
         </div>
     </div>
+    <div class="col-md-12 mb-3">
+        <label class="small mb-1" for="inputDescription">Description</label>
+        <textarea class="form-control" style="resize: none;" name="description" id="edit-description"
+            placeholder="Add Description" rows="15" required>{{ old('description', $item->description) }}</textarea>
+        <div id="error-edit-description" class="error text-danger"></div>
+    </div>
     <div class="col-md-12 mt-2">
         <div class="form-group">
             <label for="category_id">Category</label>

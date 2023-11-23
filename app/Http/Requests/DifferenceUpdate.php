@@ -27,6 +27,7 @@ class DifferenceUpdate extends FormRequest
             'category_id' => 'required|exists:categories,id',
             'image1' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
             'image2' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
+            'description' => 'nullable|string',
         ];
     }
 }
