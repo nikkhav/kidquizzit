@@ -54,6 +54,13 @@ return [
         'route' => 'tale.index',
         'can' => 'tale.index'
     ],
+
+    [
+        'icon' => '<i class="fas fa-chess-king"></i>',
+        'title' => 'Games',
+        'route' => 'game.index',
+        'can' => 'game.index'
+    ],
     [
         'icon' => '<i class="fas fa-mail-bulk"></i>',
         'title' => 'Contact Us',

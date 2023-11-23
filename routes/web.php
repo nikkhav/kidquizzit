@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColouringController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DifferenceController;
+use App\Http\Controllers\Admin\GamesController;
 use App\Http\Controllers\Admin\QuizAnswerController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\QuizQuestionController;
@@ -56,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('difference', DifferenceController::class);
     Route::resource('whyquestion', WhyQuestionController::class);
     Route::resource('tale', TalesController::class);
+    Route::resource('game', GamesController::class);
+
 
     Route::resource('quiz', QuizController::class);
     Route::resource('contact', ContactController::class)->except(['store', 'update']);
