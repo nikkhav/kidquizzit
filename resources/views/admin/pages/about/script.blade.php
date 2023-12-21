@@ -12,4 +12,9 @@
             }
         });
     });
+    CKEDITOR.replace('inputDescription');
+    CKEDITOR.replace('inputLastName');
+    CKEDITOR.replace('inputFirstName');
+
+
 </script>

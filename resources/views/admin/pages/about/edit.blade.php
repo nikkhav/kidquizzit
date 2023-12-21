@@ -23,16 +23,16 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label class="small mb-1" for="inputFirstName">Title</label>
-                        <input class="form-control" name="title" value="{{ old('title', $item->title) }}"
-                            id="inputFirstName" type="text" placeholder="Add title" required>
+                        <textarea class="form-control" name="title" 
+                            id="inputFirstName" type="text" placeholder="Add title" required>{{ old('title', $item->title) }} </textarea>
                         @error('title')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-12 mb-3">
                         <label class="small mb-1" for="inputLastName">Subtitle</label>
-                        <input class="form-control" name="subtitle" value="{{ old('subtitle', $item->subtitle) }}"
-                            id="inputLastName" type="text" placeholder="Add Subtitle" required>
+                        <textarea class="form-control" name="subtitle" 
+                            id="inputLastName" type="text" placeholder="Add Subtitle" required>{{ old('subtitle', $item->subtitle) }} </textarea>
                         @error('subtitle')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
