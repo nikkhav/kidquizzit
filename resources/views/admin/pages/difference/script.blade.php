@@ -28,7 +28,14 @@
             e.preventDefault();
             pageLoader(true);
 
+            // Get CKEditor content
+            let titleContent = CKEDITOR.instances.title.getData();
+            let descriptionContent = CKEDITOR.instances.description.getData();
+            // Create FormData and append CKEditor content
             let formData = new FormData($("#create-form")[0]);
+            formData.append('title', titleContent);
+            formData.append('description', descriptionContent);
+
 
             $.ajax({
                 url: "{{ route('difference.store') }}",
@@ -57,8 +64,10 @@
 
         $(document).on('click', '.edit', function() {
             let id = $(this).data('id');
-            let url = "{{ route('difference.edit', 'edit') }}"
+            let url = "{{ route('difference.edit', 'edit') }}";
+            
             url = url.replace('edit', id);
+            
             let data = {
                 _token: "{{ csrf_token() }}",
                 id: id
@@ -78,9 +87,15 @@
             e.preventDefault();
             pageLoader(true);
 
-            let formData = new FormData($("#edit-form")[0]); // Create FormData object from the form
             let id = $("#edit-id").val();
-            let url = "{{ route('difference.update', 'update') }}"
+            let url = "{{ route('difference.update', 'update') }}";
+            let titleContent = CKEDITOR.instances['edit-title'].getData();
+            let descriptionContent = CKEDITOR.instances['edit-description'].getData();
+            let formData = new FormData($("#edit-form")[0]); // Create FormData object from the form
+            formData.append('title', titleContent);
+            formData.append('description', descriptionContent);
+
+
             url = url.replace('update', id);
 
             $.ajax({

@@ -28,4 +28,7 @@
             </div>
         </div>
     </div>
+    <script>
+        CKEDITOR.replace('inputDescription');
+    </script>
 @endsection

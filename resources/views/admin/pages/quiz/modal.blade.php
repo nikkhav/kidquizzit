@@ -2,18 +2,18 @@
     <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Colouring</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Quiz create</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="create-form" enctype="multipart/form-data">
+                <form id="create-form">
                     @csrf
                     <div class="row">
                         <div class="col-md-12 mt-2">
                             <div class="form-group">
                                 <label for="title">Title</label>
-                                <input type="text" name="title" id="title" class="form-control"
-                                    placeholder="Enter title" aria-describedby="helpId" required>
+                                <textarea  name="title" id="title" class="form-control"
+                                    placeholder="Enter title"  required></textarea>
                                 <div id="title-error" class="error text-danger"></div>
 
                             </div>
@@ -45,7 +45,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Category edit</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Quiz edit</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -66,3 +66,6 @@
         </div>
     </div>
 </div>
+<script>
+    CKEDITOR.replace('title');
+</script>

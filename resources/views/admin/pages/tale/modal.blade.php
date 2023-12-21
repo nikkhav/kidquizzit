@@ -18,8 +18,8 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="small mb-1" for="title">Title</label>
-                            <input class="form-control" name="title" id="title" type="text"
-                                placeholder="Add title" required>
+                            <textarea class="form-control" name="title" id="title" 
+                                placeholder="Add title" required></textarea>
                             <div id="title-error" class="error text-danger"></div>
 
                         </div>
@@ -77,3 +77,8 @@
         </div>
     </div>
 </div>
+<script>
+    CKEDITOR.replace('description');
+    CKEDITOR.replace('title');
+
+</script>

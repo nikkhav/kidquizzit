@@ -3,8 +3,8 @@
     <div class="col-md-12 mt-2">
         <div class="form-group">
             <label for="name">Title</label>
-            <input type="text" name="title" id="edit-title" value="{{ $item->title }}" class="form-control"
-                placeholder="Title" aria-describedby="helpId" required>
+            <textarea name="title" id="edit-title"  class="form-control"
+                placeholder="Title" aria-describedby="helpId" required>{{ $item->title }}</textarea>
             <div id="error-edit-title" class="error text-danger"></div>
 
         </div>
@@ -21,3 +21,7 @@
         </div>
     </div>
 </div>
+
+<script>
+    CKEDITOR.replace('edit-title');
+</script>

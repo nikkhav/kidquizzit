@@ -28,7 +28,12 @@
             e.preventDefault();
             pageLoader(true);
 
-            let formData = new FormData($("#create-form")[0]);
+    // Get CKEditor content
+    let titleContent = CKEDITOR.instances.title.getData();
+
+    // Create FormData and append CKEditor content
+    let formData = new FormData($("#create-form")[0]);
+    formData.append('title', titleContent);
 
             $.ajax({
                 url: "{{ route('colouring.store') }}",
@@ -76,9 +81,11 @@
         $("#edit-customer-type").click(function(e) {
             e.preventDefault();
             pageLoader(true);
+            let titleContent = CKEDITOR.instances['edit-title'].getData();
             let formData = new FormData($("#edit-form")[0]); // Create FormData object from the form
             let id = $("#edit-id").val();
-            let url = "{{ route('colouring.update', 'update') }}"
+            let url = "{{ route('colouring.update', 'update') }}";
+            formData.append('title', titleContent);
             url = url.replace('update', id);
 
 

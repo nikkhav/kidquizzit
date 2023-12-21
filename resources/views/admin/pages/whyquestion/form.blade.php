@@ -10,8 +10,8 @@
     </div>
     <div class="col-md-12 mb-3">
         <label class="small mb-1" for="inputFirstName">Title</label>
-        <input class="form-control" name="title" value="{{ old('title', $item->title) }}" id="edit-title"
-            type="text" placeholder="Add title" required>
+        <textarea class="form-control" name="title" id="edit-title"
+            placeholder="Add title" required> {{ old('title', $item->title) }}</textarea>
         <div id="error-edit-title" class="error text-danger"></div>
 
     </div>
@@ -50,3 +50,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    CKEDITOR.replace('edit-description');
+    CKEDITOR.replace('edit-description2');
+    CKEDITOR.replace('edit-description3');
+
+    CKEDITOR.replace('edit-title');
+
+</script>

@@ -28,7 +28,19 @@
             e.preventDefault();
             pageLoader(true);
 
+            // Get CKEditor content
+            let titleContent = CKEDITOR.instances.title.getData();
+            let descriptionContent = CKEDITOR.instances.description.getData();
+            let description2Content = CKEDITOR.instances.description2.getData();
+            let description3Content = CKEDITOR.instances.description3.getData();
+
+            // Create FormData and append CKEditor content
             let formData = new FormData($("#create-form")[0]);
+            formData.append('title', titleContent);
+            formData.append('description', descriptionContent);
+            formData.append('description2', description2Content);
+            formData.append('description3', description3Content);
+
 
             $.ajax({
                 url: "{{ route('whyquestion.store') }}",
@@ -78,10 +90,21 @@
             e.preventDefault();
             pageLoader(true);
 
-            let formData = new FormData($("#edit-form")[0]); // Create FormData object from the form
+
             let id = $("#edit-id").val();
             let url = "{{ route('whyquestion.update', 'update') }}"
             url = url.replace('update', id);
+            let titleContent = CKEDITOR.instances['edit-title'].getData();
+            let descriptionContent = CKEDITOR.instances['edit-description'].getData();
+            let description2Content = CKEDITOR.instances['edit-description2'].getData();
+            let description3Content = CKEDITOR.instances['edit-description3'].getData();
+
+            let formData = new FormData($("#edit-form")[0]); // Create FormData object from the form
+            formData.append('title', titleContent);
+            formData.append('description', descriptionContent);
+            formData.append('description2', description2Content);
+            formData.append('description3', description3Content);
+
 
 
             // Use AJAX to submit form data including files

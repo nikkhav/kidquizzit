@@ -12,8 +12,8 @@
                         <div class="col-md-12 mt-2">
                             <div class="form-group">
                                 <label for="question_text">Question Text</label>
-                                <input type="text" name="question_text" id="question_text" class="form-control"
-                                    placeholder="Enter Question Text" aria-describedby="helpId">
+                                <textarea type="text" name="question_text" id="question_text" class="form-control"
+                                    placeholder="Enter Question Text" aria-describedby="helpId"></textarea>
                                 <div id="question_text-error" class="error text-danger"></div>
 
                             </div>
@@ -57,3 +57,8 @@
         </div>
     </div>
 </div>
+
+<script>
+    CKEDITOR.replace('question_text');
+
+</script>

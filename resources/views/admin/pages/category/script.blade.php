@@ -1,4 +1,5 @@
 <script>
+
     $(document).ready(function() {
         $('.create').click(function(e) {
             e.preventDefault();
@@ -27,7 +28,11 @@
         $("#save-category").click(function(e) {
             e.preventDefault();
             pageLoader(true);
-            let data = $("#create-form").serialize();
+            // let data = $("#create-form").serialize();
+            let titleContent = CKEDITOR.instances.title.getData();
+
+            // Include CKEditor content in the data
+            let data = $("#create-form").serialize() + '&title=' + encodeURIComponent(titleContent);
             $.ajax({
                 type: "POST",
                 url: "{{ route('category.store') }}",
@@ -72,7 +77,8 @@
             pageLoader(true);
 
             let id = $("#edit-id").val();
-            let title = $("#edit-title").val();
+            // let title = $("#edit-title").val();
+            let title = CKEDITOR.instances['edit-title'].getData();
             let parent_id = $("#edit-parent_id").val();
 
             $.ajax({
@@ -101,5 +107,9 @@
                 }
             });
         });
+
     });
+    CKEDITOR.replace('title');
+    
+
 </script>

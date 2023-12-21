@@ -3,8 +3,8 @@
     <div class="col-md-12 mt-2">
         <div class="form-group">
             <label for="name">Answer</label>
-            <input type="text" name="answer_text" id="edit-answer_text" value="{{ $item->answer_text }}"
-                class="form-control" placeholder="Answer Text" aria-describedby="helpId" required>
+            <textarea type="text" name="answer_text" id="edit-answer_text"
+                class="form-control" placeholder="Answer Text" aria-describedby="helpId" required>{{ $item->answer_text }}</textarea>
             <div id="error-edit-answer_text" class="error text-danger"></div>
 
         </div>
@@ -21,3 +21,8 @@
     <input type="hidden" name="quiz_question_id" class="form-control" value="{{ $item->quiz_question_id }}">
 
 </div>
+
+<script>
+    CKEDITOR.replace('edit-answer_text');
+
+</script>

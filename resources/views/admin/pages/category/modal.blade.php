@@ -12,8 +12,8 @@
                         <div class="col-md-12 mt-2">
                             <div class="form-group">
                                 <label for="title">Title</label>
-                                <input type="text" name="title" id="title" class="form-control"
-                                    placeholder="Enter title" aria-describedby="helpId" required>
+                                <textarea name="title" id="title" class="form-control"
+                                    placeholder="Enter title" aria-describedby="helpId" required></textarea>
                             </div>
                             <div id="title-error" class="error text-danger"></div>
                         </div>

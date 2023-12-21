@@ -30,6 +30,11 @@
 
             let formData = new FormData($("#create-form")[0]);
 
+            // Get CKEditor content
+            let titleContent = CKEDITOR.instances.title.getData();
+
+            formData.append('title', titleContent);
+
             $.ajax({
                 url: "{{ route('quiz.store') }}",
                 type: "POST",
@@ -81,6 +86,10 @@
             let id = $("#edit-id").val();
             let url = "{{ route('quiz.update', 'update') }}"
             url = url.replace('update', id);
+
+
+            let titleContent = CKEDITOR.instances['edit-title'].getData();
+            formData.append('title', titleContent);
 
 
             // Use AJAX to submit form data including files

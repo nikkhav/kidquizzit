@@ -28,7 +28,13 @@
             e.preventDefault();
             pageLoader(true);
 
+            // Get CKEditor content
+            let titleContent = CKEDITOR.instances.title.getData();
+            let descriptionContent = CKEDITOR.instances.description.getData();
+            // Create FormData and append CKEditor content
             let formData = new FormData($("#create-form")[0]);
+            formData.append('title', titleContent);
+            formData.append('description', descriptionContent);
 
             $.ajax({
                 url: "{{ route('game.store') }}",
@@ -78,10 +84,14 @@
             e.preventDefault();
             pageLoader(true);
 
-            let formData = new FormData($("#edit-form")[0]); // Create FormData object from the form
             let id = $("#edit-id").val();
             let url = "{{ route('game.update', 'update') }}"
             url = url.replace('update', id);
+            let titleContent = CKEDITOR.instances['edit-title'].getData();
+            let descriptionContent = CKEDITOR.instances['edit-description'].getData();
+            let formData = new FormData($("#edit-form")[0]); // Create FormData object from the form
+            formData.append('title', titleContent);
+            formData.append('description', descriptionContent);
 
 
             // Use AJAX to submit form data including files

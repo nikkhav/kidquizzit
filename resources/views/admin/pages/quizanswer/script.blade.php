@@ -29,6 +29,8 @@
             pageLoader(true);
 
             let formData = new FormData($("#create-form")[0]);
+            let answer_textContent = CKEDITOR.instances.answer_text.getData();
+            formData.append('answer_text', answer_textContent);
 
             $.ajax({
                 url: "{{ route('quizanswer.store') }}",
@@ -81,6 +83,9 @@
             let id = $("#edit-id").val();
             let url = "{{ route('quizanswer.update', 'update') }}"
             url = url.replace('update', id);
+
+            let edit_answer_textContent = CKEDITOR.instances['edit-answer_text'].getData();
+            formData.append('answer_text', edit_answer_textContent);
 
 
             // Use AJAX to submit form data including files
