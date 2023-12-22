@@ -24,9 +24,9 @@
                                 <select name="parent_id" id="parent_id" class="form-control">
                                     <option value="">Main</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                        <option value="{{ $category->id }}">{{ strip_tags($category->title) }}</option>
                                         @foreach ($category->childCategories as $childCategory)
-                                            <option value="{{ $childCategory->id }}">- {{ $childCategory->title }}
+                                            <option value="{{ $childCategory->id }}"> - {{ strip_tags($childCategory->title) }}
                                             </option>
                                         @endforeach
                                     @endforeach

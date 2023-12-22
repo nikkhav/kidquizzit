@@ -27,7 +27,7 @@
             <select name="category_id" id="category_id" class="form-control">
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @if ($category->id == $item->category_id) selected @endif>
-                        {{ $category->title }}</option>
+                        {{ strip_tags($category->title) }}</option>
                 @endforeach
             </select>
         </div>

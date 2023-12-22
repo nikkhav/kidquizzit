@@ -15,11 +15,11 @@
                 <option value="">Main</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @if ($category->id == $item->parent_id) selected @endif>
-                        {{ $category->title }}
+                        {{ strip_tags($category->title) }}
                     </option>
                     @foreach ($category->childCategories as $childCategory)
                         <option value="{{ $childCategory->id }}" @if ($childCategory->id == $item->parent_id) selected @endif>
-                            - {{ $childCategory->title }}
+                            - {{ strip_tags($childCategory->title) }}
                         </option>
                     @endforeach
                 @endforeach

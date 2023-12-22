@@ -46,7 +46,7 @@
                                 <label for="category_id">Category</label>
                                 <select name="category_id" id="category_id" class="form-control">
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                        <option value="{{ $category->id }}">{{ strip_tags($category->title) }}</option>
                                     @endforeach
                                 </select>
                             </div>
