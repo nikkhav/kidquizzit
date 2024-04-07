@@ -36,6 +36,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 })->name('/');
+Route::post('/whyquestion/store-to-json', [WhyQuestionController::class, 'storeToJson'])->name('whyquestion.storeToJson');
+Route::post('/quiz/store-to-json', [QuizController::class, 'storeToJson'])->name('quiz.storeToJson');
+
 Auth::routes(['register' => false]);
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');

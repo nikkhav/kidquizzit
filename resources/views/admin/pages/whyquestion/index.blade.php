@@ -8,6 +8,29 @@
                     <h4 class="card-title mb-0">Why Questions</h4>
                 </div>
                 <div class="card-body">
+                    <form action="{{ route('whyquestion.storeToJson') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="category_id" class="form-label">Category</label>
+                            <select class="form-select" id="category_id" name="category_id">
+                                <option selected>Select Category</option>
+                                {{-- Dynamically populate categories --}}
+                                @php
+                                    use App\Models\Category; // Use your actual namespace and class
+                                    $categories = Category::where('parent_id', 3)->get();
+                                @endphp
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="question" class="form-label">Question</label>
+                            <input type="text" class="form-control" id="question" name="question" placeholder="Enter question" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Question</button>
+                    </form>
+
                     @include('admin.inc.dynamic_datatable', [
                         '__datatableName' => 'WhyQuestion',
                         '__datatableId' => 'whyQuestion',

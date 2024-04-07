@@ -8,6 +8,7 @@ use App\Http\Requests\QuizStore;
 use App\Services\QuizService;
 use App\Models\Quiz;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 
 class QuizController extends Controller
@@ -133,4 +134,46 @@ class QuizController extends Controller
 
         return response()->json($quizzes);
     }
+
+    public function storeToJson(Request $request)
+    {
+        // Validate the request
+        $validatedData = $request->validate([
+            'category_id' => 'required|integer',
+            'theme' => 'required|string',
+        ]);
+
+        // Define the path to the JSON file
+        $jsonFilePath = storage_path('app/contentData/quizzes.json');
+
+        // Read the existing data from the file
+        $existingData = json_decode(file_get_contents($jsonFilePath), true);
+
+        // Find the category by category_id
+        $foundCategoryIndex = null;
+        foreach ($existingData['quizzes'] as $index => $category) {
+            if ($category['category_id'] == $validatedData['category_id']) {
+                $foundCategoryIndex = $index;
+                break;
+            }
+        }
+
+        // If category exists, push the new theme
+        if (!is_null($foundCategoryIndex)) {
+            $existingData['quizzes'][$foundCategoryIndex]['themes'][] = $validatedData['theme'];
+        } else {
+            // If category doesn't exist, create a new one with the theme
+            $existingData['quizzes'][] = [
+                'category_id' => $validatedData['category_id'],
+                'themes' => [$validatedData['theme']]
+            ];
+        }
+
+        // Save the updated data back to the JSON file
+        file_put_contents($jsonFilePath, json_encode($existingData, JSON_PRETTY_PRINT));
+
+        // Redirect back or to another page with a success message
+        return redirect()->back()->with('success', 'Theme added successfully.');
+    }
+
 }

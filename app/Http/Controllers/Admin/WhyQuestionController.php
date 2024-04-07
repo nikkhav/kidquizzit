@@ -8,6 +8,7 @@ use App\Http\Requests\WhyQuestionUpdate;
 use App\Models\Category;
 use App\Models\WhyQuestion;
 use App\Services\WhyQuestionService;
+use Illuminate\Http\Request;
 
 class WhyQuestionController extends Controller
 {
@@ -123,4 +124,52 @@ class WhyQuestionController extends Controller
         });
         return response()->json($whyQuestions);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeToJson(Request $request)
+    {
+        // Validate the request
+        $validatedData = $request->validate([
+            'category_id' => 'required|integer',
+            'question' => 'required|string',
+        ]);
+
+        // Define the path to the JSON file
+        $jsonFilePath = storage_path('app/contentData/whyquestions.json');
+
+        // Read the existing data from the file
+        $existingData = json_decode(file_get_contents($jsonFilePath), true);
+
+        // Check if the category already exists
+        $foundCategoryIndex = null;
+        foreach ($existingData['questions'] as $index => $category) {
+            if ($category['category_id'] == $validatedData['category_id']) {
+                $foundCategoryIndex = $index;
+                break;
+            }
+        }
+
+        // Add the new question to the category
+        if (!is_null($foundCategoryIndex)) {
+            $existingData['questions'][$foundCategoryIndex]['questions'][] = $validatedData['question'];
+        } else {
+            $existingData['questions'][] = [
+                'category_id' => $validatedData['category_id'],
+                'questions' => [$validatedData['question']],
+            ];
+        }
+
+        // Save the updated data back to the JSON file
+        file_put_contents($jsonFilePath, json_encode($existingData, JSON_PRETTY_PRINT));
+
+        // Redirect back or to another page with a success message
+        return redirect()->back()->with('success', 'Question added successfully.');
+    }
+
+
 }
