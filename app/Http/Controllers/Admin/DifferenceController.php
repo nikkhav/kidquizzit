@@ -115,11 +115,7 @@ class DifferenceController extends Controller
         $difference = Difference::with('category')->get();
 
         $difference = $difference->map(function ($item) {
-            $item->image1 = config('app.url') . '/storage/' . $item->image1;
-            return $item;
-        });
-        $difference = $difference->map(function ($item) {
-            $item->image2 = config('app.url') . '/storage/' . $item->image2;
+            $item->image = config('app.url') . '/storage/' . $item->image;
             return $item;
         });
         $difference = $difference->makeHidden(['created_at', 'updated_at']);

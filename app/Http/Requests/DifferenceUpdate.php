@@ -25,8 +25,7 @@ class DifferenceUpdate extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
-            'image1' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
-            'image2' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
             'title' => 'required|max:255',
             'description' => 'nullable|string',
         ];

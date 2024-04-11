@@ -9,13 +9,17 @@ class DifferenceService
 {
     public function createDifference($data)
     {
-        if (isset($data['image1']) && $data['image1']->isValid()) {
-            $imagePath = $data['image1']->store('difference', 'public');
-            $data['image1'] = $imagePath;
-        }
-        if (isset($data['image2']) && $data['image2']->isValid()) {
-            $imagePath = $data['image2']->store('difference', 'public');
-            $data['image2'] = $imagePath;
+//        if (isset($data['image1']) && $data['image1']->isValid()) {
+//            $imagePath = $data['image1']->store('difference', 'public');
+//            $data['image1'] = $imagePath;
+//        }
+//        if (isset($data['image2']) && $data['image2']->isValid()) {
+//            $imagePath = $data['image2']->store('difference', 'public');
+//            $data['image2'] = $imagePath;
+//        }
+        if(isset($data['image']) && $data['image']->isValid()){
+            $imagePath = $data['image']->store('difference', 'public');
+            $data['image'] = $imagePath;
         }
 
         $difference = Difference::create($data);
@@ -30,32 +34,42 @@ class DifferenceService
 
     public function updateDifference($id, $data)
     {
-        if (isset($data['image1'])) {
-            // Upload the new image and get its path
-            $imagePath = $data['image1']->store('difference', 'public');
-
-            // Delete the old image if it exists
+//        if (isset($data['image1'])) {
+//            // Upload the new image and get its path
+//            $imagePath = $data['image1']->store('difference', 'public');
+//
+//            // Delete the old image if it exists
+//            $oldDifference = Difference::find($id);
+//            if ($oldDifference->image && Storage::disk('public')->exists($oldDifference->image)) {
+//                Storage::disk('public')->delete($oldDifference->image);
+//            }
+//
+//            // Update the data array with the new image path
+//            $data['image1'] = $imagePath;
+//        }
+//
+//        if (isset($data['image2'])) {
+//            // Upload the new image and get its path
+//            $imagePath = $data['image2']->store('difference', 'public');
+//
+//            // Delete the old image if it exists
+//            $oldDifference = Difference::find($id);
+//            if ($oldDifference->image && Storage::disk('public')->exists($oldDifference->image)) {
+//                Storage::disk('public')->delete($oldDifference->image);
+//            }
+//
+//            // Update the data array with the new image path
+//            $data['image2'] = $imagePath;
+//        }
+        if(isset($data['image'])){
+            $imagePath = $data['image']->store('difference', 'public');
             $oldDifference = Difference::find($id);
             if ($oldDifference->image && Storage::disk('public')->exists($oldDifference->image)) {
                 Storage::disk('public')->delete($oldDifference->image);
             }
 
-            // Update the data array with the new image path
-            $data['image1'] = $imagePath;
-        }
 
-        if (isset($data['image2'])) {
-            // Upload the new image and get its path
-            $imagePath = $data['image2']->store('difference', 'public');
-
-            // Delete the old image if it exists
-            $oldDifference = Difference::find($id);
-            if ($oldDifference->image && Storage::disk('public')->exists($oldDifference->image)) {
-                Storage::disk('public')->delete($oldDifference->image);
-            }
-
-            // Update the data array with the new image path
-            $data['image2'] = $imagePath;
+            $data['image'] = $imagePath;
         }
 
         // Update the Difference record with the updated data
@@ -66,15 +80,21 @@ class DifferenceService
     {
         $difference = Difference::find($id);
 
-        if ($difference) {
-            // Delete the associated image file if it exists
-            if ($difference->image1 && Storage::disk('public')->exists($difference->image1)) {
-                Storage::disk('public')->delete($difference->image1);
+//        if ($difference) {
+//            // Delete the associated image file if it exists
+//            if ($difference->image1 && Storage::disk('public')->exists($difference->image1)) {
+//                Storage::disk('public')->delete($difference->image1);
+//            }
+//            if ($difference->image2 && Storage::disk('public')->exists($difference->image2)) {
+//                Storage::disk('public')->delete($difference->image2);
+//            }
+//            // Delete the Difference record from the database
+//            $difference->delete();
+//        }
+        if($difference){
+            if ($difference->image && Storage::disk('public')->exists($difference->image)) {
+                Storage::disk('public')->delete($difference->image);
             }
-            if ($difference->image2 && Storage::disk('public')->exists($difference->image2)) {
-                Storage::disk('public')->delete($difference->image2);
-            }
-            // Delete the Difference record from the database
             $difference->delete();
         }
     }

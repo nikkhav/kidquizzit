@@ -254,8 +254,7 @@ INSERT INTO `departments` (`id`, `name`, `created_at`, `updated_at`, `deleted_at
 CREATE TABLE `differences` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
-  `image1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

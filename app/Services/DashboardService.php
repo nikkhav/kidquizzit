@@ -3,9 +3,11 @@
 namespace App\Services;
 
 use App\Models\Category;
+use App\Models\Game;
 use App\Models\Quiz;
 use App\Models\Colouring;
 use App\Models\Difference;
+use App\Models\Tale;
 use App\Models\WhyQuestion;
 
 class DashboardService
@@ -18,6 +20,8 @@ class DashboardService
             'colouring_count' => Colouring::count(),
             'difference_count' => Difference::count(),
             'whyquestion_count' => WhyQuestion::count(),
+            'tales_count' => Tale::count(),
+            'games_count' => Game::count(),
         ];
 
         return $counts;

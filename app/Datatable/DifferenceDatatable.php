@@ -13,8 +13,7 @@ class DifferenceDatatable extends BaseDatatable
         parent::__construct(Difference::class, [
             'id' => '№',
             'category_title' => 'Category',
-            'image1' => 'Image1',
-            'image2' => 'Image2',
+            'image' => 'Image',
             'title' => 'Title',
             'description' => 'Description',
         ], [

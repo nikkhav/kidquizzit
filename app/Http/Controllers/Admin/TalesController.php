@@ -17,7 +17,8 @@ class TalesController extends Controller
     public function __construct(TaleService $taleService)
     {
         $this->taleService = $taleService;
-        $taleCategory = Category::where('parent_id', 40)->get();
+        // TODO: change parent_id to the id of the category that tales belong to
+        $taleCategory = Category::where('parent_id', 35)->get();
         view()->share('categories', $taleCategory);
     }
     /**

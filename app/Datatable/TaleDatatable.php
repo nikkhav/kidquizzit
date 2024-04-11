@@ -30,7 +30,7 @@ class TaleDatatable extends BaseDatatable
         $query = $this->baseQueryScope()
             ->leftJoin('categories', 'tales.category_id', '=', 'categories.id')
             ->select('tales.*', 'categories.title as category_title')
-            ->where('categories.parent_id', 40)
+            ->where('categories.parent_id', 35)
             ->orderBy('created_at', 'asc');
 
         if (isset($_GET['filters'])) {
