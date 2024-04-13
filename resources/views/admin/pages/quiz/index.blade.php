@@ -2,7 +2,8 @@
 @section('heading_title', 'Quiz')
 @section('content')
     <div class="row">
-        <div class="col-lg-12"><div class="card">
+        <div class="col-lg-12">
+            <div class="card">
                 <div class="card-header">
                     <h4 class="card-title mb-0">Import Quizzes Themes from CSV</h4>
                 </div>

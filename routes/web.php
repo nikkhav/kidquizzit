@@ -40,6 +40,7 @@ Route::post('/whyquestion/store-to-json', [WhyQuestionController::class, 'storeT
 Route::post('/quiz/store-to-json', [QuizController::class, 'storeToJson'])->name('quiz.storeToJson');
 
 Route::post('/quiz/import-csv', [QuizController::class, 'importCsv'])->name('quiz.importCsv');
+Route::post('/whyquestion/import-csv', [WhyQuestionController::class, 'importCsv'])->name('whyquestion.importCsv');
 
 Auth::routes(['register' => false]);
 Route::middleware(['auth'])->group(function () {

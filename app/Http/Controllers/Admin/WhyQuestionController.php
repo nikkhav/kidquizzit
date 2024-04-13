@@ -171,5 +171,77 @@ class WhyQuestionController extends Controller
         return redirect()->back()->with('success', 'Question added successfully.');
     }
 
+    public function importCsv(Request $request)
+    {
+        $request->validate([
+            'csv_file' => 'required|file|mimes:csv,txt', // Ensure the file is a CSV
+        ]);
+
+        $file = $request->file('csv_file');
+        $filePath = $file->getRealPath(); // Get the real path to the temporary uploaded file
+
+        // Process the file directly
+        try {
+            $this->importFromCSV($filePath, storage_path('app/contentData/whyquestions.json'));
+            return redirect()->back()->with('success', 'Questions imported successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to import questions: ' . $e->getMessage());
+        }
+    }
+
+    protected function importFromCSV($csvFilePath, $jsonFilePath) {
+        if (!file_exists($csvFilePath)) {
+            throw new \Exception("File not found: " . $csvFilePath);
+        }
+
+        $jsonString = file_get_contents($jsonFilePath);
+        if ($jsonString === false) {
+            throw new \Exception("Failed to read JSON file: " . $jsonFilePath);
+        }
+
+        $data = json_decode($jsonString, true);
+        if ($data === null) {
+            throw new \Exception("Failed to decode JSON from file: " . $jsonFilePath);
+        }
+
+        if (($handle = fopen($csvFilePath, "r")) !== FALSE) {
+            $header = fgetcsv($handle); // Assumes the first line is the header
+            if ($header === false) {
+                throw new \Exception("Failed to read header from CSV file: " . $csvFilePath);
+            }
+
+            while (($row = fgetcsv($handle)) !== FALSE) {
+                $newEntry = array_combine($header, $row);
+
+                // Find the correct category and add the question if it's not already present
+                $categoryFound = false;
+                foreach ($data['questions'] as &$category) {
+                    if ($category['category_id'] == $newEntry['category_id']) {
+                        if (!in_array($newEntry['question'], $category['questions'])) {
+                            $category['questions'][] = $newEntry['question'];
+                        }
+                        $categoryFound = true;
+                        break;
+                    }
+                }
+
+                // If the category_id does not exist, create a new entry
+                if (!$categoryFound) {
+                    $data['questions'][] = [
+                        'category_id' => $newEntry['category_id'],
+                        'questions' => [$newEntry['question']]
+                    ];
+                }
+            }
+            fclose($handle);
+        }
+
+        $result = file_put_contents($jsonFilePath, json_encode($data, JSON_PRETTY_PRINT));
+        if ($result === false) {
+            throw new \Exception("Failed to write to JSON file: " . $jsonFilePath);
+        }
+    }
+
+
 
 }
