@@ -25,7 +25,7 @@ class GameUpdate extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,webp',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
         ];
