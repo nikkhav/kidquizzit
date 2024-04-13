@@ -38,9 +38,15 @@ Route::get('/', function () {
 })->name('/');
 Route::post('/whyquestion/store-to-json', [WhyQuestionController::class, 'storeToJson'])->name('whyquestion.storeToJson');
 Route::post('/quiz/store-to-json', [QuizController::class, 'storeToJson'])->name('quiz.storeToJson');
+Route::post('/game/store-to-json', [GamesController::class, 'storeToJson'])->name('game.storeToJson');
+Route::post('/tale/store-to-json', [TalesController::class, 'storeToJson'])->name('tale.storeToJson');
+Route::post('/difference/store-to-json', [DifferenceController::class, 'storeToJson'])->name('difference.storeToJson');
 
 Route::post('/quiz/import-csv', [QuizController::class, 'importCsv'])->name('quiz.importCsv');
 Route::post('/whyquestion/import-csv', [WhyQuestionController::class, 'importCsv'])->name('whyquestion.importCsv');
+Route::post('/game/import-csv', [GamesController::class, 'importCsv'])->name('game.importCsv');
+Route::post('/tale/import-csv', [TalesController::class, 'importCsv'])->name('tale.importCsv');
+Route::post('/difference/import-csv', [DifferenceController::class, 'importCsv'])->name('difference.importCsv');
 
 Auth::routes(['register' => false]);
 Route::middleware(['auth'])->group(function () {

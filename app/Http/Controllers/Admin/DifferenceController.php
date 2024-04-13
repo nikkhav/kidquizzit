@@ -8,6 +8,7 @@ use App\Http\Requests\DifferenceUpdate;
 use App\Models\Category;
 use App\Models\Difference;
 use App\Services\DifferenceService;
+use Illuminate\Http\Request;
 
 class DifferenceController extends Controller
 {
@@ -123,5 +124,141 @@ class DifferenceController extends Controller
             $item->category->makeHidden(['created_at', 'updated_at']);
         });
         return response()->json($difference);
+    }
+
+    public function storeToJson(Request $request)
+    {
+        try {
+            // Validate the request for game category and theme
+            $validatedData = $request->validate([
+                'category_id' => 'required|integer',
+                'theme' => 'required|string',
+            ]);
+
+            // Define the path to the games JSON file
+            $jsonFilePath = storage_path('app/contentData/puzzles.json');
+
+            // Check if the JSON file exists and is readable
+            if (!file_exists($jsonFilePath) || !is_readable($jsonFilePath)) {
+                throw new \Exception('Unable to read the puzzles data file.');
+            }
+
+            // Read the existing data from the file
+            $jsonString = file_get_contents($jsonFilePath);
+            if ($jsonString === false) {
+                throw new \Exception('Failed to read from the puzzles data file.');
+            }
+
+            $existingData = json_decode($jsonString, true);
+            if ($existingData === null) {
+                throw new \Exception('Failed to decode JSON data from the puzzles file.');
+            }
+
+            // Check if the category already exists and add the new theme
+            $foundCategoryIndex = null;
+            foreach ($existingData['puzzles'] as $index => $category) {
+                if ($category['category_id'] == $validatedData['category_id']) {
+                    $foundCategoryIndex = $index;
+                    break;
+                }
+            }
+
+            if (!is_null($foundCategoryIndex)) {
+                // Check if the theme already exists to avoid duplication
+                if (!in_array($validatedData['theme'], $existingData['puzzles'][$foundCategoryIndex]['themes'])) {
+                    $existingData['puzzles'][$foundCategoryIndex]['themes'][] = $validatedData['theme'];
+                }
+            } else {
+                // Add a new category with the theme
+                $existingData['puzzles'][] = [
+                    'category_id' => $validatedData['category_id'],
+                    'themes' => [$validatedData['theme']],
+                ];
+            }
+
+            // Save the updated data back to the JSON file
+            if (file_put_contents($jsonFilePath, json_encode($existingData, JSON_PRETTY_PRINT)) === false) {
+                throw new \Exception('Failed to write to the puzzles data file.');
+            }
+
+            // Redirect back with a success message
+            return redirect()->back()->with('success', 'Theme added successfully.');
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+
+
+    public function importCsv(Request $request)
+    {
+        $request->validate([
+            'csv_file' => 'required|file|mimes:csv,txt', // Ensure the file is a CSV
+        ]);
+
+        $file = $request->file('csv_file');
+        $filePath = $file->getRealPath(); // Get the real path to the temporary uploaded file
+
+        try {
+            $this->importFromCSV($filePath, storage_path('app/contentData/games.json'));
+            return redirect()->back()->with('success', 'Puzzles imported successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to import games: ' . $e->getMessage());
+        }
+    }
+
+    protected function importFromCSV($csvFilePath, $jsonFilePath)
+    {
+        if (!file_exists($csvFilePath)) {
+            throw new \Exception("File not found: " . $csvFilePath);
+        }
+
+        $jsonString = file_get_contents($jsonFilePath);
+        if ($jsonString === false) {
+            throw new \Exception("Failed to read JSON file: " . $jsonFilePath);
+        }
+
+        $data = json_decode($jsonString, true);
+        if ($data === null) {
+            throw new \Exception("Failed to decode JSON from file: " . $jsonFilePath);
+        }
+
+        if (($handle = fopen($csvFilePath, "r")) !== FALSE) {
+            $header = fgetcsv($handle); // Assumes the first line is the header
+            if ($header === false) {
+                throw new \Exception("Failed to read header from CSV file: " . $csvFilePath);
+            }
+
+            while (($row = fgetcsv($handle)) !== FALSE) {
+                $newEntry = array_combine($header, $row);
+
+                // Find the correct category and add the theme if it's not already present
+                $categoryFound = false;
+                foreach ($data['games'] as &$category) {
+                    if ($category['category_id'] == $newEntry['category_id']) {
+                        if (!in_array($newEntry['theme'], $category['themes'])) {
+                            $category['themes'][] = $newEntry['theme'];
+                        }
+                        $categoryFound = true;
+                        break;
+                    }
+                }
+
+                // If the category_id does not exist, create a new entry
+                if (!$categoryFound) {
+                    $data['games'][] = [
+                        'category_id' => $newEntry['category_id'],
+                        'themes' => [$newEntry['theme']]
+                    ];
+                }
+            }
+            fclose($handle);
+        }
+
+        $result = file_put_contents($jsonFilePath, json_encode($data, JSON_PRETTY_PRINT));
+        if ($result === false) {
+            throw new \Exception("Failed to write to JSON file: " . $jsonFilePath);
+        }
     }
 }
