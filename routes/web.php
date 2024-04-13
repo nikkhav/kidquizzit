@@ -39,6 +39,8 @@ Route::get('/', function () {
 Route::post('/whyquestion/store-to-json', [WhyQuestionController::class, 'storeToJson'])->name('whyquestion.storeToJson');
 Route::post('/quiz/store-to-json', [QuizController::class, 'storeToJson'])->name('quiz.storeToJson');
 
+Route::post('/quiz/import-csv', [QuizController::class, 'importCsv'])->name('quiz.importCsv');
+
 Auth::routes(['register' => false]);
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');

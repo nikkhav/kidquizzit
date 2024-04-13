@@ -2,7 +2,22 @@
 @section('heading_title', 'Quiz')
 @section('content')
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12"><div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Import Quizzes Themes from CSV</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('quiz.importCsv') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="csv_file" class="form-label">CSV File</label>
+                            <input type="file" class="form-control" id="csv_file" name="csv_file" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Import CSV</button>
+                    </form>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title mb-0">Quizzes</h4>

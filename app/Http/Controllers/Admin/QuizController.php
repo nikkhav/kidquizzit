@@ -9,6 +9,8 @@ use App\Services\QuizService;
 use App\Models\Quiz;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 
 class QuizController extends Controller
@@ -175,5 +177,82 @@ class QuizController extends Controller
         // Redirect back or to another page with a success message
         return redirect()->back()->with('success', 'Theme added successfully.');
     }
+
+    public function importCsv(Request $request)
+    {
+        $request->validate([
+            'csv_file' => 'required|file|mimes:csv,txt', // Ensure the file is a CSV
+        ]);
+
+        $file = $request->file('csv_file');
+        $filePath = $file->getRealPath(); // Get the real path to the temporary uploaded file
+
+        // Process the file directly
+        try {
+            $this->importFromCSV($filePath, storage_path('app/contentData/quizzes.json'));
+            return redirect()->back()->with('success', 'Quizzes imported successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to import quizzes: ' . $e->getMessage());
+        }
+    }
+
+    protected function importFromCSV($csvFilePath, $jsonFilePath) {
+        if (!file_exists($csvFilePath)) {
+            throw new \Exception("File not found: " . $csvFilePath);
+        }
+
+        $jsonString = file_get_contents($jsonFilePath);
+        if ($jsonString === false) {
+            throw new \Exception("Failed to read JSON file: " . $jsonFilePath);
+        }
+
+        $data = json_decode($jsonString, true);
+        if ($data === null) {
+            throw new \Exception("Failed to decode JSON from file: " . $jsonFilePath);
+        }
+
+        if (($handle = fopen($csvFilePath, "r")) !== FALSE) {
+            $header = fgetcsv($handle); // Assumes the first line is the header
+            if ($header === false) {
+                throw new \Exception("Failed to read header from CSV file: " . $csvFilePath);
+            }
+
+            while (($row = fgetcsv($handle)) !== FALSE) {
+                $newEntry = array_combine($header, $row);
+
+                // Find the correct category and add the theme if it's not already present
+                $categoryFound = false;
+                foreach ($data['quizzes'] as &$quiz) {
+                    if ($quiz['category_id'] == $newEntry['category_id']) {
+                        if (!isset($quiz['themes'])) {
+                            $quiz['themes'] = []; // Ensure there is an array to add to
+                        }
+                        // Check if the theme is already in the array to avoid duplication
+                        if (!in_array($newEntry['theme'], $quiz['themes'])) {
+                            array_push($quiz['themes'], $newEntry['theme']);
+                        }
+                        $categoryFound = true;
+                        break;
+                    }
+                }
+
+                // If the category_id does not exist, create a new entry
+                if (!$categoryFound) {
+                    $data['quizzes'][] = [
+                        'category_id' => $newEntry['category_id'],
+                        'themes' => [$newEntry['theme']]
+                    ];
+                }
+            }
+            fclose($handle);
+        }
+
+        $result = file_put_contents($jsonFilePath, json_encode($data, JSON_PRETTY_PRINT));
+        if ($result === false) {
+            throw new \Exception("Failed to write to JSON file: " . $jsonFilePath);
+        }
+    }
+
+
 
 }
