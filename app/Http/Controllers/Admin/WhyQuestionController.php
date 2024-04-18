@@ -212,6 +212,8 @@ class WhyQuestionController extends Controller
 
             while (($row = fgetcsv($handle)) !== FALSE) {
                 $newEntry = array_combine($header, $row);
+                // Extract only numbers from the category_id
+                $newEntry['category_id'] = preg_replace('/[^0-9]/', '', $newEntry['category_id']);
 
                 // Find the correct category and add the question if it's not already present
                 $categoryFound = false;

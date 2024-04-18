@@ -55,7 +55,7 @@ class GenerateTale extends Command
 
         $lineBreakToken = '__LINE_BREAK__'; // Special token for line breaks
 
-        $answerPrompt = "create a kid " . $categoryName . " fairy tale in minimum 1000 words with the theme of: \n" . $tale . "Use the token '$lineBreakToken' for line breaks";
+        $answerPrompt = "create a kids " . $categoryName . " fairy tale in three chapters in 1000 words with the theme: \n" . $tale . "Use the token '$lineBreakToken' for line breaks";
         $answer = $this->chatGPTService->generateContent($answerPrompt);
 
         if (!isset($answer['choices'][0]['message']['content'])) {

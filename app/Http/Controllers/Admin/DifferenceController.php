@@ -233,6 +233,9 @@ class DifferenceController extends Controller
             while (($row = fgetcsv($handle)) !== FALSE) {
                 $newEntry = array_combine($header, $row);
 
+                // Extract only the first number sequence from the category_id (assuming it's the actual ID)
+                $newEntry['category_id'] = preg_replace('/[^0-9].*$/', '', $newEntry['category_id']);
+
                 // Find the correct category and add the theme if it's not already present
                 $categoryFound = false;
                 foreach ($data['games'] as &$category) {
@@ -261,4 +264,5 @@ class DifferenceController extends Controller
             throw new \Exception("Failed to write to JSON file: " . $jsonFilePath);
         }
     }
+
 }
