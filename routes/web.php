@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\PrivacyAndPolicyController;
+use App\Http\Controllers\Admin\QuizThemesController;
 use App\Http\Controllers\Admin\TermsAndConditionController;
 use App\Http\Controllers\Api\DatatableController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -91,4 +92,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::match(['put', 'patch'], 'profile-update', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('themes/quiz', [QuizThemesController::class, 'index'])->name('themes.quiz');
+
+
+
 });
