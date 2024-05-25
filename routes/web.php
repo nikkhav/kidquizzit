@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DifferenceThemesController;
 use App\Http\Controllers\Admin\GamesThemesController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\AboutController;
@@ -100,6 +101,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('themes/whyquestion', [WhyQuestionThemesController::class, 'index'])->name('themes.whyquestion');
     Route::get('themes/tale', [TalesThemesController::class, 'index'])->name('themes.tale');
     Route::get('themes/game', [GamesThemesController::class, 'index'])->name('themes.game');
+    Route::get('themes/difference', [DifferenceThemesController::class, 'index'])->name('themes.difference');
 
 
 

@@ -1,16 +1,16 @@
 @extends('admin.layouts.main')
 
-@section('heading_title', 'Themes for Games')
+@section('heading_title', 'Themes for Logic Puzzles')
 
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Import Games themes from CSV</h4>
+                    <h4 class="card-title mb-0">Import Logic Puzzles themes from CSV</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('game.importCsv') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('difference.importCsv') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="csv_file" class="form-label">CSV File</label>
@@ -19,7 +19,7 @@
                         <button type="submit" class="btn btn-success">Import CSV</button>
                     </form>
 
-                    <form class="mt-3" action="{{ route('game.storeToJson') }}" method="POST">
+                    <form action="{{ route('difference.storeToJson') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="category_id" class="form-label">Category</label>
@@ -28,7 +28,7 @@
                                 {{-- Dynamically populate categories --}}
                                 @php
                                     use App\Models\Category; // Use your actual namespace and class
-                                    $categories = Category::where('parent_id', 41)->get();
+                                    $categories = Category::where('parent_id', 4)->get();
                                 @endphp
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -45,7 +45,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Themes for Games</h4>
+                    <h4 class="card-title mb-0">Themes for Logic Puzzles</h4>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -56,10 +56,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($games as $game)
+                        @foreach($questions as $question)
                             <tr>
-                                <td>{!! $game['themes'] !!}</td>
-                                <td>{{ $game['category_name'] }}</td>
+                                <td>{!! $question['questions'] !!}</td>
+                                <td>{{ $question['category'] }}</td>
                             </tr>
                         @endforeach
                         </tbody>
