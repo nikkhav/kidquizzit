@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\QuizQuestionController;
 use App\Http\Controllers\Admin\WhyQuestionController;
 use App\Http\Controllers\Admin\TalesController;
 use App\Http\Controllers\Admin\WhyQuestionThemesController;
+use App\Http\Controllers\Admin\TalesThemesController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -96,6 +97,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('themes/quiz', [QuizThemesController::class, 'index'])->name('themes.quiz');
     Route::get('themes/whyquestion', [WhyQuestionThemesController::class, 'index'])->name('themes.whyquestion');
+    Route::get('themes/tale', [TalesThemesController::class, 'index'])->name('themes.tale');
 
 
 

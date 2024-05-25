@@ -1,16 +1,16 @@
 @extends('admin.layouts.main')
 
-@section('heading_title', 'Themes for Why Questions')
+@section('heading_title', 'Themes for Tales')
 
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Import Why Questions from CSV</h4>
+                    <h4 class="card-title mb-0">Import Tales themes from CSV</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('whyquestion.importCsv') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('tale.importCsv') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="csv_file" class="form-label">CSV File</label>
@@ -19,7 +19,7 @@
                         <button type="submit" class="btn btn-success">Import CSV</button>
                     </form>
 
-                    <form class="mt-3" action="{{ route('whyquestion.storeToJson') }}" method="POST">
+                    <form class="mt-3" action="{{ route('tale.storeToJson') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="category_id" class="form-label">Category</label>
@@ -28,7 +28,7 @@
                                 {{-- Dynamically populate categories --}}
                                 @php
                                     use App\Models\Category; // Use your actual namespace and class
-                                    $categories = Category::where('parent_id', 3)->get();
+                                    $categories = Category::where('parent_id', 40)->get();
                                 @endphp
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -36,10 +36,10 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="question" class="form-label">Question</label>
-                            <input type="text" class="form-control" id="question" name="question" placeholder="Enter question" required>
+                            <label for="theme" class="form-label">Theme</label>
+                            <input type="text" class="form-control" id="theme" name="theme" placeholder="Enter theme" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add Question</button>
+                        <button type="submit" class="btn btn-primary">Add Theme</button>
                     </form>
                 </div>
             </div>
@@ -56,10 +56,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($questions as $question)
+                        @foreach($tales as $tale)
                             <tr>
-                                <td>{!! $question['questions'] !!}</td>
-                                <td>{{ $question['category'] }}</td>
+                                <td>{!! $tale['themes'] !!}</td>
+                                <td>{{ $tale['category_name'] }}</td>
                             </tr>
                         @endforeach
                         </tbody>
