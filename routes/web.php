@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\QuizQuestionController;
 use App\Http\Controllers\Admin\WhyQuestionController;
 use App\Http\Controllers\Admin\TalesController;
+use App\Http\Controllers\Admin\WhyQuestionThemesController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -94,6 +95,7 @@ Route::middleware(['auth'])->group(function () {
     Route::match(['put', 'patch'], 'profile-update', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('themes/quiz', [QuizThemesController::class, 'index'])->name('themes.quiz');
+    Route::get('themes/whyquestion', [WhyQuestionThemesController::class, 'index'])->name('themes.whyquestion');
 
 
 
