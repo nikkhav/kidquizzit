@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="my-3">
-                <a href="/themes/whyquestion" class="btn btn-primary">
+                <a href="/themes/difference" class="btn btn-primary">
                     View current available themes for logic puzzles
                 </a>
             </div>

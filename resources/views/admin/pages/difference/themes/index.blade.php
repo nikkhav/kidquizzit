@@ -19,7 +19,7 @@
                         <button type="submit" class="btn btn-success">Import CSV</button>
                     </form>
 
-                    <form action="{{ route('difference.storeToJson') }}" method="POST">
+                    <form class="mt-3" action="{{ route('difference.storeToJson') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="category_id" class="form-label">Category</label>
@@ -56,10 +56,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($questions as $question)
+                        @foreach($puzzles as $puzzle)
                             <tr>
-                                <td>{!! $question['questions'] !!}</td>
-                                <td>{{ $question['category'] }}</td>
+                                <td>{!! $puzzle['themes'] !!}</td>
+                                <td>{{ $puzzle['category_name'] }}</td>
                             </tr>
                         @endforeach
                         </tbody>
