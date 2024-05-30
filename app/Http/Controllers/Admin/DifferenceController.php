@@ -201,10 +201,10 @@ class DifferenceController extends Controller
         $filePath = $file->getRealPath(); // Get the real path to the temporary uploaded file
 
         try {
-            $this->importFromCSV($filePath, storage_path('app/contentData/games.json'));
+            $this->importFromCSV($filePath, storage_path('app/contentData/puzzles.json'));
             return redirect()->back()->with('success', 'Puzzles imported successfully!');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to import games: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to import logic puzzles: ' . $e->getMessage());
         }
     }
 
@@ -238,7 +238,7 @@ class DifferenceController extends Controller
 
                 // Find the correct category and add the theme if it's not already present
                 $categoryFound = false;
-                foreach ($data['games'] as &$category) {
+                foreach ($data['puzzles'] as &$category) {
                     if ($category['category_id'] == $newEntry['category_id']) {
                         if (!in_array($newEntry['theme'], $category['themes'])) {
                             $category['themes'][] = $newEntry['theme'];
@@ -250,7 +250,7 @@ class DifferenceController extends Controller
 
                 // If the category_id does not exist, create a new entry
                 if (!$categoryFound) {
-                    $data['games'][] = [
+                    $data['puzzles'][] = [
                         'category_id' => $newEntry['category_id'],
                         'themes' => [$newEntry['theme']]
                     ];
