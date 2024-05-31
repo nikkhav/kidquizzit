@@ -26,4 +26,23 @@ class WhyQuestionThemesController extends Controller
 
         return view('admin.pages.whyquestion.themes.index', ['questions' => $questions]);
     }
+
+    public function completedWhyQuestions()
+    {
+        $jsonPath = storage_path('app/contentData/completed_whyquestions.json');
+        if (!file_exists($jsonPath)) {
+            return redirect()->back()->withErrors('Completed why questions file not found.');
+        }
+
+        $jsonContent = file_get_contents($jsonPath);
+        $data = json_decode($jsonContent, true);
+        $questions = $data['completed_questions'];
+
+        $categories = Category::all()->keyBy('id')->toArray();
+        foreach ($questions as &$question) {
+            $question['category_name'] = $categories[$question['category_id']]['title'] . " (" . $question['category_id'] . ")";
+        }
+
+        return view('admin.pages.whyquestion.themes.completed.index', ['questions' => $questions]);
+    }
 }

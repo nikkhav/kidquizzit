@@ -24,6 +24,7 @@ class GenerateQuiz extends Command
     public function handle()
     {
         $jsonPath = storage_path('app/contentData/quizzes.json');
+        $completedJsonPath = storage_path('app/contentData/completed_quizzes.json');
         if (!file_exists($jsonPath)) {
             $this->error("Quizzes JSON file does not exist: $jsonPath");
             return;
@@ -44,19 +45,12 @@ class GenerateQuiz extends Command
         $themeIndex = array_rand($category['themes']);
         $theme = $category['themes'][$themeIndex];
 
-
         $prompt = "Create a kid quiz of 10 different questions with answers on the below subject”: " . $theme . "each question should have 4 multiple choice answers. Each question should start with Q: and each right answer should start with A: and each wrong answer should start with W: . Please mix positions of right and wrong answers.";
-
         $answer = $this->chatGPTService->generateContent($prompt);
-
         $content = $answer['choices'][0]['message']['content'];
-
-
         $lines = explode("\n", $content);
-
         $quizzes = [];
         $currentQuestion = null;
-
         foreach ($lines as $line) {
             // Check if the line is a question (Q1, Q2, etc.)
             if (preg_match('/^Q(\d+)?: (.*)$/', trim($line), $questionMatches)) {
@@ -77,32 +71,23 @@ class GenerateQuiz extends Command
                 ];
             }
         }
-
         if ($currentQuestion) {
             $quizzes[] = $currentQuestion;
         }
-
 
         if (empty($quizzes)) {
             $this->error("Failed to generate quiz for theme: $theme");
             return;
         }
-
         foreach ($quizzes as &$quiz) {
             shuffle($quiz['answers']);
         }
         unset($quiz);
-
-
-
         $newQuiz = Quiz::create([
             "category_id" => $category['category_id'],
             "title" => $theme,
         ]);
-
         $newQuizId = $newQuiz->id;
-
-
 
         foreach ($quizzes as $quiz) {
             $newQuestion = QuizQuestion::create([
@@ -130,6 +115,17 @@ class GenerateQuiz extends Command
         $jsonContent = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
         file_put_contents($jsonPath, $jsonContent);
+
+        // Append to the completed quizzes JSON
+        if (!file_exists($completedJsonPath)) {
+            file_put_contents($completedJsonPath, json_encode(['completed_quizzes' => []]));
+        }
+        $completedQuizzes = json_decode(file_get_contents($completedJsonPath), true);
+        $completedQuizzes['completed_quizzes'][] = [
+            'category_id' => $category['category_id'],
+            'title' => $theme,
+        ];
+        file_put_contents($completedJsonPath, json_encode($completedQuizzes, JSON_PRETTY_PRINT));
 
     }
 }

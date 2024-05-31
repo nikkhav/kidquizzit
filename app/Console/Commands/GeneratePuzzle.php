@@ -27,6 +27,7 @@ class GeneratePuzzle extends Command
     public function handle()
     {
         $jsonPath = storage_path('app/contentData/puzzles.json');
+        $completedJsonPath = storage_path('app/contentData/completed_puzzles.json');
 
         if (!file_exists($jsonPath)) {
             $this->error("Puzzles JSON file does not exist: $jsonPath");
@@ -97,6 +98,17 @@ class GeneratePuzzle extends Command
 
             // Save the updated JSON back to the file
             file_put_contents($jsonPath, $jsonContent);
+
+            // Save to completed puzzles JSON
+            if (!file_exists($completedJsonPath)) {
+                file_put_contents($completedJsonPath, json_encode(['completed_puzzles' => []]));
+            }
+            $completedPuzzles = json_decode(file_get_contents($completedJsonPath), true);
+            $completedPuzzles['completed_puzzles'][] = [
+                'title' => $puzzle,
+                'category_id' => $category['category_id'],
+            ];
+            file_put_contents($completedJsonPath, json_encode($completedPuzzles, JSON_PRETTY_PRINT));
 
             $this->info("Successfully generated puzzle and image for: $puzzle");
         } else {

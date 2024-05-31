@@ -37,7 +37,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
 Route::get('/', function () {
     return view('auth.login');
 })->name('/');
@@ -66,9 +65,6 @@ Route::middleware(['auth'])->group(function () {
     Route::match(['put', 'patch'], 'termsandcondition-update', [TermsAndConditionController::class, 'update'])->name('termsandcondition.update');
 
 
-
-
-
     Route::resource('category', CategoryController::class);
     Route::resource('colouring', ColouringController::class);
     Route::resource('difference', DifferenceController::class);
@@ -89,8 +85,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('quizanswer/show', [QuizAnswerController::class, 'show'])->name('quizanswer.show');
 
 
-
-
     Route::get('datatable/{table}', [DatatableController::class, 'handle'])->name('datatable.source');
     Route::get('datatable/{table}/{id}', [DatatableController::class, 'handle'])->name('datatable.sourceid');
 
@@ -103,8 +97,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('themes/game', [GamesThemesController::class, 'index'])->name('themes.game');
     Route::get('themes/difference', [DifferenceThemesController::class, 'index'])->name('themes.difference');
 
+    Route::get('themes/quiz/completed', [QuizThemesController::class, 'completedQuizzes'])->name('themes.quiz.completed');
+    Route::get('themes/whyquestion/completed', [WhyQuestionThemesController::class, 'completedWhyQuestions'])->name('themes.whyquestion.completed');
+    Route::get('themes/tale/completed', [TalesThemesController::class, 'completedTales'])->name('themes.tale.completed');
     Route::get('themes/game/completed', [GamesThemesController::class, 'completedGames'])->name('themes.game.completed');
-
+    Route::get('themes/difference/completed', [DifferenceThemesController::class, 'completedPuzzles'])->name('themes.difference.completed');
 
 
 });

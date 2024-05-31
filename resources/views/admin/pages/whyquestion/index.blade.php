@@ -8,6 +8,9 @@
                 <a href="/themes/whyquestion" class="btn btn-primary">
                     View current available themes for why questions
                 </a>
+                <a href="/themes/whyquestion/completed" class="btn btn-primary">
+                    View completed themes for why questions
+                </a>
             </div>
             <div class="card">
                 <div class="card-header">

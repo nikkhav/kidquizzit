@@ -8,6 +8,9 @@
                 <a href="/themes/quiz" class="btn btn-primary">
                     View current available themes for quizzes
                 </a>
+                <a href="/themes/quiz/completed" class="btn btn-primary">
+                    View completed themes for quizzes
+                </a>
             </div>
 
             <div class="card">

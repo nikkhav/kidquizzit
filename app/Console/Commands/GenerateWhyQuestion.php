@@ -26,6 +26,7 @@ class GenerateWhyQuestion extends Command
     public function handle()
     {
         $jsonPath = storage_path('app/contentData/whyquestions.json');
+        $completedJsonPath = storage_path('app/contentData/completed_whyquestions.json');
         if (!file_exists($jsonPath)) {
             $this->error("Questions JSON file does not exist: $jsonPath");
             return;
@@ -77,6 +78,17 @@ class GenerateWhyQuestion extends Command
                 'category_id' => $category['category_id'],
                 'image' => $imagePath,
             ]);
+
+            // Record the completed why question
+            if (!file_exists($completedJsonPath)) {
+                file_put_contents($completedJsonPath, json_encode(['completed_questions' => []]));
+            }
+            $completedQuestions = json_decode(file_get_contents($completedJsonPath), true);
+            $completedQuestions['completed_questions'][] = [
+                'title' => $question,
+                'category_id' => $category['category_id'],
+            ];
+            file_put_contents($completedJsonPath, json_encode($completedQuestions, JSON_PRETTY_PRINT));
 
             $this->info("Successfully generated why question with two descriptions and an image for: $question");
         } else {

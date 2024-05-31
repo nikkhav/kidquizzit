@@ -27,6 +27,7 @@ class GenerateTale extends Command
     public function handle()
     {
         $jsonPath = storage_path('app/contentData/tales.json');
+        $completedJsonPath = storage_path('app/contentData/completed_tales.json');
 
         if (!file_exists($jsonPath)) {
             $this->error("Tales JSON file does not exist: $jsonPath");
@@ -97,6 +98,17 @@ class GenerateTale extends Command
 
             // Save the updated JSON back to the file
             file_put_contents($jsonPath, $jsonContent);
+
+            // Append to the completed tales JSON
+            if (!file_exists($completedJsonPath)) {
+                file_put_contents($completedJsonPath, json_encode(['completed_tales' => []]));
+            }
+            $completedTales = json_decode(file_get_contents($completedJsonPath), true);
+            $completedTales['completed_tales'][] = [
+                'category_id' => $category['category_id'],
+                'title' => $tale
+            ];
+            file_put_contents($completedJsonPath, json_encode($completedTales, JSON_PRETTY_PRINT));
 
             $this->info("Successfully generated tale and image for: $tale");
         } else {

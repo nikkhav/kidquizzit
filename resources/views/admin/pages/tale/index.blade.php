@@ -7,6 +7,9 @@
                 <a href="/themes/tale" class="btn btn-primary">
                     View current available themes for tales
                 </a>
+                <a href="/themes/tale/completed" class="btn btn-primary">
+                    View completed themes for tales
+                </a>
             </div>
             <div class="card">
                 <div class="card-header">

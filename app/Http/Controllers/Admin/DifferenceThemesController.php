@@ -28,4 +28,23 @@ class DifferenceThemesController extends Controller
         return view('admin.pages.difference.themes.index', ['puzzles' => $puzzles]);
     }
 
+    public function completedPuzzles()
+    {
+        $jsonPath = storage_path('app/contentData/completed_puzzles.json');
+        if (!file_exists($jsonPath)) {
+            return redirect()->back()->withErrors('Completed puzzles file not found.');
+        }
+
+        $jsonContent = file_get_contents($jsonPath);
+        $data = json_decode($jsonContent, true);
+        $puzzles = $data['completed_puzzles'];
+
+        $categories = Category::all()->keyBy('id')->toArray();
+        foreach ($puzzles as &$puzzle) {
+            $puzzle['category_name'] = $categories[$puzzle['category_id']]['title'] . " (" . $puzzle['category_id'] . ")";
+        }
+
+        return view('admin.pages.difference.themes.completed.index', ['puzzles' => $puzzles]);
+    }
+
 }

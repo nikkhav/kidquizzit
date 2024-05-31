@@ -7,6 +7,9 @@
                 <a href="/themes/difference" class="btn btn-primary">
                     View current available themes for logic puzzles
                 </a>
+                <a href="/themes/difference/completed" class="btn btn-primary">
+                    View completed themes for logic puzzles
+                </a>
             </div>
             <div class="card">
                 <div class="card-header">

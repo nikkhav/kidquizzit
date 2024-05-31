@@ -26,4 +26,23 @@ class TalesThemesController extends Controller
 
         return view('admin.pages.tale.themes.index', ['tales' => $tales]);
     }
+
+    public function completedTales()
+    {
+        $jsonPath = storage_path('app/contentData/completed_tales.json');
+        if (!file_exists($jsonPath)) {
+            return redirect()->back()->withErrors('Completed tales file not found.');
+        }
+
+        $jsonContent = file_get_contents($jsonPath);
+        $data = json_decode($jsonContent, true);
+        $tales = $data['completed_tales'];
+
+        $categories = Category::all()->keyBy('id')->toArray();
+        foreach ($tales as &$tale) {
+            $tale['category_name'] = $categories[$tale['category_id']]['title'] . " (" . $tale['category_id'] . ")";
+        }
+
+        return view('admin.pages.tale.themes.completed.index', ['tales' => $tales]);
+    }
 }

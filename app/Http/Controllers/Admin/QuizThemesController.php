@@ -43,4 +43,23 @@ class QuizThemesController extends Controller
 
         return view('admin.pages.quiz.themes.index', ['quizzes' => $quizzes]);
     }
+
+    public function completedQuizzes()
+    {
+        $jsonPath = storage_path('app/contentData/completed_quizzes.json');
+        if (!file_exists($jsonPath)) {
+            return redirect()->back()->withErrors('Completed quizzes file not found.');
+        }
+
+        $jsonContent = file_get_contents($jsonPath);
+        $data = json_decode($jsonContent, true);
+        $quizzes = $data['completed_quizzes'];
+
+        $categories = Category::all()->keyBy('id')->toArray();
+        foreach ($quizzes as &$quiz) {
+            $quiz['category_name'] = $categories[$quiz['category_id']]['title'] . " (" . $quiz['category_id'] . ")";
+        }
+
+        return view('admin.pages.quiz.themes.completed.index', ['quizzes' => $quizzes]);
+    }
 }
