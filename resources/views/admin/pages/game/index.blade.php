@@ -7,6 +7,9 @@
                 <a href="/themes/game" class="btn btn-primary">
                     View current available themes for games
                 </a>
+                <a href="/themes/game/completed" class="btn btn-primary">
+                    View completed themes for games
+                </a>
             </div>
             <div class="card">
                 <div class="card-header">

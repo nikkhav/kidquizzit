@@ -103,6 +103,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('themes/game', [GamesThemesController::class, 'index'])->name('themes.game');
     Route::get('themes/difference', [DifferenceThemesController::class, 'index'])->name('themes.difference');
 
+    Route::get('themes/game/completed', [GamesThemesController::class, 'completedGames'])->name('themes.game.completed');
+
 
 
 });

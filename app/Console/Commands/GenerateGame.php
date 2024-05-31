@@ -26,6 +26,7 @@ class GenerateGame extends Command
     public function handle()
     {
         $jsonPath = storage_path('app/contentData/games.json');
+        $completedGamesPath = storage_path('app/contentData/completed_games.json');
 
         if (!file_exists($jsonPath)) {
             $this->error("Games JSON file does not exist: $jsonPath");
@@ -50,11 +51,8 @@ class GenerateGame extends Command
 
         $gameKey = array_rand($category['themes']);
         $game = $category['themes'][$gameKey];
-
-        $lineBreakToken = '__LINE_BREAK__'; // Special token for line breaks
-
-        //$answerPrompt = "Provide a direct answer with each part of the explanation separated by a line break. Start directly with the explanation. A word is a group of letters separated by spaces, or the group of letters that starts or ends a sentence.  Please write a 500 word answer for a 5-year-old kid to the below question. Use the token '$lineBreakToken' for line breaks:\n$question";
-        $answerPrompt = "create a simple description or invent rules for the kids game: \n" . $game . "Use the token '$lineBreakToken' for line breaks";
+        $lineBreakToken = '__LINE_BREAK__';
+        $answerPrompt = "create a simple description or invent rules for the kids game: \n" . $game . " Use the token '$lineBreakToken' for line breaks";
         $answer = $this->chatGPTService->generateContent($answerPrompt);
 
         if (!isset($answer['choices'][0]['message']['content'])) {
@@ -68,7 +66,6 @@ class GenerateGame extends Command
 
         if (isset($image['data'][0]['url'])) {
             $imageURL = $image['data'][0]['url'];
-
             $imageName = 'image_' . time() . '.png';
             $imagePath = "game/" . $imageName;
             Storage::disk('public')->put($imagePath, file_get_contents($imageURL));
@@ -80,22 +77,21 @@ class GenerateGame extends Command
                 'image' => $imagePath,
             ]);
 
+            // Add to completed games JSON
+            if (!file_exists($completedGamesPath)) {
+                file_put_contents($completedGamesPath, json_encode(['completed_games' => []]));
+            }
+            $completedGamesContent = file_get_contents($completedGamesPath);
+            $completedGames = json_decode($completedGamesContent, true);
+            $completedGames['completed_games'][] = ['title' => $game, 'description' => $answerText, 'category_id' => $category['category_id']];
+            file_put_contents($completedGamesPath, json_encode($completedGames, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
             unset($allGames[$categoryKey]['themes'][$gameKey]);
-
-            // If the category now has 0 questions, remove the category as well
-
-            if(empty($allGames[$categoryKey]['themes'])){
+            if (empty($allGames[$categoryKey]['themes'])) {
                 unset($allGames[$categoryKey]);
             }
-
-            // Re-index the array to prevent JSON from converting array to object
             $allGames = array_values($allGames);
-
-            // Convert the updated array back to JSON
             $jsonContent = json_encode(['games' => $allGames], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-
-            // Save the updated JSON back to the file
             file_put_contents($jsonPath, $jsonContent);
 
             $this->info("Successfully generated game and image for: $game");
