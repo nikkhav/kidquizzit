@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\Difference;
-use App\Models\Game;
 use Illuminate\Console\Command;
 use App\Services\ChatGPTService;
 use App\Services\ImageGenerationService;
@@ -55,7 +54,24 @@ class GeneratePuzzle extends Command
 
         $lineBreakToken = '__LINE_BREAK__'; // Special token for line breaks
 
-        $answerPrompt = "create a simple rules and clues for kids puzzle for : \n" . $puzzle . "Use the token '$lineBreakToken' for line breaks";
+        if ($category['category_id'] == 21) {
+            $answerPrompt = "Create Brain Blenders story clues for kids for each of the themes below. The story provides several clues scattered throughout the text. The child must use these clues to figure out where the item is hidden. The story clue shall be designed to challenge a child's critical thinking and problem-solving skills in a fun and engaging way. Each story clue description must be with answer. \n" . $puzzle . " Use the token '$lineBreakToken' for line breaks";
+        }
+        else if ($category['category_id'] == 54) {
+            $answerPrompt = "create a pattern made up of shapes, numbers, and letters for kids. Kid's task is to find the next item in each pattern and to figure out the rule that governs it. Each pattern shall contain an answer. \n" . $puzzle . " Use the token '$lineBreakToken' for line breaks";
+        }
+        else if ($category['category_id'] == 55) {
+            $answerPrompt = "Create a mystery story for kids for each of the themes below where events are described out of order. The child must rearrange the events in the correct sequence. Each story clue description must be with answer.
+            \n" . $puzzle . " Use the token '$lineBreakToken' for line breaks";
+        }
+        else if ($category['category_id'] == 56) {
+            $answerPrompt = "create a set of instructions for the child to follow to complete a task for kids for each of the themes below, such as drawing a picture or making a simple craft. The instructions should require careful reading and logical thinking.
+            \n" . $puzzle . " Use the token '$lineBreakToken' for line breaks";
+        } else {
+            $answerPrompt = "Create a logic puzzle with simple rules and clues for kids for : \n" . $puzzle . " Use the token '$lineBreakToken' for line breaks";
+        }
+
+        //$answerPrompt = "create a simple rules and clues for kids puzzle for : \n" . $puzzle . "Use the token '$lineBreakToken' for line breaks";
         $answer = $this->chatGPTService->generateContent($answerPrompt);
 
         if (!isset($answer['choices'][0]['message']['content'])) {
@@ -64,7 +80,7 @@ class GeneratePuzzle extends Command
         }
         $answerText = str_replace($lineBreakToken, "\n", $answer['choices'][0]['message']['content']);
 
-        $imagePrompt = "Prepare a colorful picture for kids illustrating the puzzle: \n" . $puzzle;
+        $imagePrompt = "Create and image for logic puzzle for kids for : \n" . $puzzle . "And answer is : \n" . $answerText;
         $image = $this->imageService->generateImage($imagePrompt);
 
         if (isset($image['data'][0]['url'])) {
@@ -86,7 +102,7 @@ class GeneratePuzzle extends Command
 
             // If the category now has 0 questions, remove the category as well
 
-            if(empty($allPuzzles[$categoryKey]['themes'])){
+            if (empty($allPuzzles[$categoryKey]['themes'])) {
                 unset($allPuzzles[$categoryKey]);
             }
 
