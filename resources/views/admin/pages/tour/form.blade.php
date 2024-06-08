@@ -29,9 +29,6 @@
                   placeholder="Add Description" rows="15">{{ old('description2', $item->description2) }}</textarea>
         <div id="error-edit-description2" class="error text-danger"></div>
     </div>
-
-
-
     <div class="col-md-12 mt-2">
         <div class="form-group">
             <label for="category_id">Category</label>
@@ -49,14 +46,19 @@
             <label for="city_id">City</label>
             <select name="city_id" id="city_id" class="form-control">
                 @foreach ($cities as $city)
-                    <option value="{{ $city->id }}" @if ($city->id == $item->category_id) selected @endif>
-                        {{ strip_tags($city->name) }}</option>
+                    <option value="{{ $city->id }}" @if ($city->id == $item->city_id) selected @endif>{{ strip_tags($city->name) }}</option>
                 @endforeach
             </select>
         </div>
     </div>
-
 </div>
+
+<script>
+    CKEDITOR.replace('edit-description1');
+    CKEDITOR.replace('edit-description2');
+    CKEDITOR.replace('edit-title');
+</script>
+
 
 <script>
     CKEDITOR.replace('edit-description1');

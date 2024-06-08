@@ -55,7 +55,7 @@ class ToursController extends Controller
     public function edit($id)
     {
         $item = $this->tourService->getTourById($id);
-        $categories = Category::all();
+        $categories = Category::where('parent_id', 58)->get();
         $cities = City::all(); // Fetch all cities
         $view = view('admin.pages.tour.form', compact('item', 'categories', 'cities'))->render();
         return response()->json([
