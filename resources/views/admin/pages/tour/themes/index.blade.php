@@ -27,7 +27,7 @@
                                 <option selected>Select Category</option>
                                 {{-- Dynamically populate categories --}}
                                 @php
-                                    $categories = Category::where('parent_id', 58)->get(); // Adjust parent_id as appropriate for your tour categories
+                                    $categories = Category::where('parent_id', 72)->get(); // Adjust parent_id as appropriate for your tour categories
                                 @endphp
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>

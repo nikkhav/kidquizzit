@@ -14,17 +14,17 @@
                     $("#create-modal").modal('show');
                 } else {
                     // Handle error case if needed
-                    console.error('Failed to create tour');
+                    console.error('Failed to create category');
                 }
                 pageLoader(false);
             }).fail(function(error) {
                 // Handle AJAX request failure if needed
-                console.error('Failed to create tour');
+                console.error('Failed to create category');
                 pageLoader(false);
             });
         });
 
-        $("#save-tour").click(function(e) {
+        $("#save-category").click(function(e) {
             e.preventDefault();
             pageLoader(true);
 
@@ -32,11 +32,13 @@
             let titleContent = CKEDITOR.instances.title.getData();
             let description1Content = CKEDITOR.instances.description1.getData();
             let description2Content = CKEDITOR.instances.description2.getData();
+
             // Create FormData and append CKEditor content
-            let formData = new FormData($("#create-tour-form")[0]);
+            let formData = new FormData($("#create-form")[0]);
             formData.append('title', titleContent);
             formData.append('description1', description1Content);
             formData.append('description2', description2Content);
+
 
             $.ajax({
                 url: "{{ route('tour.store') }}",
@@ -47,7 +49,7 @@
                 success: function(response) {
                     if (response.code == 200) {
                         dTReload();
-                        $("#create-tour-form").trigger("reset");
+                        $("#create-form").trigger("reset");
                         $("#create-modal").modal('toggle');
                     }
                     pageLoader(false);
@@ -82,9 +84,10 @@
             });
         });
 
-        $("#edit-tour").click(function(e) {
+        $("#edit-customer-type").click(function(e) {
             e.preventDefault();
             pageLoader(true);
+
 
             let id = $("#edit-id").val();
             let url = "{{ route('tour.update', 'update') }}"
@@ -92,10 +95,13 @@
             let titleContent = CKEDITOR.instances['edit-title'].getData();
             let description1Content = CKEDITOR.instances['edit-description1'].getData();
             let description2Content = CKEDITOR.instances['edit-description2'].getData();
+
             let formData = new FormData($("#edit-form")[0]); // Create FormData object from the form
             formData.append('title', titleContent);
             formData.append('description1', description1Content);
             formData.append('description2', description2Content);
+
+
 
             // Use AJAX to submit form data including files
             $.ajax({
