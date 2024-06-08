@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\GamesController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\WhyQuestionController;
 use App\Http\Controllers\Admin\TalesController;
+use App\Http\Controllers\Admin\ToursController;
 
 
 /*
@@ -35,6 +36,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/whyquestion', [WhyQuestionController::class, 'getAll']);
     Route::get('/tale', [TalesController::class, 'getAll']);
     Route::get('/game', [GamesController::class, 'getAll']);
+    Route::get('/tour', [ToursController::class, 'getAll']);
 
     Route::get('/quiz', [QuizController::class, 'getAll']);
     Route::post('/contact', [ContactController::class, 'store']);

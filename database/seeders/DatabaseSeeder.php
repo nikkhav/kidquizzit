@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             PrivacyAndPolicySeeder::class,
             TermsAndConditionSeeder::class,
             CategorySeeder::class,
-
+            CountrySeeder::class,
+            CitySeeder::class,
         ]);
     }
 }

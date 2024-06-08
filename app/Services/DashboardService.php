@@ -8,6 +8,7 @@ use App\Models\Quiz;
 use App\Models\Colouring;
 use App\Models\Difference;
 use App\Models\Tale;
+use App\Models\Tour;
 use App\Models\WhyQuestion;
 
 class DashboardService
@@ -22,6 +23,7 @@ class DashboardService
             'whyquestion_count' => WhyQuestion::count(),
             'tales_count' => Tale::count(),
             'games_count' => Game::count(),
+            'tours_count' => Tour::count()
         ];
 
         return $counts;

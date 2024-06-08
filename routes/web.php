@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\PrivacyAndPolicyController;
 use App\Http\Controllers\Admin\QuizThemesController;
 use App\Http\Controllers\Admin\TermsAndConditionController;
+use App\Http\Controllers\Admin\ToursController;
 use App\Http\Controllers\Api\DatatableController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColouringController;
@@ -45,12 +46,14 @@ Route::post('/quiz/store-to-json', [QuizController::class, 'storeToJson'])->name
 Route::post('/game/store-to-json', [GamesController::class, 'storeToJson'])->name('game.storeToJson');
 Route::post('/tale/store-to-json', [TalesController::class, 'storeToJson'])->name('tale.storeToJson');
 Route::post('/difference/store-to-json', [DifferenceController::class, 'storeToJson'])->name('difference.storeToJson');
+Route::post('/tour/store-to-json', [ToursController::class, 'storeToJson'])->name('tour.storeToJson');
 
 Route::post('/quiz/import-csv', [QuizController::class, 'importCsv'])->name('quiz.importCsv');
 Route::post('/whyquestion/import-csv', [WhyQuestionController::class, 'importCsv'])->name('whyquestion.importCsv');
 Route::post('/game/import-csv', [GamesController::class, 'importCsv'])->name('game.importCsv');
 Route::post('/tale/import-csv', [TalesController::class, 'importCsv'])->name('tale.importCsv');
 Route::post('/difference/import-csv', [DifferenceController::class, 'importCsv'])->name('difference.importCsv');
+Route::post('/tour/import-csv', [ToursController::class, 'importCsv'])->name('tour.importCsv');
 
 Auth::routes(['register' => false]);
 Route::middleware(['auth'])->group(function () {
@@ -71,6 +74,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('whyquestion', WhyQuestionController::class);
     Route::resource('tale', TalesController::class);
     Route::resource('game', GamesController::class);
+    Route::resource('tour', ToursController::class);
 
 
     Route::resource('quiz', QuizController::class);
@@ -96,12 +100,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('themes/tale', [TalesThemesController::class, 'index'])->name('themes.tale');
     Route::get('themes/game', [GamesThemesController::class, 'index'])->name('themes.game');
     Route::get('themes/difference', [DifferenceThemesController::class, 'index'])->name('themes.difference');
+    Route::get('themes/tour', [ToursController::class, 'index'])->name('themes.tour');
 
     Route::get('themes/quiz/completed', [QuizThemesController::class, 'completedQuizzes'])->name('themes.quiz.completed');
     Route::get('themes/whyquestion/completed', [WhyQuestionThemesController::class, 'completedWhyQuestions'])->name('themes.whyquestion.completed');
     Route::get('themes/tale/completed', [TalesThemesController::class, 'completedTales'])->name('themes.tale.completed');
     Route::get('themes/game/completed', [GamesThemesController::class, 'completedGames'])->name('themes.game.completed');
     Route::get('themes/difference/completed', [DifferenceThemesController::class, 'completedPuzzles'])->name('themes.difference.completed');
+    Route::get('themes/tour/completed', [ToursController::class, 'completedTours'])->name('themes.tour.completed');
 
 
 });
