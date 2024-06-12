@@ -98,4 +98,126 @@ class ToursController extends Controller
         });
         return response()->json($tours);
     }
+
+    public function storeToJson(Request $request)
+    {
+        // Validate the request
+        $validatedData = $request->validate([
+            'category_id' => 'required|integer',
+            'theme' => 'required|string',
+        ]);
+
+        $jsonFilePath = storage_path('app/contentData/tours.json');
+
+        $existingData = json_decode(file_get_contents($jsonFilePath), true);
+        $defaultCityId = 1;
+
+        $foundTourIndex = null;
+        foreach ($existingData['tours'] as $index => $tour) {
+            if ($tour['category_id'] == $validatedData['category_id'] && $tour['city_id'] == $defaultCityId) {
+                $foundTourIndex = $index;
+                break;
+            }
+        }
+
+        $newQuestion = ['0' => $validatedData['theme']];
+
+        if (!is_null($foundTourIndex)) {
+            $existingData['tours'][$foundTourIndex]['questions'] = array_merge($existingData['tours'][$foundTourIndex]['questions'], $newQuestion);
+        } else {
+            $existingData['tours'][] = [
+                'category_id' => $validatedData['category_id'],
+                'city_id' => $defaultCityId,
+                'questions' => $newQuestion,
+            ];
+        }
+
+        file_put_contents($jsonFilePath, json_encode($existingData, JSON_PRETTY_PRINT));
+
+        return redirect()->back()->with('success', 'Theme added successfully to the tour.');
+    }
+
+
+    public function importCsv(Request $request)
+    {
+        $request->validate([
+            'csv_file' => 'required|file|mimes:csv,txt',
+        ]);
+
+        $file = $request->file('csv_file');
+        $filePath = $file->getRealPath();
+
+
+        try {
+            $this->importFromCSV($filePath, storage_path('app/contentData/tours.json'));
+            return redirect()->back()->with('success', 'Tours imported successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to import tours: ' . $e->getMessage());
+        }
+    }
+
+    protected function importFromCSV($csvFilePath, $jsonFilePath) {
+        if (!file_exists($csvFilePath)) {
+            throw new \Exception("File not found: " . $csvFilePath);
+        }
+
+        $jsonString = file_get_contents($jsonFilePath);
+        if ($jsonString === false) {
+            throw new \Exception("Failed to read JSON file: " . $jsonFilePath);
+        }
+
+        $data = json_decode($jsonString, true);
+        if ($data === null) {
+            throw new \Exception("Failed to decode JSON from file: " . $jsonFilePath);
+        }
+
+        if (($handle = fopen($csvFilePath, "r")) !== FALSE) {
+            $header = fgetcsv($handle); // Assumes the first line is the header
+            if ($header === false) {
+                throw new \Exception("Failed to read header from CSV file: " . $csvFilePath);
+            }
+
+            while (($row = fgetcsv($handle)) !== FALSE) {
+                $newEntry = array_combine($header, $row);
+                // Use regular expression to extract only numbers from the category_id
+                $newEntry['category_id'] = preg_replace('/\D/', '', $newEntry['category_id']);
+                $newEntry['city_id'] = preg_replace('/\D/', '', $newEntry['city_id']);
+
+                // Find the correct tour and add the question if it's not already present
+                $tourFound = false;
+                foreach ($data['tours'] as &$tour) {
+                    if ($tour['category_id'] == $newEntry['category_id'] && $tour['city_id'] == $newEntry['city_id']) {
+                        // Ensure that the questions are handled as an array
+                        if (!isset($tour['questions'])) {
+                            $tour['questions'] = [];
+                        }
+                        // Check if the question already exists to avoid duplicates
+                        if (!in_array($newEntry['question'], $tour['questions'])) {
+                            $tour['questions'][] = $newEntry['question'];
+                        }
+                        $tourFound = true;
+                        break;
+                    }
+                }
+
+                // If the category_id and city_id combination does not exist, create a new entry
+                if (!$tourFound) {
+                    $data['tours'][] = [
+                        'category_id' => $newEntry['category_id'],
+                        'city_id' => $newEntry['city_id'],
+                        'questions' => [$newEntry['question']]
+                    ];
+                }
+            }
+            fclose($handle);
+        }
+
+        $result = file_put_contents($jsonFilePath, json_encode($data, JSON_PRETTY_PRINT));
+        if ($result === false) {
+            throw new \Exception("Failed to write to JSON file: " . $jsonFilePath);
+        }
+    }
+
+
+
 }

@@ -18,7 +18,7 @@ class ToursThemesController extends Controller
         $categories = Category::all()->keyBy('id')->toArray();
 
         foreach ($tours as &$tour) {
-            $tour['category_name'] = $categories[$tour['category_id']]['name'] ?? 'Unknown Category';
+            $tour['category_name'] = $categories[$tour['category_id']]['title'] ?? 'Unknown Category';
 
             $questionsList = array_map(function ($question) {
                 return "<li>$question</li>";

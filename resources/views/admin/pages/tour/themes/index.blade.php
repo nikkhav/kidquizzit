@@ -1,4 +1,4 @@
-@php use App\Models\Category; @endphp
+@php use App\Models\Category;use App\Models\City; @endphp
 @extends('admin.layouts.main')
 
 @section('heading_title', 'Themes for Tours')
@@ -28,7 +28,7 @@
                                 <option selected>Select Category</option>
                                 {{-- Dynamically populate categories --}}
                                 @php
-                                    $categories = Category::where('parent_id', 72)->get(); // Adjust parent_id as appropriate for your tour categories
+                                    $categories = Category::where('parent_id', 58)->get();
                                 @endphp
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -36,11 +36,25 @@
                             </select>
                         </div>
                         <div class="mb-3">
+                            <label for="city_id" class="form-label">City</label>
+                            <select class="form-select" id="city_id" name="city_id">
+                                <option selected>Select City</option>
+                                @php
+                                    $cities = City::all();
+                                @endphp
+                                @foreach($cities as $city)
+                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="theme" class="form-label">Theme</label>
-                            <input type="text" class="form-control" id="theme" name="theme" placeholder="Enter theme" required>
+                            <input type="text" class="form-control" id="theme" name="theme" placeholder="Enter theme"
+                                   required>
                         </div>
                         <button type="submit" class="btn btn-primary">Add Theme</button>
                     </form>
+
                 </div>
             </div>
             <div class="card">
