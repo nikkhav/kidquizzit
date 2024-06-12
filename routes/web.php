@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PrivacyAndPolicyController;
 use App\Http\Controllers\Admin\QuizThemesController;
 use App\Http\Controllers\Admin\TermsAndConditionController;
 use App\Http\Controllers\Admin\ToursController;
+use App\Http\Controllers\Admin\ToursThemesController;
 use App\Http\Controllers\Api\DatatableController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColouringController;
@@ -100,14 +101,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('themes/tale', [TalesThemesController::class, 'index'])->name('themes.tale');
     Route::get('themes/game', [GamesThemesController::class, 'index'])->name('themes.game');
     Route::get('themes/difference', [DifferenceThemesController::class, 'index'])->name('themes.difference');
-    Route::get('themes/tour', [ToursController::class, 'index'])->name('themes.tour');
+    Route::get('themes/tour', [ToursThemesController::class, 'index'])->name('themes.tour');
 
     Route::get('themes/quiz/completed', [QuizThemesController::class, 'completedQuizzes'])->name('themes.quiz.completed');
     Route::get('themes/whyquestion/completed', [WhyQuestionThemesController::class, 'completedWhyQuestions'])->name('themes.whyquestion.completed');
     Route::get('themes/tale/completed', [TalesThemesController::class, 'completedTales'])->name('themes.tale.completed');
     Route::get('themes/game/completed', [GamesThemesController::class, 'completedGames'])->name('themes.game.completed');
     Route::get('themes/difference/completed', [DifferenceThemesController::class, 'completedPuzzles'])->name('themes.difference.completed');
-    Route::get('themes/tour/completed', [ToursController::class, 'completedTours'])->name('themes.tour.completed');
+    Route::get('themes/tour/completed', [ToursThemesController::class, 'completedTours'])->name('themes.tour.completed');
 
 
 });

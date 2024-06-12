@@ -18,11 +18,13 @@ class ToursThemesController extends Controller
         $categories = Category::all()->keyBy('id')->toArray();
 
         foreach ($tours as &$tour) {
-            $tour['category_name'] = $categories[$tour['category_id']]['title'] ?? 'Unknown Category';
-            $tour['themes'] = array_map(function ($theme) {
-                return "<li>$theme</li>";
-            }, $tour['themes']);
-            $tour['themes'] = "<ul>" . implode('', $tour['themes']) . "</ul>";
+            $tour['category_name'] = $categories[$tour['category_id']]['name'] ?? 'Unknown Category';
+
+            $questionsList = array_map(function ($question) {
+                return "<li>$question</li>";
+            }, $tour['questions']);
+
+            $tour['themes'] = "<ul>" . implode('', $questionsList) . "</ul>";
         }
 
         return view('admin.pages.tour.themes.index', ['tours' => $tours]);

@@ -1,3 +1,4 @@
+@php use App\Models\Category; @endphp
 @extends('admin.layouts.main')
 
 @section('heading_title', 'Themes for Tours')
@@ -55,7 +56,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{-- Assume $tours is passed from the controller --}}
                         @foreach($tours as $tour)
                             <tr>
                                 <td>{!! $tour['themes'] !!}</td>
@@ -65,6 +65,7 @@
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>
