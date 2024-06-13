@@ -61,7 +61,9 @@ class GenerateTour extends Command
         $prompt = 'Write an article in a tone principally targeting parents, encouraging them to plan and enjoy these tours with their kids. Cover the history and detailed tour scenarios. Include H2 and H3 as needed and expand on key points or add more if needed to hit at least 1500 words.';
 
         $description1 = $this->generateDescription($prompt . $question);
-        $description2 = $this->generateDescription($prompt . $question);
+
+        $prompt2 = 'Continue this article by providing a detailed description of the tour, including the best time to visit, the weather, and the best places to stay.' . $description1;
+        $description2 = $this->generateDescription($prompt2 . $question);
 
         // Image generation
         $imagePrompt = "Create an engaging illustration for a travel brochure related to: \n" . $question;
