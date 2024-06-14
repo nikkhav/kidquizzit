@@ -22,7 +22,7 @@ class ToursThemesController extends Controller
 
             $questionsList = array_map(function ($question) {
                 return "<li>$question</li>";
-            }, $tour['questions']);
+            }, $tour['themes']);
 
             $tour['themes'] = "<ul>" . implode('', $questionsList) . "</ul>";
         }

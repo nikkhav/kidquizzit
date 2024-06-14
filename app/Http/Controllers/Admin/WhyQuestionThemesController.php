@@ -20,7 +20,7 @@ class WhyQuestionThemesController extends Controller
             $question['category'] = $categories[$question['category_id']]['title'] ?? 'Unknown Category';
             $question['questions'] = array_map(function ($q) {
                 return "<li>$q</li>";
-            }, $question['questions']);
+            }, $question['themes']);
             $question['questions'] = "<ul>" . implode('', $question['questions']) . "</ul>";
         }
 

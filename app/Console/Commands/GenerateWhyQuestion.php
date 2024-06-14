@@ -48,8 +48,8 @@ class GenerateWhyQuestion extends Command
         $categoryKey = array_rand($allQuestions);
         $category = $allQuestions[$categoryKey];
 
-        $questionKey = array_rand($category['questions']);
-        $question = $category['questions'][$questionKey];
+        $questionKey = array_rand($category['themes']);
+        $question = $category['themes'][$questionKey];
 
         $lineBreakToken = '__LINE_BREAK__'; // Special token for line breaks
 

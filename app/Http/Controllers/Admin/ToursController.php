@@ -120,21 +120,23 @@ class ToursController extends Controller
             }
         }
 
-        $newQuestion = ['0' => $validatedData['theme']];
+        $newTheme = ['0' => $validatedData['theme']];
 
         if (!is_null($foundTourIndex)) {
-            $existingData['tours'][$foundTourIndex]['questions'] = array_merge($existingData['tours'][$foundTourIndex]['questions'], $newQuestion);
+            // Adjust the key from 'questions' to 'themes'
+            $existingData['tours'][$foundTourIndex]['themes'] = array_merge($existingData['tours'][$foundTourIndex]['themes'], $newTheme);
         } else {
             $existingData['tours'][] = [
                 'category_id' => $validatedData['category_id'],
                 'city_id' => $defaultCityId,
-                'questions' => $newQuestion,
+                'themes' => $newTheme,
             ];
         }
 
         file_put_contents($jsonFilePath, json_encode($existingData, JSON_PRETTY_PRINT));
 
         return redirect()->back()->with('success', 'Theme added successfully to the tour.');
+
     }
 
 
@@ -179,33 +181,28 @@ class ToursController extends Controller
 
             while (($row = fgetcsv($handle)) !== FALSE) {
                 $newEntry = array_combine($header, $row);
-                // Use regular expression to extract only numbers from the category_id
                 $newEntry['category_id'] = preg_replace('/\D/', '', $newEntry['category_id']);
                 $newEntry['city_id'] = preg_replace('/\D/', '', $newEntry['city_id']);
 
-                // Find the correct tour and add the question if it's not already present
                 $tourFound = false;
                 foreach ($data['tours'] as &$tour) {
                     if ($tour['category_id'] == $newEntry['category_id'] && $tour['city_id'] == $newEntry['city_id']) {
-                        // Ensure that the questions are handled as an array
-                        if (!isset($tour['questions'])) {
-                            $tour['questions'] = [];
+                        if (!isset($tour['themes'])) {
+                            $tour['themes'] = [];
                         }
-                        // Check if the question already exists to avoid duplicates
-                        if (!in_array($newEntry['question'], $tour['questions'])) {
-                            $tour['questions'][] = $newEntry['question'];
+                        if (!in_array($newEntry['theme'], $tour['themes'])) {
+                            $tour['themes'][] = $newEntry['theme'];
                         }
                         $tourFound = true;
                         break;
                     }
                 }
 
-                // If the category_id and city_id combination does not exist, create a new entry
                 if (!$tourFound) {
                     $data['tours'][] = [
                         'category_id' => $newEntry['category_id'],
                         'city_id' => $newEntry['city_id'],
-                        'questions' => [$newEntry['question']]
+                        'themes' => [$newEntry['theme']]
                     ];
                 }
             }

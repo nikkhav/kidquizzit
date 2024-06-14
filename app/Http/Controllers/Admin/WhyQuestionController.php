@@ -136,7 +136,7 @@ class WhyQuestionController extends Controller
         // Validate the request
         $validatedData = $request->validate([
             'category_id' => 'required|integer',
-            'question' => 'required|string',
+            'question' => 'required|string', // Assuming 'theme' is used in UI but it contains the questions.
         ]);
 
         // Define the path to the JSON file
@@ -154,14 +154,12 @@ class WhyQuestionController extends Controller
             }
         }
 
-        // Add the new question to the category
+        // Add the new question under the appropriate theme
         if (!is_null($foundCategoryIndex)) {
-            $existingData['questions'][$foundCategoryIndex]['questions'][] = $validatedData['question'];
-        } else {
-            $existingData['questions'][] = [
-                'category_id' => $validatedData['category_id'],
-                'questions' => [$validatedData['question']],
-            ];
+            if (!array_key_exists('themes', $existingData['questions'][$foundCategoryIndex])) {
+                $existingData['themes'][$foundCategoryIndex]['questions'] = [];
+            }
+            $existingData['questions'][$foundCategoryIndex]['themes'][] = $validatedData['question'];
         }
 
         // Save the updated data back to the JSON file
@@ -170,6 +168,7 @@ class WhyQuestionController extends Controller
         // Redirect back or to another page with a success message
         return redirect()->back()->with('success', 'Question added successfully.');
     }
+
 
     public function importCsv(Request $request)
     {
@@ -212,15 +211,14 @@ class WhyQuestionController extends Controller
 
             while (($row = fgetcsv($handle)) !== FALSE) {
                 $newEntry = array_combine($header, $row);
-                // Extract only numbers from the category_id
                 $newEntry['category_id'] = preg_replace('/[^0-9]/', '', $newEntry['category_id']);
 
-                // Find the correct category and add the question if it's not already present
+                // Find the correct category and add the theme if it's not already present
                 $categoryFound = false;
                 foreach ($data['questions'] as &$category) {
                     if ($category['category_id'] == $newEntry['category_id']) {
-                        if (!in_array($newEntry['question'], $category['questions'])) {
-                            $category['questions'][] = $newEntry['question'];
+                        if (!in_array($newEntry['theme'], $category['themes'])) {
+                            $category['themes'][] = $newEntry['theme'];
                         }
                         $categoryFound = true;
                         break;
@@ -231,7 +229,7 @@ class WhyQuestionController extends Controller
                 if (!$categoryFound) {
                     $data['questions'][] = [
                         'category_id' => $newEntry['category_id'],
-                        'questions' => [$newEntry['question']]
+                        'themes' => [$newEntry['theme']]
                     ];
                 }
             }
@@ -243,6 +241,7 @@ class WhyQuestionController extends Controller
             throw new \Exception("Failed to write to JSON file: " . $jsonFilePath);
         }
     }
+
 
 
 

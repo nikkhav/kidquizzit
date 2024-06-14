@@ -50,23 +50,19 @@ class GenerateTour extends Command
         $tour = $allTours[$tourKey];
 
         // Selecting a random question
-        $questionKey = array_rand($tour['questions']);
-        $question = $tour['questions'][$questionKey];
+        $questionKey = array_rand($tour['themes']);
+        $question = $tour['themes'][$questionKey];
 
-//        // Article prompt for generating content
-//        $articlePrompt = "Write an article in a tone principally targeting parents, encouraging them to plan and enjoy this tour with their kids. Cover the history and detailed tour scenarios related to: " . $question . ". Include H2 and H3 as needed and expand on key points or add more if needed to hit at least 1500 words.";
-//
-//        // Generate the full article description
-//        $fullArticleDescription = $this->generateDescription($articlePrompt);
-        $prompt = 'Write an article in a tone principally targeting parents, encouraging them to plan and enjoy these tours with their kids. Cover the history and detailed tour scenarios. Include H2 and H3 as needed and expand on key points or add more if needed to hit at least 1500 words.';
+        // Adjusted prompt to ensure proper formatting
+        $prompt = 'Write an article in a tone targeting parents, encouraging them to plan and enjoy these tours with their kids. Start with a main heading formatted with "# ", followed by subheadings "## " for major sections and "### " for sub-sections. Please ensure to use a space after each markdown symbol for proper formatting. Include detailed historical and tour scenario content. Aim for at least 1500 words.';
 
-        $description1 = $this->generateDescription($prompt . $question);
+        $description1 = $this->generateDescription($prompt . " " . $question);
 
-        $prompt2 = 'Continue this article by providing a detailed description of the tour, including the best time to visit, the weather, and the best places to stay.' . $description1;
-        $description2 = $this->generateDescription($prompt2 . $question);
+        $prompt2 = 'Continue this article by providing detailed descriptions of the best times to visit, the weather, and the best places to stay. ' . $description1;
+        $description2 = $this->generateDescription($prompt2);
 
         // Image generation
-        $imagePrompt = "Create an engaging illustration for a travel brochure related to: \n" . $question;
+        $imagePrompt = "Create an engaging illustration for a travel brochure related to: " . $question;
         $image = $this->imageService->generateImage($imagePrompt);
 
         if ($image && isset($image['data'][0]['url'])) {
