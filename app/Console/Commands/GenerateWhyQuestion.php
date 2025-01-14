@@ -58,7 +58,7 @@ class GenerateWhyQuestion extends Command
         $description1 = $this->generateDescription($answerPrompt1);
 
         // Second description generation
-        $answerPrompt2 = "Generate a detailed yet simple answer to the following \"Why\" question: $question. The answer should be written in a fun, engaging, and age-appropriate tone for kids (ages 6–12) while remaining accurate and educational. Use short sentences and easy-to-understand language, with examples or comparisons kids can relate to. The answer should be conversational, as if a parent is explaining it to their child. Add a creative or imaginative element (e.g., analogies, stories, or scenarios) to keep it entertaining. Ensure the response is even more detailed and includes additional context.";
+        $answerPrompt2 = "Expand on the previous explanation for the following \"Why\" question: $question. Continue the fun and engaging tone, adding more depth and context to the answer. Provide additional examples, surprising facts, or creative elements to enrich the story and maintain the interest of kids (ages 6–12). Make it feel like a natural continuation of the first part, diving deeper into the topic.";
         $description2 = $this->generateDescription($answerPrompt2);
 
         // Image generation
