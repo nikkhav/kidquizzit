@@ -20,7 +20,7 @@ class ToursController extends Controller
     public function __construct(TourService $tourService)
     {
         $this->tourService = $tourService;
-        $tourCategory = Category::where('parent_id', 58)->get();
+        $tourCategory = Category::where('parent_id', 52)->get();
         $cities = City::all();
         view()->share('categories', $tourCategory);
         view()->share('cities', $cities);

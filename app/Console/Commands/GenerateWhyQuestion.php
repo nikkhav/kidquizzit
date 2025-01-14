@@ -54,11 +54,11 @@ class GenerateWhyQuestion extends Command
         $lineBreakToken = '__LINE_BREAK__'; // Special token for line breaks
 
         // First description generation
-        $answerPrompt1 = "Provide a 300 words direct answer for a young child, each explanation part separated by '$lineBreakToken'. Question:\n$question";
+        $answerPrompt1 = "Generate a detailed yet simple answer to the following \"Why\" question: $question. The answer should be written in a fun, engaging, and age-appropriate tone for kids (ages 6–12) while remaining accurate and educational. Use short sentences and easy-to-understand language, with examples or comparisons kids can relate to. The answer should be conversational, as if a parent is explaining it to their child. Add a creative or imaginative element (e.g., analogies, stories, or scenarios) to keep it entertaining.";
         $description1 = $this->generateDescription($answerPrompt1);
 
         // Second description generation
-        $answerPrompt2 = "Provide a 500 words direct, detailed answer for a young child, each explanation part separated by '$question";
+        $answerPrompt2 = "Generate a detailed yet simple answer to the following \"Why\" question: $question. The answer should be written in a fun, engaging, and age-appropriate tone for kids (ages 6–12) while remaining accurate and educational. Use short sentences and easy-to-understand language, with examples or comparisons kids can relate to. The answer should be conversational, as if a parent is explaining it to their child. Add a creative or imaginative element (e.g., analogies, stories, or scenarios) to keep it entertaining. Ensure the response is even more detailed and includes additional context.";
         $description2 = $this->generateDescription($answerPrompt2);
 
         // Image generation

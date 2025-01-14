@@ -78,18 +78,11 @@
             </div>
             <footer class="footer">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script> © Admin Panel.
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="text-sm-end d-none d-sm-block">
-                                Design & Develop by Telman Akhundov(https://github.com/WINDARK-coder)
-                            </div>
-                        </div>
-                    </div>
+                    <p>
+                        Kidquizzit &copy; <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                    </p>
                 </div>
             </footer>
         </div>

@@ -52,7 +52,7 @@ class GenerateGame extends Command
         $gameKey = array_rand($category['themes']);
         $game = $category['themes'][$gameKey];
         $lineBreakToken = '__LINE_BREAK__';
-        $answerPrompt = "create a simple description or invent rules for the kids game: \n" . $game . " Use the token '$lineBreakToken' for line breaks";
+        $answerPrompt = "Generate a detailed yet simple description and set of rules for the following kids' game: $game. The explanation should be fun, engaging, and easy to understand for children ages 6–12. Start with a brief introduction to the game, including its purpose or goal, and what makes it fun. Then provide clear, step-by-step rules for how to play, using simple sentences and examples kids can relate to. Include any materials needed, how to set up the game, and any variations or creative twists to keep it interesting. Make the explanation feel exciting, as if you're inviting kids to join the game right now!";
         $answer = $this->chatGPTService->generateContent($answerPrompt);
 
         if (!isset($answer['choices'][0]['message']['content'])) {

@@ -28,7 +28,7 @@
                                 <option selected>Select Category</option>
                                 {{-- Dynamically populate categories --}}
                                 @php
-                                    $categories = Category::where('parent_id', 58)->get();
+                                    $categories = Category::where('parent_id', 52)->get();
                                 @endphp
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>

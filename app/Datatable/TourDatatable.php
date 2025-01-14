@@ -36,7 +36,7 @@ class TourDatatable extends BaseDatatable
             ->select('tours.*', 'categories.title as category_title', 'cities.name as city_name', 'countries.name as country_name');
 
 
-        $parent_id = 58;
+        $parent_id = 52;
         $query->where('categories.parent_id', $parent_id);
 
         if (isset($_GET['filters'])) {

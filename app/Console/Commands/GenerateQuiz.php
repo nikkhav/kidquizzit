@@ -45,7 +45,7 @@ class GenerateQuiz extends Command
         $themeIndex = array_rand($category['themes']);
         $theme = $category['themes'][$themeIndex];
 
-        $prompt = "Create a kid quiz of 10 different questions with answers on the below subject”: " . $theme . "each question should have 4 multiple choice answers. Each question should start with Q: and each right answer should start with A: and each wrong answer should start with W: . Please mix positions of right and wrong answers.";
+        $prompt = "Generate 10 fun, engaging, and age-appropriate quiz questions for kids (ages 6–12) in the category of $theme. The questions should: be simple and easy to understand, with a mix of true/false, multiple choice, and short answer formats, cover a variety of interesting topics to keep kids curious and entertained, include fun facts or explanations for the answers to make the quiz educational as well as enjoyable. Write the questions in a playful tone to make learning feel like a fun game!";
         $answer = $this->chatGPTService->generateContent($prompt);
         $content = $answer['choices'][0]['message']['content'];
         $lines = explode("\n", $content);

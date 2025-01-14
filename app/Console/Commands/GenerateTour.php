@@ -54,11 +54,11 @@ class GenerateTour extends Command
         $question = $tour['themes'][$questionKey];
 
         // Adjusted prompt to ensure proper formatting
-        $prompt = 'Write an article in a tone targeting parents, encouraging them to plan and enjoy these tours with their kids. Start with a main heading formatted with "# ", followed by subheadings "## " for major sections and "### " for sub-sections. Please ensure to use a space after each markdown symbol for proper formatting. Include detailed historical and tour scenario content. Aim for at least 1500 words.';
+        $prompt = "Write an article for the category $question in a tone principally targeting parents, encouraging them to plan and enjoy these tours with their kids. Cover the history and detailed tour scenarios. Include H2 and H3 as needed and expand on key points or add more if needed to hit at least 1500 words.";
 
         $description1 = $this->generateDescription($prompt . " " . $question);
 
-        $prompt2 = 'Continue this article by providing detailed descriptions of the best times to visit, the weather, and the best places to stay. ' . $description1;
+        $prompt2 = "Continue this article by providing detailed descriptions of the best times to visit, the weather, and the best places to stay, making it engaging and informative for parents planning their trip. Use examples and add practical tips. " . $description1;
         $description2 = $this->generateDescription($prompt2);
 
         // Image generation
