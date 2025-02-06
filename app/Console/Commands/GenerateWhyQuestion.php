@@ -54,11 +54,11 @@ class GenerateWhyQuestion extends Command
         $lineBreakToken = '__LINE_BREAK__'; // Special token for line breaks
 
         // First description generation
-        $answerPrompt1 = "Generate a detailed yet simple answer to the following \"Why\" question: $question. The answer should be written in a fun, engaging, and age-appropriate tone for kids (ages 6–12) while remaining accurate and educational. Use short sentences and easy-to-understand language, with examples or comparisons kids can relate to. The answer should be conversational, as if a parent is explaining it to their child. Add a creative or imaginative element (e.g., analogies, stories, or scenarios) to keep it entertaining.";
+        $answerPrompt1 = "Generate a detailed yet simple answer to the following \"Why\" question: $question. The answer should be written in a fun, engaging, and age-appropriate tone for kids (ages 6–12) while remaining accurate and educational. Use short sentences and easy-to-understand language, with examples or comparisons kids can relate to. The answer should be conversational, as if a parent is explaining it to their child. Add a creative element (e.g., analogies, stories, or scenarios) to keep it entertaining.";
         $description1 = $this->generateDescription($answerPrompt1);
 
         // Second description generation
-        $answerPrompt2 = "Expand on the previous explanation for the following \"Why\" question: $question. Continue the fun and engaging tone, adding more depth and context to the answer. Provide additional examples, surprising facts, or creative elements to enrich the story and maintain the interest of kids (ages 6–12). Make it feel like a natural continuation of the first part, diving deeper into the topic.";
+        $answerPrompt2 = "Using the explanation provided earlier for the \"Why\" question: $question, expand on the answer by adding additional details and examples to deepen the understanding of the topic. Introduce new, interesting facts and creative elements (such as an extended story, fresh analogies, or fun scenarios) that enrich the narrative without repeating the original content. Ensure the continuation flows naturally and logically.";
         $description2 = $this->generateDescription($answerPrompt2);
 
         // Image generation
