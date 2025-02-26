@@ -3,7 +3,6 @@
 @section('heading_title', 'Kidquizzit Admin Panel')
 
 @section('content')
-    <!-- start page title -->
     <div class="row mb-3 pb-1">
         <div class="col-12">
             <div class="d-flex align-items-lg-center flex-lg-row flex-column">
@@ -11,26 +10,23 @@
                     <h4 class="fs-16 mb-1">Hello, {{ Auth::user()->name }}</h4>
                     <p class="text-muted mb-0">Create children's entertainment content with Kidquizzit Admin Panel</p>
                 </div>
-            </div><!-- end card header -->
+            </div>
         </div>
-        <!--end col-->
     </div>
-    <!-- end page title -->
     <div class="row">
         <div class="col-xxl-12">
             <div class="d-flex flex-column h-100">
                 <div class="row">
-                    <!-- Each column represents a category -->
                     @php
                         $categories = [
                             'category' => ['label' => 'Categories', 'count' => $counts['category_count'], 'route' => 'category.index'],
                             'quiz' => ['label' => 'Quizes', 'count' => $counts['quiz_count'], 'route' => 'quiz.index'],
                             'colouring' => ['label' => 'Colourings', 'count' => $counts['colouring_count'], 'route' => 'colouring.index'],
-//                            'difference' => ['label' => 'Find the Difference', 'count' => $counts['difference_count'], 'route' => 'difference.index'],
                             'whyquestion' => ['label' => 'Why Questions', 'count' => $counts['whyquestion_count'], 'route' => 'whyquestion.index'],
                             'tales' => ['label' => 'Tales', 'count' => $counts['tales_count'], 'route' => 'tale.index'],
                             'games' => ['label' => 'Games', 'count' => $counts['games_count'], 'route' => 'game.index'],
-                            'tours' => ['label' => 'Tours', 'count' => $counts['tours_count'], 'route' => 'tour.index'] // Newly added Tours category
+                            'tours' => ['label' => 'Tours', 'count' => $counts['tours_count'], 'route' => 'tour.index'],
+                            'artsandcrafts' => ['label' => 'Arts and Crafts', 'count' => $counts['artsandcrafts_count'], 'route' => 'arts_and_crafts.index']
                         ];
                     @endphp
                     @foreach ($categories as $key => $category)
@@ -48,17 +44,17 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <a href="{{ route($category['route']) }}" class="text-decoration-un">All {{ $category['label'] }}</a>
                                         <div class="avatar-sm flex-shrink-0">
-                                        <span class="avatar-title bg-soft-info border-icon-department fs-2">
-                                            <i data-feather="external-link" class="text-info"></i>
-                                        </span>
+                                            <span class="avatar-title bg-soft-info border-icon-department fs-2">
+                                                <i data-feather="external-link" class="text-info"></i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
-                            </div> <!-- end card-->
-                        </div> <!-- end col-->
+                            </div>
+                        </div>
                     @endforeach
-                </div> <!-- end row-->
+                </div>
             </div>
-        </div> <!-- end col-->
-    </div> <!-- end row-->
+        </div>
+    </div>
 @endsection

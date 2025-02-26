@@ -23,7 +23,8 @@ use App\Http\Controllers\Admin\WhyQuestionController;
 use App\Http\Controllers\Admin\TalesController;
 use App\Http\Controllers\Admin\WhyQuestionThemesController;
 use App\Http\Controllers\Admin\TalesThemesController;
-
+use App\Http\Controllers\Admin\ArtsAndCraftsController;
+use App\Http\Controllers\Admin\ArtsAndCraftsThemesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,7 @@ Route::post('/game/store-to-json', [GamesController::class, 'storeToJson'])->nam
 Route::post('/tale/store-to-json', [TalesController::class, 'storeToJson'])->name('tale.storeToJson');
 Route::post('/difference/store-to-json', [DifferenceController::class, 'storeToJson'])->name('difference.storeToJson');
 Route::post('/tour/store-to-json', [ToursController::class, 'storeToJson'])->name('tour.storeToJson');
+Route::post('/arts_and_crafts/store-to-json', [ArtsAndCraftsController::class, 'storeToJson'])->name('arts_and_crafts.storeToJson');
 
 Route::post('/quiz/import-csv', [QuizController::class, 'importCsv'])->name('quiz.importCsv');
 Route::post('/whyquestion/import-csv', [WhyQuestionController::class, 'importCsv'])->name('whyquestion.importCsv');
@@ -55,6 +57,7 @@ Route::post('/game/import-csv', [GamesController::class, 'importCsv'])->name('ga
 Route::post('/tale/import-csv', [TalesController::class, 'importCsv'])->name('tale.importCsv');
 Route::post('/difference/import-csv', [DifferenceController::class, 'importCsv'])->name('difference.importCsv');
 Route::post('/tour/import-csv', [ToursController::class, 'importCsv'])->name('tour.importCsv');
+Route::post('/arts_and_crafts/import-csv', [ArtsAndCraftsController::class, 'importCsv'])->name('arts_and_crafts.importCsv');
 
 Auth::routes(['register' => false]);
 Route::middleware(['auth'])->group(function () {
@@ -76,6 +79,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tale', TalesController::class);
     Route::resource('game', GamesController::class);
     Route::resource('tour', ToursController::class);
+    Route::resource('arts_and_crafts', ArtsAndCraftsController::class);
 
 
     Route::resource('quiz', QuizController::class);
@@ -109,6 +113,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('themes/game/completed', [GamesThemesController::class, 'completedGames'])->name('themes.game.completed');
     Route::get('themes/difference/completed', [DifferenceThemesController::class, 'completedPuzzles'])->name('themes.difference.completed');
     Route::get('themes/tour/completed', [ToursThemesController::class, 'completedTours'])->name('themes.tour.completed');
-
-
+    Route::get('themes/arts_and_crafts', [ArtsAndCraftsThemesController::class, 'index'])->name('themes.arts_and_crafts');
+    Route::get('themes/arts_and_crafts/completed', [ArtsAndCraftsThemesController::class, 'completedArtsAndCrafts'])->name('themes.arts_and_crafts.completed');
 });

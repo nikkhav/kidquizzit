@@ -12,7 +12,7 @@ class DatatableController extends Controller
     private $namespace = 'App\\Datatable';
     public function handle($datasource, $id = null)
     {
-        $class = $this->namespace . '\\' . Str::ucfirst($datasource) . 'Datatable';
+        $class = $this->namespace . '\\' . Str::studly($datasource) . 'Datatable';
         try {
             return (new $class)->datatable($datasource, $id);
         } catch (QueryException $exception) {

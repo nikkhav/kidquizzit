@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\ArtsAndCraft;
 use App\Models\Category;
 use App\Models\Game;
 use App\Models\Quiz;
@@ -23,7 +24,8 @@ class DashboardService
             'whyquestion_count' => WhyQuestion::count(),
             'tales_count' => Tale::count(),
             'games_count' => Game::count(),
-            'tours_count' => Tour::count()
+            'tours_count' => Tour::count(),
+            'artsandcrafts_count' => ArtsAndCraft::count(),
         ];
 
         return $counts;

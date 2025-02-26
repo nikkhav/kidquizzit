@@ -13,18 +13,7 @@ use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\WhyQuestionController;
 use App\Http\Controllers\Admin\TalesController;
 use App\Http\Controllers\Admin\ToursController;
-
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+use App\Http\Controllers\Admin\ArtsAndCraftsController;
 
 Route::prefix('v1')->group(function () {
     Route::get('/about', [AboutController::class, 'getAll']);
@@ -37,7 +26,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/tale', [TalesController::class, 'getAll']);
     Route::get('/game', [GamesController::class, 'getAll']);
     Route::get('/tour', [ToursController::class, 'getAll']);
-
     Route::get('/quiz', [QuizController::class, 'getAll']);
     Route::post('/contact', [ContactController::class, 'store']);
+    Route::get('/arts_and_crafts', [ArtsAndCraftsController::class, 'getAll']);
 });
