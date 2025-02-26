@@ -54,11 +54,11 @@ class GenerateWhyQuestion extends Command
         $lineBreakToken = '__LINE_BREAK__'; // Special token for line breaks
 
         // First description generation
-        $answerPrompt1 = "Generate a detailed yet simple answer to the following \"Why\" question: $question. The answer should be written in a fun, engaging, and age-appropriate tone for kids (ages 6–12) while remaining accurate and educational. Use short sentences and easy-to-understand language, with examples or comparisons kids can relate to. The answer should be conversational, as if a parent is explaining it to their child. Add a creative element (e.g., analogies, stories, or scenarios) to keep it entertaining.";
+        $answerPrompt1 = "Provide a **direct, engaging, and educational** response to the following 'Why' question: \"$question\". The response should be **around 300 words**, using a natural, human-like style. Avoid introductions, disclaimers, or AI-generated phrases. Make the explanation **clear and fun** for kids (ages 6–12), using relatable examples, simple comparisons, and a storytelling element (e.g., a fun scenario or analogy). Ensure that the answer feels **complete on its own** without needing additional context.";
         $description1 = $this->generateDescription($answerPrompt1);
 
         // Second description generation
-        $answerPrompt2 = "Using the explanation provided earlier for the \"Why\" question: $question, expand on the answer by adding additional details and examples to deepen the understanding of the topic. Introduce new, interesting facts and creative elements (such as an extended story, fresh analogies, or fun scenarios) that enrich the narrative without repeating the original content. Ensure the continuation flows naturally and logically.";
+        $answerPrompt2 = "Now **expand on the previous explanation** for the question \"$question\". Do not repeat or rephrase any information from this original explanation: \"$description1\". Instead, build upon it by introducing **new facts, deeper insights, and additional details** that weren’t covered before. This could include scientific explanations, real-world historical examples, or additional creative storytelling elements (e.g., an extended analogy or a different perspective on the topic). The response should be **around 500 words**, structured as a seamless continuation without an introduction like 'Let’s continue' or 'Absolutely!'. Keep the tone **engaging, educational, and natural**, ensuring it feels like a smooth and logical next step.";
         $description2 = $this->generateDescription($answerPrompt2);
 
         // Image generation
