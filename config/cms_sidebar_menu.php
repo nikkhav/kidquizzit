@@ -62,6 +62,12 @@ return [
         'can' => 'game.index'
     ],
     [
+        'icon' => '<i class="fas fa-palette"></i>',
+        'title' => 'Arts and Crafts',
+        'route' => 'arts_and_crafts.index',
+        'can' => 'arts_and_crafts.index'
+    ],
+    [
         'icon' => '<i class="fas fa-mail-bulk"></i>',
         'title' => 'Contact Us',
         'route' => 'contact.index',
